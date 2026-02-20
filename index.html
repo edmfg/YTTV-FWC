@@ -35,7 +35,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .hero p{font-size:15px;color:var(--t2);max-width:560px;line-height:1.7}
 
 /* FLOW */
-.flow-wrap{padding-bottom:44px}
+.flow-wrap{padding-bottom:28px}
 .slabel{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
 .flow{display:flex;align-items:stretch}
 .fnode{flex:1;background:var(--s1);border:1px solid var(--bdr);border-radius:12px;padding:18px 16px;transition:border-color .4s,background .4s}
@@ -48,11 +48,65 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .fn-dsc{font-size:11px;color:var(--t2);line-height:1.5}
 .fn-src{font-size:10px;color:var(--t3);margin-top:6px;font-style:italic}
 
+/* INFO BUTTONS */
+.info-btns{display:flex;gap:10px;margin-bottom:14px}
+.iBtn{display:flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-size:13px;font-weight:600;padding:9px 20px;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;}
+.iBtn:hover{border-color:#444;color:var(--t1)}
+.iBtn.active{border-color:rgba(255,0,0,.5);color:var(--t1);background:rgba(255,0,0,.06)}
+
+/* INFO PANELS */
+.info-panel{max-height:0;overflow:hidden;transition:max-height .55s ease,opacity .4s ease,margin-bottom .4s ease;opacity:0;margin-bottom:0;}
+.info-panel.open{max-height:2400px;opacity:1;margin-bottom:28px;}
+.panel-inner{background:var(--s1);border:1px solid var(--bdr);border-radius:14px;padding:28px 30px;}
+.panel-title{font-size:17px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px}
+.panel-sub{font-size:13px;color:var(--t2);margin-bottom:22px;line-height:1.65;max-width:680px}
+
+/* SCHEDULE TABLE */
+.sched-table{width:100%;border-collapse:collapse;margin-bottom:24px}
+.sched-table th{text-align:left;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);padding:0 16px 10px 0;border-bottom:1px solid var(--bdr);}
+.sched-table th:last-child{padding-right:0}
+.sched-table td{padding:16px 16px 16px 0;border-bottom:1px solid var(--bdr);vertical-align:top}
+.sched-table td:last-child{padding-right:0}
+.sched-table tbody tr:last-child td{border-bottom:none}
+.sched-phase{font-size:13px;font-weight:700;color:var(--t1)}
+.sched-dates{font-size:11px;color:var(--t3);margin-top:3px}
+.sched-days{font-size:13px;color:var(--t2);font-weight:500}
+.sched-games-num{font-size:22px;font-weight:800;color:var(--t1);line-height:1}
+.sched-games-lbl{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.sched-desc{font-size:12px;color:var(--t2);line-height:1.65;max-width:340px}
+.sched-hi{color:var(--t1);font-weight:600}
+.sched-total td{padding-top:18px;border-top:1px solid var(--bdr)}
+.sched-total .sched-phase{font-size:14px}
+.sched-total .sched-games-num{color:var(--red)}
+.sched-days-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
+.sched-day-card{background:var(--s2);border:1px solid var(--bdr);border-radius:8px;padding:12px 14px}
+.sdc-date{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.sdc-groups{font-size:13px;font-weight:700;margin-bottom:4px}
+.sdc-note{font-size:11px;color:var(--t3);line-height:1.4}
+.sdc-tag{display:inline-block;margin-top:8px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:rgba(255,0,0,.1);color:var(--red);border:1px solid rgba(255,0,0,.2);padding:2px 7px;border-radius:20px;}
+
+/* HISTORY */
+.hist-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hist-card{background:var(--s2);border:1px solid var(--bdr);border-radius:12px;padding:16px}
+.hist-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.hist-title{font-size:13px;font-weight:800;letter-spacing:-.2px;line-height:1.3}
+.hist-badge{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.hist-year{font-size:10px;font-weight:800;background:rgba(255,0,0,.12);color:var(--red);border:1px solid rgba(255,0,0,.25);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.hist-grp{font-size:10px;font-weight:700;background:var(--s3);color:var(--t3);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.hist-matches{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.hist-match{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3)}
+.hist-match::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--t3);flex-shrink:0}
+.hist-vs{color:var(--t2);font-weight:600}
+.hist-score{font-size:11px;font-weight:700;color:var(--t1);background:var(--s3);padding:1px 6px;border-radius:3px;white-space:nowrap}
+.hist-drama{font-size:11px;color:var(--t2);line-height:1.65;border-top:1px solid var(--bdr);padding-top:10px;margin-top:6px}
+.hist-drama strong{color:var(--t1)}
+
 /* DEMO GRID */
 .demo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
 /* GAME CARDS */
 .games{display:flex;flex-direction:column;gap:10px}
+.games-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
 .gcard{background:var(--s1);border:1px solid var(--bdr);border-radius:12px;padding:12px 14px;transition:border-color .3s}
 .gcard.flash{border-color:rgba(255,0,0,.6)}
 .gmatch{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -65,9 +119,18 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .tm{font-size:13px;font-weight:600}
 .sc{font-size:20px;font-weight:800}
 .gmeta{font-size:11px;color:var(--t3)}
-.ptag{font-size:10px;font-weight:700;background:var(--s2);padding:3px 7px;border-radius:4px;color:var(--t3);flex-shrink:0}
 
-/* EVENT CHIPS */
+/* FOX / FS1 NETWORK LOGOS */
+.net-fox{display:flex;align-items:center;justify-content:center;background:#000;border-radius:5px;padding:4px 9px;font-size:13px;font-weight:900;font-style:italic;letter-spacing:.5px;color:#fff;flex-shrink:0;border:1px solid #222;}
+.net-fs1{display:flex;align-items:center;justify-content:center;background:#000;border-radius:5px;padding:4px 8px;font-size:11px;font-weight:900;letter-spacing:.3px;color:#fff;flex-shrink:0;border:1px solid #222;}
+.net-fs1 em{color:#FF4500;font-style:normal;font-size:13px}
+
+/* RANDOMIZE BUTTON */
+.rand-btn{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.rand-btn:hover{border-color:#555;color:var(--t1)}
+.rand-btn:active{transform:scale(.97)}
+
+/* CHIP */
 .chip-row{display:flex;flex-wrap:wrap;gap:5px;padding-top:2px}
 .chip{padding:4px 9px;border-radius:20px;border:1px solid var(--bdr);background:transparent;color:var(--t2);font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
 .chip:hover{border-color:#555;color:var(--t1)}
@@ -91,30 +154,29 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .edet{color:var(--t2);font-size:11px}
 
 /* AD PANEL */
-.adpanel{display:flex;flex-direction:column;gap:12px}
+.adpanel{display:flex;flex-direction:column;gap:10px}
+.adpanel-controls{display:flex;align-items:center;justify-content:space-between;}
 .tpill{display:flex;background:var(--s1);border:1px solid var(--bdr);border-radius:100px;padding:3px;width:fit-content}
 .tog{padding:7px 18px;border-radius:100px;border:none;background:transparent;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
 .tog.on{background:var(--red);color:#fff}
 
+/* ZOOM TOGGLE BUTTON */
+.zoom-toggle-btn{display:flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--bdr);color:var(--t3);font-size:11px;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;letter-spacing:.2px;}
+.zoom-toggle-btn:hover{border-color:#555;color:var(--t1)}
+
+/* SIMULATE BUTTON (inline in adpanel) */
+.tbtn{display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;border:none;padding:14px 36px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.2px;transition:background .15s,transform .1s;}
+.tbtn:hover{background:#DD0000}.tbtn:active{transform:scale(.98)}
+.tbtn.panel-btn{width:100%;justify-content:center;border-radius:10px;padding:12px 20px;font-size:13px}
+.new-cta-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--t2);border:1.5px solid var(--bd);padding:10px 20px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.2px;transition:border-color .15s,color .15s,background .15s;}
+.new-cta-btn:hover{border-color:var(--red);color:var(--red);background:rgba(255,0,0,.05)}.new-cta-btn:active{transform:scale(.98)}
+
 /* ── CTV HOMESCREEN ── */
 .ctv-wrap{border:1px solid var(--bdr);border-radius:14px;overflow:hidden;background:#0d0d0d}
-
-/* CTV HERO BANNER */
 .ctv-hero{position:relative;min-height:160px;overflow:hidden}
-/* Default hero state */
-.ctv-hero-default{
-  display:grid;grid-template-columns:55% 45%;
-  background:#050510;
-  transition:opacity .4s;
-}
-.ctv-hero-default .hero-l{
-  padding:20px 22px;display:flex;flex-direction:column;justify-content:center;
-}
-.ctv-hero-default .hero-r{
-  background:linear-gradient(135deg,#0a1628,#091840);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
+.ctv-hero-default{display:grid;grid-template-columns:55% 45%;background:#050510;transition:opacity .4s;}
+.ctv-hero-default .hero-l{padding:20px 22px;display:flex;flex-direction:column;justify-content:center;}
+.ctv-hero-default .hero-r{background:linear-gradient(135deg,#0a1628,#091840);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
 .default-headline{font-size:22px;font-weight:900;line-height:1.1;margin-bottom:8px;letter-spacing:-.5px}
 .default-sub{font-size:12px;color:var(--t2);margin-bottom:14px}
 .default-cta{display:inline-block;background:var(--s3);color:var(--t1);font-size:11px;font-weight:700;padding:7px 14px;border-radius:20px}
@@ -122,23 +184,11 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .ctv-hero-dots{display:flex;gap:5px;margin-top:12px}
 .hero-dot{width:20px;height:3px;border-radius:2px;background:rgba(255,255,255,.2)}
 .hero-dot:first-child{background:rgba(255,255,255,.7)}
-
-/* Ad hero state */
-.ctv-hero-ad{
-  display:none;grid-template-columns:55% 45%;
-  animation:slideUp .45s ease forwards;
-}
+.ctv-hero-ad{display:none;grid-template-columns:55% 45%;animation:slideUp .45s ease forwards;}
 .ctv-hero-ad.show{display:grid}
 @keyframes slideUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.ctv-hero-ad .hero-l{
-  background:#EFEFEF;
-  padding:20px 22px;display:flex;flex-direction:column;justify-content:center;
-  color:#111;
-}
-.ctv-hero-ad .hero-r{
-  background:#111;
-  padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
+.ctv-hero-ad .hero-l{background:#EFEFEF;padding:20px 22px;display:flex;flex-direction:column;justify-content:center;color:#111;}
+.ctv-hero-ad .hero-r{background:#111;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .ad-yt-logo{display:flex;align-items:center;gap:6px;margin-bottom:10px}
 .ad-yt-btn{width:28px;height:20px;background:var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center}
 .ad-yt-btn::after{content:'';border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #fff;margin-left:1px}
@@ -149,203 +199,111 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .ad-dots{display:flex;gap:5px;margin-top:10px}
 .ad-dot{width:20px;height:3px;border-radius:2px;background:rgba(0,0,0,.15)}
 .ad-dot:first-child{background:rgba(0,0,0,.6)}
-
-/* CTV multiview preview (right side of ad hero) */
-.ctv-mv-frame{
-  border:2px solid #2a2a2a;border-radius:8px;overflow:hidden;
-  width:100%;aspect-ratio:16/9;position:relative;
-}
+.ctv-mv-frame{border:2px solid #2a2a2a;border-radius:8px;overflow:hidden;width:100%;aspect-ratio:16/9;position:relative;}
 .ctv-mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;height:100%;background:#1a1a1a}
-.ctv-mv-cell{
-  position:relative;overflow:hidden;
-  display:flex;align-items:flex-end;
-}
+.ctv-mv-cell{position:relative;overflow:hidden;display:flex;align-items:flex-end;}
 .ctv-mv-cell:nth-child(1){background:linear-gradient(160deg,#1a3a1a,#0d200d)}
 .ctv-mv-cell:nth-child(2){background:linear-gradient(160deg,#3a1a1a,#200d0d)}
 .ctv-mv-cell:nth-child(3){background:linear-gradient(160deg,#1a1a3a,#0d0d20)}
 .ctv-mv-cell:nth-child(4){background:linear-gradient(160deg,#3a2a0a,#201500)}
-.ctv-mv-score{
-  position:absolute;bottom:3px;left:3px;
-  font-size:8px;color:#fff;background:rgba(0,0,0,.65);
-  padding:2px 5px;border-radius:2px;font-weight:600;white-space:nowrap;
-}
-.ctv-mv-live{
-  position:absolute;top:3px;left:3px;
-  background:var(--red);color:#fff;font-size:7px;font-weight:800;
-  padding:1px 4px;border-radius:2px;letter-spacing:.5px;
-}
+.ctv-mv-score{position:absolute;bottom:3px;left:3px;font-size:8px;color:#fff;background:rgba(0,0,0,.65);padding:2px 5px;border-radius:2px;font-weight:600;white-space:nowrap;}
+.ctv-mv-live{position:absolute;top:3px;left:3px;background:var(--red);color:#fff;font-size:7px;font-weight:800;padding:1px 4px;border-radius:2px;letter-spacing:.5px;}
 .ctv-progress{height:3px;background:var(--s3);margin-top:6px;border-radius:2px;overflow:hidden}
 .ctv-progress-bar{height:100%;width:72%;background:var(--red);border-radius:2px}
 .ctv-mv-label{font-size:9px;color:var(--t3);text-align:center;margin-top:4px}
-
-/* CTV NAV BAR */
-.ctv-nav{
-  background:#111;border-top:1px solid #1c1c1c;
-  padding:9px 14px;display:flex;align-items:center;gap:0;
-}
+.ctv-nav{background:#111;border-top:1px solid #1c1c1c;padding:9px 14px;display:flex;align-items:center;}
 .ctv-nav-icons{display:flex;gap:16px;color:#666;font-size:13px;margin-right:auto}
 .ctv-nav-apps{display:flex;gap:5px}
-.nav-app{
-  height:26px;padding:0 8px;border-radius:4px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:800;letter-spacing:.3px;
-}
-
-/* CTV CONTENT TILES */
+.nav-app{height:26px;padding:0 8px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;letter-spacing:.3px;}
 .ctv-content{padding:10px 14px 14px;background:#0d0d0d}
 .ctv-row-lbl{font-size:10px;color:#555;font-weight:500;margin-bottom:7px}
 .ctv-tiles{display:flex;gap:7px;overflow:hidden}
-.ctv-tile{
-  flex:1;min-width:0;aspect-ratio:16/9;border-radius:6px;
-  position:relative;overflow:hidden;background:var(--s2);
-  display:flex;align-items:flex-end;
-}
+.ctv-tile{flex:1;min-width:0;aspect-ratio:16/9;border-radius:6px;position:relative;overflow:hidden;background:var(--s2);display:flex;align-items:flex-end;}
 .ctv-tile:nth-child(1){background:linear-gradient(135deg,#0d1a2e,#1a2a4a)}
 .ctv-tile:nth-child(2){background:linear-gradient(135deg,#1a0d0d,#3a1a1a)}
 .ctv-tile:nth-child(3){background:linear-gradient(135deg,#0d1a0d,#1a3a1a)}
 .ctv-tile:nth-child(4){background:linear-gradient(135deg,#1a1a0d,#2a2a0d)}
 .ctv-tile:nth-child(5){background:linear-gradient(135deg,#1a0d1a,#2a0d2a)}
-.ctv-tile-lbl{
-  width:100%;padding:4px 5px;
-  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-  font-size:8px;color:#ccc;font-weight:600;line-height:1.3;
-}
-.ctv-live-badge{
-  position:absolute;top:4px;left:4px;
-  background:var(--red);color:#fff;font-size:7px;font-weight:800;
-  padding:1px 4px;border-radius:2px;letter-spacing:.5px;
-}
+.ctv-tile-lbl{width:100%;padding:4px 5px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);font-size:8px;color:#ccc;font-weight:600;line-height:1.3;}
+.ctv-live-badge{position:absolute;top:4px;left:4px;background:var(--red);color:#fff;font-size:7px;font-weight:800;padding:1px 4px;border-radius:2px;letter-spacing:.5px;}
 
 /* ── INSTAGRAM PHONE ── */
 #ig-view{display:none}
 #ig-view.on{display:block}
-.phone-outer{
-  width:276px;margin:0 auto;
-  background:#1c1c1e;border-radius:44px;
-  padding:12px;box-shadow:0 0 0 1px #333,0 20px 60px rgba(0,0,0,.6);
-  position:relative;
-}
-/* Dynamic island */
-.dyn-island{
-  width:100px;height:30px;background:#000;border-radius:20px;
-  margin:0 auto 10px;
-}
+.phone-outer{width:276px;margin:0 auto;background:#1c1c1e;border-radius:44px;padding:12px;box-shadow:0 0 0 1px #333,0 20px 60px rgba(0,0,0,.6);position:relative;}
+.dyn-island{width:100px;height:30px;background:#000;border-radius:20px;margin:0 auto 10px;}
 .status-bar{display:flex;justify-content:space-between;align-items:center;padding:0 6px;margin-bottom:10px}
 .sb-time{font-size:13px;font-weight:700;color:var(--t1)}
 .sb-icons{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--t1)}
-
-.phone-screen{background:#000;border-radius:20px;overflow:hidden;overflow-y:scroll;max-height:470px;scrollbar-width:none}
+.phone-screen{background:#000;border-radius:20px;overflow:hidden;overflow-y:scroll;max-height:510px;scrollbar-width:none;position:relative;}
 .phone-screen::-webkit-scrollbar{display:none}
-
-.ig-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 6px;background:#000}
+.ig-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 6px;background:#000;position:sticky;top:0;z-index:10}
 .ig-brand{font-size:20px;font-weight:900;font-style:italic;letter-spacing:-.5px}
 .ig-icons{display:flex;gap:14px;font-size:17px}
-
 .ig-stories{display:flex;gap:10px;padding:8px 14px;overflow:hidden;background:#000}
-.ig-story{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ig-story{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
 .ig-story-ring{width:48px;height:48px;border-radius:50%;padding:2px;flex-shrink:0}
 .ig-story-inner{width:100%;height:100%;border-radius:50%;background:var(--s2)}
 .ig-story-name{font-size:9px;color:var(--t2);max-width:48px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
 .ig-divider{height:1px;background:#1a1a1a;margin:0 14px}
-
 .ig-post{padding:10px 14px}
 .ig-post-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .ig-avatar{width:30px;height:30px;border-radius:50%;flex-shrink:0}
 .ig-uname{font-size:12px;font-weight:700}
 .ig-follow{font-size:12px;color:#3B82F6;font-weight:600;margin-left:auto}
 .ig-more{margin-left:6px;color:var(--t3);font-size:15px}
-.ig-img{width:100%;aspect-ratio:1;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--t3);margin-bottom:8px;background:var(--s2)}
+/* Real photo */
+.ig-photo{width:100%;aspect-ratio:1;border-radius:4px;object-fit:cover;display:block;margin-bottom:8px;background:var(--s2)}
+.ig-photo-fallback{width:100%;aspect-ratio:1;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:8px;background:linear-gradient(160deg,#0a0a0a,#1a0505,#0a0a14);gap:6px}
+.ig-photo-fallback span:first-child{font-size:28px}
+.ig-photo-fallback span:last-child{font-size:10px;color:var(--t3);font-weight:600;letter-spacing:.5px;text-transform:uppercase}
 .ig-actions{display:flex;gap:12px;font-size:18px;margin-bottom:5px}
-.ig-likes{font-size:11px;font-weight:700;color:var(--t1)}
+.ig-likes{font-size:11px;font-weight:700;color:var(--t1);margin-bottom:3px}
 .ig-caption{font-size:11px;color:var(--t2);line-height:1.4}
-
+.ig-caption strong{color:var(--t1)}
+.ig-time{font-size:9px;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:.3px}
 .ig-ad-post{padding:10px 14px}
 .ig-sponsored{font-size:9px;color:var(--t3)}
-
-/* IG placeholder */
 .ig-ad-ph{width:100%;aspect-ratio:1;background:var(--s2);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:8px}
 .ig-ad-ph p{font-size:11px;color:var(--t3);margin-top:6px}
-
-/* IG creative (after trigger) */
-.ig-creative{
-  display:none;flex-direction:column;
-  width:100%;aspect-ratio:1;border-radius:4px;overflow:hidden;
-  position:relative;margin-bottom:8px;
-  animation:fadeIn .5s ease forwards;
-}
+.ig-creative{display:none;flex-direction:column;width:100%;aspect-ratio:1;border-radius:4px;overflow:hidden;position:relative;margin-bottom:8px;animation:fadeIn .5s ease forwards;}
 .ig-creative.on{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.ig-creative-bg{
-  position:absolute;inset:0;
-  background:linear-gradient(160deg,#050505 0%,#180000 60%,#0a0a0a 100%);
-}
-.ig-creative-content{
-  position:relative;z-index:1;
-  display:flex;flex-direction:column;
-  padding:16px;height:100%;
-}
+.ig-creative-bg{position:absolute;inset:0;background:linear-gradient(160deg,#050505 0%,#180000 60%,#0a0a0a 100%);}
+.ig-creative-content{position:relative;z-index:1;display:flex;flex-direction:column;padding:16px;height:100%;}
 .ig-copy-top{margin-bottom:auto}
 .ig-copy-eyebrow{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
 .ig-copy-head{font-size:19px;font-weight:900;line-height:1.1;letter-spacing:-.4px;margin-bottom:6px}
 .ig-copy-head span{color:var(--red)}
 .ig-copy-sub{font-size:10px;color:var(--t2);line-height:1.5}
-
 .ig-mv{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:6px;overflow:hidden;margin:12px 0;flex-shrink:0}
-.ig-mv-cell{
-  aspect-ratio:16/9;position:relative;
-  display:flex;align-items:flex-end;
-}
+.ig-mv-cell{aspect-ratio:16/9;position:relative;display:flex;align-items:flex-end;}
 .ig-mv-cell:nth-child(1){background:linear-gradient(160deg,#1a3a1a,#0d200d)}
 .ig-mv-cell:nth-child(2){background:linear-gradient(160deg,#3a1a1a,#200d0d)}
 .ig-mv-cell:nth-child(3){background:linear-gradient(160deg,#1a1a3a,#0d0d20)}
 .ig-mv-cell:nth-child(4){background:linear-gradient(160deg,#3a2a0a,#201500)}
-.ig-mv-score{
-  position:absolute;bottom:2px;left:2px;
-  font-size:7px;color:#fff;background:rgba(0,0,0,.6);
-  padding:1px 3px;border-radius:2px;font-weight:600;
-}
-.ig-mv-live-dot{
-  position:absolute;top:3px;left:3px;
-  background:var(--red);color:#fff;font-size:6px;font-weight:800;
-  padding:1px 3px;border-radius:2px;
-}
+.ig-mv-score{position:absolute;bottom:2px;left:2px;font-size:7px;color:#fff;background:rgba(0,0,0,.6);padding:1px 3px;border-radius:2px;font-weight:600;}
+.ig-mv-live-dot{position:absolute;top:3px;left:3px;background:var(--red);color:#fff;font-size:6px;font-weight:800;padding:1px 3px;border-radius:2px;}
 .ig-creative-bottom{margin-top:auto}
-.ig-cta{
-  width:100%;background:var(--red);color:#fff;
-  font-size:12px;font-weight:700;
-  padding:9px;border-radius:5px;text-align:center;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  cursor:pointer;border:none;font-family:inherit;
-}
+.ig-cta{width:100%;background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:5px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border:none;font-family:inherit;}
 .ig-yt-logo{display:flex;align-items:center;gap:4px;margin-bottom:6px}
 .ig-yt-btn{width:16px;height:11px;background:var(--red);border-radius:2px;display:flex;align-items:center;justify-content:center}
 .ig-yt-btn::after{content:'';border-style:solid;border-width:2.5px 0 2.5px 4.5px;border-color:transparent transparent transparent #fff;margin-left:1px}
 .ig-yt-wm{font-size:10px;font-weight:700;color:var(--t2)}
-
 .ig-actions-row{display:flex;gap:12px;font-size:17px;margin-bottom:4px}
 .ig-learn{font-size:11px;color:var(--t2)}
 .ig-learn a{color:var(--t1);font-weight:600;text-decoration:none}
+/* IG bottom nav */
+.ig-bottom-nav{display:flex;justify-content:space-around;align-items:center;padding:8px 16px 10px;background:#000;border-top:1px solid #111;position:sticky;bottom:0;z-index:10}
+.ig-bottom-nav span{font-size:19px;opacity:.7}
+.ig-bottom-nav span:first-child{opacity:1}
 
-/* TRIGGER AREA */
-.trigger-area{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 60px}
-.prox-banner{
-  display:flex;align-items:center;gap:10px;
-  background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.25);
-  border-radius:10px;padding:10px 20px;
-  opacity:0;transform:translateY(4px);transition:all .4s;pointer-events:none;
-}
+/* TRIGGER ROW (now just credit strip) */
+.trigger-area{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0 48px}
+.prox-banner{display:flex;align-items:center;gap:10px;background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.25);border-radius:10px;padding:10px 20px;opacity:0;transform:translateY(4px);transition:all .4s;pointer-events:none;}
 .prox-banner.on{opacity:1;transform:none}
 .prox-banner strong{color:var(--t1);font-size:13px}
 .prox-banner span{color:var(--t2);font-size:12px}
-.tbtn{
-  display:flex;align-items:center;gap:8px;
-  background:var(--red);color:#fff;
-  border:none;padding:14px 36px;border-radius:100px;
-  font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.2px;
-  transition:background .15s,transform .1s;
-}
-.tbtn:hover{background:#DD0000}.tbtn:active{transform:scale(.98)}
 .hint{font-size:12px;color:#c00;opacity:0;transition:opacity .3s}
 .hint.on{opacity:1}
 .gscredit{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3)}
@@ -361,6 +319,37 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .cme-label{font-size:7px;font-weight:700;color:#fff;letter-spacing:.5px;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,1);margin-top:4px;text-align:center;line-height:1.3}
 .ig-mv-event .cme-label{font-size:6px;margin-top:2px}
 @keyframes popIn{from{transform:scale(.2);opacity:0}65%{transform:scale(1.2);opacity:1}to{transform:scale(1);opacity:1}}
+
+/* ── ZOOM MODAL ── */
+.zoom-modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;align-items:center;justify-content:center;
+  z-index:500;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  cursor:pointer;
+  padding:24px;
+}
+.zoom-modal.on{display:flex}
+.zoom-wrap{
+  position:relative;
+  flex-shrink:0;
+  overflow:hidden;
+  cursor:default;
+  box-shadow:0 40px 120px rgba(0,0,0,.8);
+}
+.zoom-close-btn{
+  position:fixed;top:18px;right:18px;
+  width:38px;height:38px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;color:rgba(255,255,255,.85);
+  font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .15s;z-index:501;
+}
+.zoom-close-btn:hover{background:rgba(255,255,255,.2);color:#fff}
 </style>
 </head>
 <body>
@@ -379,7 +368,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
   <div class="hero">
     <div class="eyebrow">Real-Time Ad Trigger System</div>
     <h1>Watch every moment.<br>Miss <em>nothing.</em></h1>
-    <p>During the group stage, up to 4 matches run concurrently. When two major events happen in close proximity across different games, we intercept fans on competing platforms — and drive them to YouTube TV's Multiview feature.</p>
+    <p>During the group stage, multiple matches run concurrently across FOX and FS1. When major events happen in close proximity across different games, we intercept fans on competing platforms — and drive them to YouTube TV's Multiview feature.</p>
   </div>
 
   <!-- FLOW -->
@@ -408,7 +397,104 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
       <div class="fnode" id="fn4">
         <div class="fn-ico">📺</div>
         <div class="fn-ttl">CTV · Instagram</div>
-        <div class="fn-dsc">Served as a homescreen hero on Roku, Amazon Fire, Hulu — or as a native ad on Instagram. Direct CTA to Multiview.</div>
+        <div class="fn-dsc">Served as a homescreen hero on Roku, Amazon Fire, Apple TV — or as a native ad on Instagram. Direct CTA to Multiview.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO BUTTONS -->
+  <div class="info-btns">
+    <button class="iBtn" id="btn-schedule" onclick="togglePanel('schedule')">📅&nbsp; Concurrent Game Schedule</button>
+    <button class="iBtn" id="btn-history" onclick="togglePanel('history')">🏆&nbsp; Historical Examples</button>
+  </div>
+
+  <!-- SCHEDULE PANEL -->
+  <div id="panel-schedule" class="info-panel">
+    <div class="panel-inner">
+      <div class="panel-title">When Games Overlap: WC 2026 Schedule</div>
+      <div class="panel-sub">FIFA rules require that final group stage games within a group kick off simultaneously — preventing match-fixing. This creates predictable, high-stakes windows of concurrent action and peak relevance for the Multiview trigger.</div>
+      <table class="sched-table">
+        <thead>
+          <tr>
+            <th style="width:22%">Phase</th>
+            <th style="width:11%">Days</th>
+            <th style="width:14%">Games</th>
+            <th>How they're played</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="sched-phase">Group Stage Finale</div><div class="sched-dates">June 24–27, 2026</div></td>
+            <td><div class="sched-days">4 Days</div></td>
+            <td><div class="sched-games-num">24</div><div class="sched-games-lbl">Games</div></td>
+            <td><div class="sched-desc">Played in pairs. <span class="sched-hi">3 separate "double-header" time slots per day</span> — both games in the same group kick off at exactly the same time, across 3 groups per day.</div></td>
+          </tr>
+          <tr>
+            <td><div class="sched-phase">Round of 32</div><div class="sched-dates">June 28 – July 3, 2026</div></td>
+            <td><div class="sched-days">5 Days</div></td>
+            <td><div class="sched-games-num">16</div><div class="sched-games-lbl">Games</div></td>
+            <td><div class="sched-desc">Most days have 3 games, with <span class="sched-hi">2 often kicking off at the same time</span>. Staggered brackets create natural viewing overlap windows.</div></td>
+          </tr>
+          <tr>
+            <td><div class="sched-phase">Round of 16</div><div class="sched-dates">July 4–7, 2026</div></td>
+            <td><div class="sched-days">4 Days</div></td>
+            <td><div class="sched-games-num">8</div><div class="sched-games-lbl">Games</div></td>
+            <td><div class="sched-desc">2 games per day. The end of the first game often <span class="sched-hi">bleeds into the second</span> — extra time and penalties create a direct overlap window.</div></td>
+          </tr>
+          <tr class="sched-total">
+            <td><div class="sched-phase">TOTAL</div></td>
+            <td><div class="sched-days" style="font-weight:700;color:var(--t1)">13 Days</div></td>
+            <td><div class="sched-games-num" style="color:var(--red)">48</div><div class="sched-games-lbl">Games</div></td>
+            <td><div class="sched-desc" style="color:var(--t2)">48 games across 13 days with meaningful simultaneous-game windows — the core opportunity for the Multiview trigger system.</div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="slabel" style="margin-bottom:10px">Group Stage Finale — Day by Day</div>
+      <div class="sched-days-grid">
+        <div class="sched-day-card"><div class="sdc-date">June 24</div><div class="sdc-groups">Groups A, B, C</div><div class="sdc-note">3 simultaneous pairs · 6 games total</div><div class="sdc-tag">3 trigger windows</div></div>
+        <div class="sched-day-card"><div class="sdc-date">June 25</div><div class="sdc-groups">Groups D, E, F</div><div class="sdc-note">3 simultaneous pairs · 6 games total</div><div class="sdc-tag">3 trigger windows</div></div>
+        <div class="sched-day-card"><div class="sdc-date">June 26</div><div class="sdc-groups">Groups G, H, I</div><div class="sdc-note">3 simultaneous pairs · 6 games total</div><div class="sdc-tag">3 trigger windows</div></div>
+        <div class="sched-day-card"><div class="sdc-date">June 27</div><div class="sdc-groups">Groups J, K, L</div><div class="sdc-note">3 simultaneous pairs · 6 games total</div><div class="sdc-tag">3 trigger windows</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY PANEL -->
+  <div id="panel-history" class="info-panel">
+    <div class="panel-inner">
+      <div class="panel-title">When Concurrent Games Changed Everything</div>
+      <div class="panel-sub">Six moments from the last five World Cups where fans watching one game suddenly realized the other simultaneous game had just rewritten history in real time.</div>
+      <div class="hist-grid">
+        <div class="hist-card">
+          <div class="hist-card-head"><div class="hist-title">"The Miracle of Doha"</div><div class="hist-badge"><span class="hist-year">2022 Qatar</span><span class="hist-grp">Group E</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Japan vs Spain</span><span class="hist-score">2–1</span></div><div class="hist-match"><span class="hist-vs">Germany vs Costa Rica</span><span class="hist-score">4–2</span></div></div>
+          <div class="hist-drama">Japan trailed Spain 0–1 at half. <strong>Doan (48') and Tanaka (51')</strong> flipped it. Simultaneously, Costa Rica took a 2–1 lead over Germany — for 15 unreal minutes, <strong>both Spain and Germany were being eliminated at the same time.</strong> Germany recovered to win 4–2 but it didn't matter. Japan topped the group and Germany exited for the second straight Cup.</div>
+        </div>
+        <div class="hist-card">
+          <div class="hist-card-head"><div class="hist-title">Suárez Watches Uruguay Eliminated</div><div class="hist-badge"><span class="hist-year">2022 Qatar</span><span class="hist-grp">Group H</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Uruguay vs Ghana</span><span class="hist-score">2–0</span></div><div class="hist-match"><span class="hist-vs">South Korea vs Portugal</span><span class="hist-score">2–1</span></div></div>
+          <div class="hist-drama">Uruguay won their game comfortably — and still went home. <strong>Hwang Hee-chan's 91st-minute goal</strong> for South Korea created a perfect four-way deadlock resolved only by total goals scored. South Korea advanced; Uruguay did not. Cameras caught <strong>Luis Suárez in tears on the bench</strong>, watching the other game's final minutes on his phone.</div>
+        </div>
+        <div class="hist-card">
+          <div class="hist-card-head"><div class="hist-title">Advanced on Yellow Cards Alone</div><div class="hist-badge"><span class="hist-year">2018 Russia</span><span class="hist-grp">Group H</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Japan vs Poland</span><span class="hist-score">0–1</span></div><div class="hist-match"><span class="hist-vs">Senegal vs Colombia</span><span class="hist-score">0–1</span></div></div>
+          <div class="hist-drama">Japan were <strong>intentionally losing</strong> — and did it on purpose. Knowing Colombia was beating Senegal in the other stadium, Japan spent the final 10 minutes passing sideways to protect their fair play advantage (4 yellow cards vs Senegal's 6). <strong>For the first time in World Cup history</strong>, a team advanced — and a team was eliminated — purely on accumulated yellow cards.</div>
+        </div>
+        <div class="hist-card">
+          <div class="hist-card-head"><div class="hist-title">Defending Champions Collapse</div><div class="hist-badge"><span class="hist-year">2018 Russia</span><span class="hist-grp">Group F</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Germany vs South Korea</span><span class="hist-score">0–2</span></div><div class="hist-match"><span class="hist-vs">Sweden vs Mexico</span><span class="hist-score">3–0</span></div></div>
+          <div class="hist-drama">Mexican fans watching Sweden dismantle their team <strong>erupted in celebration</strong> when Son Heung-min sprinted the length of the field to slot into an empty net at 95' as Neuer gambled upfield. <strong>Germany, the reigning World Cup champions, failed to escape the group stage for the first time since 1938.</strong></div>
+        </div>
+        <div class="hist-card">
+          <div class="hist-card-head"><div class="hist-title">Italy & England Exit Together</div><div class="hist-badge"><span class="hist-year">2014 Brazil</span><span class="hist-grp">Group D</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Italy vs Uruguay</span><span class="hist-score">0–1</span></div><div class="hist-match"><span class="hist-vs">Costa Rica vs England</span><span class="hist-score">0–0</span></div></div>
+          <div class="hist-drama"><strong>Suárez bit Chiellini</strong>, scored the winner, and sent Italy home. Simultaneously, England's draw with Costa Rica completed a <strong>historic double elimination of two of football's most storied nations on the same afternoon.</strong> Costa Rica — 500/1 pre-tournament — topped the group.</div>
+        </div>
+        <div class="hist-card">
+          <div class="hist-card-head"><div class="hist-title">Donovan's 91st-Minute Miracle</div><div class="hist-badge"><span class="hist-year">2010 S. Africa</span><span class="hist-grp">Group C</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">USA vs Algeria</span><span class="hist-score">1–0</span></div><div class="hist-match"><span class="hist-vs">England vs Slovenia</span><span class="hist-score">1–0</span></div></div>
+          <div class="hist-drama">Scoreless at 90 minutes, the USA were heading home. Slovenia were already celebrating qualification in the other stadium. Then <strong>Landon Donovan scored in the 91st minute</strong> off a Tim Howard rebound. In an instant: USA through, Slovenia eliminated. <strong>Still the most-watched moment in U.S. soccer history.</strong></div>
+        </div>
       </div>
     </div>
   </div>
@@ -418,20 +504,28 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 
     <!-- LEFT: GAMES + EVENT LOG -->
     <div class="games">
-      <div class="slabel">Group Stage — Select Events Per Match</div>
+      <div class="games-hdr">
+        <div class="slabel" style="margin-bottom:0">Group Stage — Select Events Per Match</div>
+        <button class="rand-btn" onclick="randomizeGames()">🎲&nbsp; Randomize Teams</button>
+      </div>
+      <div style="height:10px"></div>
 
-      <!-- Game 1 -->
+      <!-- Game 1: FOX -->
       <div class="gcard" id="gc1">
         <div class="gmatch">
           <div class="live-col"><div class="ldot"></div><span class="llbl">LIVE</span></div>
           <div class="ginfo">
-            <div class="matchrow"><span class="tm">🇦🇷 Argentina</span><span class="sc">1 – 0</span><span class="tm">Mexico 🇲🇽</span></div>
-            <div class="gmeta">Group A · 67'</div>
+            <div class="matchrow">
+              <span class="tm" id="g1-t1">🇦🇷 Argentina</span>
+              <span class="sc" id="sc1">1 – 0</span>
+              <span class="tm" id="g1-t2">Mexico 🇲🇽</span>
+            </div>
+            <div class="gmeta" id="g1-meta">Group A · 67'</div>
           </div>
-          <span class="ptag">Hulu</span>
+          <div class="net-fox">FOX</div>
         </div>
-        <div class="chip-row">
-          <button class="chip" onclick="pick(1,'goal',this)">⚽ Goal</button>
+        <div class="chip-row" id="cr1">
+          <button class="chip on" onclick="pick(1,'goal',this)">⚽ Goal</button>
           <button class="chip" onclick="pick(1,'red',this)">🟥 Red Card</button>
           <button class="chip" onclick="pick(1,'yel',this)">🟡 Yellow</button>
           <button class="chip" onclick="pick(1,'shot',this)">🥅 Shot</button>
@@ -440,43 +534,27 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
         </div>
       </div>
 
-      <!-- Game 2 -->
+      <!-- Game 2: FS1 -->
       <div class="gcard" id="gc2">
         <div class="gmatch">
           <div class="live-col"><div class="ldot"></div><span class="llbl">LIVE</span></div>
           <div class="ginfo">
-            <div class="matchrow"><span class="tm">🇧🇷 Brazil</span><span class="sc" id="sc2">0 – 0</span><span class="tm">Germany 🇩🇪</span></div>
-            <div class="gmeta">Group B · 71'</div>
+            <div class="matchrow">
+              <span class="tm" id="g2-t1">🇧🇷 Brazil</span>
+              <span class="sc" id="sc2">0 – 0</span>
+              <span class="tm" id="g2-t2">Germany 🇩🇪</span>
+            </div>
+            <div class="gmeta" id="g2-meta">Group B · 71'</div>
           </div>
-          <span class="ptag">Peacock</span>
+          <div class="net-fs1">FS<em>1</em></div>
         </div>
         <div class="chip-row" id="cr2">
-          <button class="chip on" onclick="pick(2,'goal',this)">⚽ Goal</button>
-          <button class="chip" onclick="pick(2,'red',this)">🟥 Red Card</button>
+          <button class="chip" onclick="pick(2,'goal',this)">⚽ Goal</button>
+          <button class="chip on" onclick="pick(2,'red',this)">🟥 Red Card</button>
           <button class="chip" onclick="pick(2,'yel',this)">🟡 Yellow</button>
           <button class="chip" onclick="pick(2,'shot',this)">🥅 Shot</button>
           <button class="chip" onclick="pick(2,'injury',this)">🤕 Injury</button>
           <button class="chip" onclick="pick(2,'offside',this)">🚩 Offside</button>
-        </div>
-      </div>
-
-      <!-- Game 3 -->
-      <div class="gcard" id="gc3">
-        <div class="gmatch">
-          <div class="live-col"><div class="ldot"></div><span class="llbl">LIVE</span></div>
-          <div class="ginfo">
-            <div class="matchrow"><span class="tm">🇫🇷 France</span><span class="sc" id="sc3">2 – 1</span><span class="tm">Japan 🇯🇵</span></div>
-            <div class="gmeta">Group C · 69'</div>
-          </div>
-          <span class="ptag">Amazon</span>
-        </div>
-        <div class="chip-row" id="cr3">
-          <button class="chip" onclick="pick(3,'goal',this)">⚽ Goal</button>
-          <button class="chip on" onclick="pick(3,'red',this)">🟥 Red Card</button>
-          <button class="chip" onclick="pick(3,'yel',this)">🟡 Yellow</button>
-          <button class="chip" onclick="pick(3,'shot',this)">🥅 Shot</button>
-          <button class="chip" onclick="pick(3,'injury',this)">🤕 Injury</button>
-          <button class="chip" onclick="pick(3,'offside',this)">🚩 Offside</button>
         </div>
       </div>
 
@@ -488,8 +566,8 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
         </div>
         <div class="evlist" id="evlist">
           <div class="ev pre"><span class="emin">67'</span><span class="eico">⚽</span><div class="ebody"><div class="etype goal">Goal</div><div class="edet">Di María — Argentina vs Mexico</div></div></div>
-          <div class="ev pre"><span class="emin">65'</span><span class="eico">🟡</span><div class="ebody"><div class="etype yel">Yellow Card</div><div class="edet">Tanaka — France vs Japan</div></div></div>
-          <div class="ev pre"><span class="emin">60'</span><span class="eico">🚩</span><div class="ebody"><div class="etype yel">Offside</div><div class="edet">Vinicius Jr. — Brazil vs Germany</div></div></div>
+          <div class="ev pre"><span class="emin">63'</span><span class="eico">🟡</span><div class="ebody"><div class="etype yel">Yellow Card</div><div class="edet">Müller — Brazil vs Germany</div></div></div>
+          <div class="ev pre"><span class="emin">58'</span><span class="eico">🚩</span><div class="ebody"><div class="etype yel">Offside</div><div class="edet">Vinicius Jr. — Brazil vs Germany</div></div></div>
         </div>
       </div>
     </div>
@@ -497,50 +575,54 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
     <!-- RIGHT: AD PREVIEW -->
     <div class="adpanel">
       <div class="slabel">Ad Delivery Preview</div>
-      <div class="tpill">
-        <button class="tog on" id="btn-ctv" onclick="setMode('ctv')">📺&nbsp; CTV</button>
-        <button class="tog"    id="btn-ig"  onclick="setMode('ig')">📱&nbsp; Instagram</button>
+
+      <!-- Controls row: toggle + zoom -->
+      <div class="adpanel-controls">
+        <div class="tpill">
+          <button class="tog on" id="btn-ctv" onclick="setMode('ctv')">📺&nbsp; CTV</button>
+          <button class="tog"    id="btn-ig"  onclick="setMode('ig')">📱&nbsp; Instagram</button>
+        </div>
+        <button class="zoom-toggle-btn" onclick="openZoom()">⤢&nbsp; Expand</button>
       </div>
 
-      <!-- CTV -->
-      <div id="ctv-view">
-        <div class="ctv-wrap">
+      <!-- Simulate button — right above the ad preview -->
+      <button class="tbtn panel-btn" id="tbtn" onclick="runDemo()">⚡&nbsp; Simulate Concurrent Game Events</button>
+      <button class="new-cta-btn" id="new-cta-btn" onclick="newCreative()">↻ &nbsp;Generate New Ad Creative</button>
 
-          <!-- HERO -->
+      <!-- Proximity banner -->
+      <div class="prox-banner" id="prox"><span style="font-size:16px">⚡</span><div><strong>Proximity trigger fired</strong><span id="prox-detail"> — 2 major events detected. Ad served.</span></div></div>
+      <div class="hint" id="hint">Select events in both matches to trigger the proximity engine.</div>
+
+      <!-- CTV VIEW -->
+      <div id="ctv-view">
+        <div class="ctv-wrap" id="ctv-widget">
           <div class="ctv-hero">
-            <!-- Default state -->
             <div class="ctv-hero-default" id="ctv-default">
               <div class="hero-l">
                 <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase">FIFA World Cup 2026™</div>
                 <div class="default-headline">GROUP STAGE<br>LIVE NOW</div>
-                <div class="default-sub">3 matches currently in progress</div>
+                <div class="default-sub">2 matches currently in progress</div>
                 <div class="default-cta">Watch Live</div>
                 <div class="ctv-hero-dots"><div class="hero-dot"></div><div class="hero-dot"></div><div class="hero-dot"></div></div>
               </div>
-              <div class="hero-r">
-                <div class="soccer-art">⚽</div>
-              </div>
+              <div class="hero-r"><div class="soccer-art">⚽</div></div>
             </div>
-            <!-- Ad state -->
             <div class="ctv-hero-ad" id="ctv-ad-hero">
               <div class="hero-l">
-                <div class="ad-yt-logo">
-                  <div class="ad-yt-btn"></div>
-                  <span class="ad-yt-wm">YouTube TV</span>
-                </div>
+                <div class="ad-yt-logo"><div class="ad-yt-btn"></div><span class="ad-yt-wm">YouTube TV</span></div>
                 <div class="ad-headline" id="ctv-headline">YOU JUST MISSED<br>2 MOMENTS.</div>
-                <div class="ad-sub" id="ctv-sub">Watch all 4 concurrent games at once with Multiview.</div>
+                <div class="ad-sub" id="ctv-sub">Watch both concurrent games at once with Multiview.</div>
                 <div class="ad-learn">Watch Now →</div>
                 <div class="ad-dots"><div class="ad-dot"></div><div class="ad-dot"></div><div class="ad-dot"></div></div>
               </div>
               <div class="hero-r" style="padding:14px">
                 <div style="width:100%">
                   <div class="ctv-mv-frame">
-                    <div class="ctv-mv-grid" id="ctv-mv-grid">
+                    <div class="ctv-mv-grid">
                       <div class="ctv-mv-cell"><span class="ctv-mv-live">LIVE</span><div class="ctv-mv-score" id="mv1">🇦🇷 ARG 1–0 MEX 🇲🇽</div><div class="ctv-mv-event" id="ctv-ev1"></div></div>
                       <div class="ctv-mv-cell"><span class="ctv-mv-live">LIVE</span><div class="ctv-mv-score" id="mv2">🇧🇷 BRA 0–0 GER 🇩🇪</div><div class="ctv-mv-event" id="ctv-ev2"></div></div>
-                      <div class="ctv-mv-cell"><span class="ctv-mv-live">LIVE</span><div class="ctv-mv-score" id="mv3">🇫🇷 FRA 2–1 JPN 🇯🇵</div><div class="ctv-mv-event" id="ctv-ev3"></div></div>
-                      <div class="ctv-mv-cell" style="display:flex;align-items:center;justify-content:center"><span style="font-size:9px;color:#666;font-weight:600">+ 1 More Live</span></div>
+                      <div class="ctv-mv-cell" style="opacity:.35"><span class="ctv-mv-live">LIVE</span><div class="ctv-mv-score">🇫🇷 FRA 1–0 JPN 🇯🇵</div></div>
+                      <div class="ctv-mv-cell" style="opacity:.35;display:flex;align-items:center;justify-content:center"><span style="font-size:9px;color:#666;font-weight:600">+ More Live</span></div>
                     </div>
                   </div>
                   <div class="ctv-progress"><div class="ctv-progress-bar"></div></div>
@@ -549,12 +631,8 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
               </div>
             </div>
           </div>
-
-          <!-- NAV BAR -->
           <div class="ctv-nav">
-            <div class="ctv-nav-icons">
-              <span>🔖</span><span>🏠</span><span>🔍</span><span>✓</span><span>📺</span>
-            </div>
+            <div class="ctv-nav-icons"><span>🔖</span><span>🏠</span><span>🔍</span><span>✓</span><span>📺</span></div>
             <div class="ctv-nav-apps">
               <div class="nav-app" style="background:#E50914;color:#fff">NETFLIX</div>
               <div class="nav-app" style="background:#1A98FF;color:#fff;font-size:8px">PRIME<br>VIDEO</div>
@@ -563,230 +641,382 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
               <div class="nav-app" style="background:#003087;color:#fff">ESPN+</div>
             </div>
           </div>
-
-          <!-- CONTENT TILES -->
           <div class="ctv-content">
             <div class="ctv-row-lbl">Continue Watching</div>
             <div class="ctv-tiles">
-              <div class="ctv-tile">
-                <span class="ctv-live-badge">LIVE</span>
-                <div class="ctv-tile-lbl">ARG vs MEX<br>Group A</div>
-              </div>
-              <div class="ctv-tile">
-                <span class="ctv-live-badge">LIVE</span>
-                <div class="ctv-tile-lbl">BRA vs GER<br>Group B</div>
-              </div>
-              <div class="ctv-tile">
-                <div class="ctv-tile-lbl">WC 2026<br>Highlights</div>
-              </div>
-              <div class="ctv-tile">
-                <div class="ctv-tile-lbl">Top Goals<br>Round 1</div>
-              </div>
-              <div class="ctv-tile">
-                <div class="ctv-tile-lbl">Pre-Match<br>Analysis</div>
-              </div>
+              <div class="ctv-tile"><span class="ctv-live-badge">LIVE</span><div class="ctv-tile-lbl" id="tile1-lbl">ARG vs MEX<br>Group A</div></div>
+              <div class="ctv-tile"><span class="ctv-live-badge">LIVE</span><div class="ctv-tile-lbl" id="tile2-lbl">BRA vs GER<br>Group B</div></div>
+              <div class="ctv-tile"><div class="ctv-tile-lbl">WC 2026<br>Highlights</div></div>
+              <div class="ctv-tile"><div class="ctv-tile-lbl">Top Goals<br>Round 1</div></div>
+              <div class="ctv-tile"><div class="ctv-tile-lbl">Pre-Match<br>Analysis</div></div>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- INSTAGRAM -->
+      <!-- INSTAGRAM VIEW -->
       <div id="ig-view">
-        <div class="phone-outer">
+        <div class="phone-outer" id="ig-phone">
           <div class="dyn-island"></div>
           <div class="status-bar">
             <span class="sb-time">3:04</span>
             <div class="sb-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
           </div>
           <div class="phone-screen">
-            <!-- IG Header -->
+            <!-- Sticky IG header -->
             <div class="ig-header">
               <span class="ig-brand">Instagram</span>
               <div class="ig-icons"><span>🔔</span><span>✉️</span></div>
             </div>
-            <!-- Stories -->
+            <!-- Stories — 6 accounts -->
             <div class="ig-stories">
-              <div class="ig-story">
-                <div class="ig-story-ring" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)"><div class="ig-story-inner"></div></div>
-                <span class="ig-story-name">fifawc26</span>
-              </div>
-              <div class="ig-story">
-                <div class="ig-story-ring" style="background:linear-gradient(45deg,#f09433,#dc2743)"><div class="ig-story-inner"></div></div>
-                <span class="ig-story-name">neymar_jr</span>
-              </div>
-              <div class="ig-story">
-                <div class="ig-story-ring" style="background:linear-gradient(45deg,#bc1888,#f09433)"><div class="ig-story-inner"></div></div>
-                <span class="ig-story-name">espn</span>
-              </div>
-              <div class="ig-story">
-                <div class="ig-story-ring" style="background:linear-gradient(45deg,#3B82F6,#1a40c0)"><div class="ig-story-inner"></div></div>
-                <span class="ig-story-name">mbappe</span>
-              </div>
+              <div class="ig-story"><div class="ig-story-ring" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)"><div class="ig-story-inner"></div></div><span class="ig-story-name">fifawc26</span></div>
+              <div class="ig-story"><div class="ig-story-ring" style="background:linear-gradient(45deg,#f09433,#dc2743)"><div class="ig-story-inner"></div></div><span class="ig-story-name">neymar_jr</span></div>
+              <div class="ig-story"><div class="ig-story-ring" style="background:linear-gradient(45deg,#bc1888,#f09433)"><div class="ig-story-inner"></div></div><span class="ig-story-name">espnfc</span></div>
+              <div class="ig-story"><div class="ig-story-ring" style="background:linear-gradient(45deg,#3B82F6,#1a40c0)"><div class="ig-story-inner"></div></div><span class="ig-story-name">mbappe</span></div>
+              <div class="ig-story"><div class="ig-story-ring" style="background:linear-gradient(45deg,#22C55E,#16803a)"><div class="ig-story-inner"></div></div><span class="ig-story-name">usmnt</span></div>
+              <div class="ig-story"><div class="ig-story-ring" style="background:linear-gradient(45deg,#F59E0B,#b45309)"><div class="ig-story-inner"></div></div><span class="ig-story-name">fifawc26_es</span></div>
             </div>
             <div class="ig-divider"></div>
-            <!-- Regular post -->
+
+            <!-- Organic post #1 — fifaworldcup with REAL photo -->
             <div class="ig-post">
               <div class="ig-post-head">
-                <div class="ig-avatar" style="background:linear-gradient(45deg,#3b5998,#1da1f2)"></div>
-                <span class="ig-uname">fifaworldcup</span>
+                <div class="ig-avatar" style="background:linear-gradient(45deg,#002868,#bf0a30);display:flex;align-items:center;justify-content:center;font-size:14px">⚽</div>
+                <div><div class="ig-uname">fifaworldcup</div></div>
                 <span class="ig-follow">Follow</span>
+                <span class="ig-more">···</span>
               </div>
-              <div class="ig-img">⚽ Match highlights</div>
+              <!-- Real WC photo with fallback -->
+              <img
+                class="ig-photo"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/FIFA_WC-2022_-_Final_-_Argentina_vs_France_%2808%29.jpg/640px-FIFA_WC-2022_-_Final_-_Argentina_vs_France_%2808%29.jpg"
+                alt="FIFA World Cup 2022 Final"
+                onerror="this.outerHTML='<div class=\'ig-photo-fallback\'><span>🏆</span><span>FIFA World Cup 2026</span></div>'"
+              >
               <div class="ig-actions">❤️ 💬 ↗️ 🔖</div>
-              <div class="ig-likes">124,832 likes</div>
+              <div class="ig-likes">312,481 likes</div>
+              <div class="ig-caption"><strong>fifaworldcup</strong> The greatest stage in football. 48 teams. 16 cities. One trophy. 🌍🏆 #FIFAWorldCup2026 #WC2026</div>
+              <div class="ig-time">2 hours ago</div>
             </div>
             <div class="ig-divider"></div>
-            <!-- Ad Post -->
+
+            <!-- Sponsored Ad post — youtubeTV -->
             <div class="ig-ad-post">
               <div class="ig-post-head">
                 <div class="ig-avatar" style="background:var(--red);display:flex;align-items:center;justify-content:center">
-                  <div style="width:16px;height:11px;background:var(--red);border:1.5px solid #fff;border-radius:2px;display:flex;align-items:center;justify-content:center">
-                    <div style="border-style:solid;border-width:3px 0 3px 5px;border-color:transparent transparent transparent #fff"></div>
-                  </div>
+                  <div style="width:16px;height:11px;background:var(--red);border:1.5px solid #fff;border-radius:2px;display:flex;align-items:center;justify-content:center"><div style="border-style:solid;border-width:3px 0 3px 5px;border-color:transparent transparent transparent #fff"></div></div>
                 </div>
                 <div><div class="ig-uname">youtubeTV</div><div class="ig-sponsored">Sponsored</div></div>
                 <span class="ig-more">···</span>
               </div>
-
-              <!-- Placeholder -->
               <div class="ig-ad-ph" id="ig-ph"><div style="font-size:24px">📱</div><p>Trigger events to see the ad</p></div>
-
-              <!-- Creative -->
               <div class="ig-creative" id="ig-ad">
                 <div class="ig-creative-bg"></div>
                 <div class="ig-creative-content">
                   <div class="ig-copy-top">
                     <div class="ig-copy-eyebrow">⚡ Proximity Trigger · Live</div>
-                    <div class="ig-copy-head" id="ig-head">You're watching<br><span>1 game.</span><br>4 are live.</div>
-                    <div class="ig-copy-sub" id="ig-sub">Events just happened in other games. Don't miss the action.</div>
+                    <div class="ig-copy-head" id="ig-head">You're watching<br><span>1 game.</span><br>2 are live.</div>
+                    <div class="ig-copy-sub" id="ig-sub">Events just happened in the other game. Don't miss it.</div>
                   </div>
                   <div class="ig-mv">
-                    <div class="ig-mv-cell"><span class="ig-mv-live-dot">LIVE</span><div class="ig-mv-score">🇦🇷 ARG 1–0 MEX 🇲🇽</div><div class="ig-mv-event" id="ig-ev1"></div></div>
+                    <div class="ig-mv-cell"><span class="ig-mv-live-dot">LIVE</span><div class="ig-mv-score" id="igmv1">🇦🇷 ARG 1–0 MEX 🇲🇽</div><div class="ig-mv-event" id="ig-ev1"></div></div>
                     <div class="ig-mv-cell"><span class="ig-mv-live-dot">LIVE</span><div class="ig-mv-score" id="igmv2">🇧🇷 BRA 0–0 GER 🇩🇪</div><div class="ig-mv-event" id="ig-ev2"></div></div>
-                    <div class="ig-mv-cell"><span class="ig-mv-live-dot">LIVE</span><div class="ig-mv-score" id="igmv3">🇫🇷 FRA 2–1 JPN 🇯🇵</div><div class="ig-mv-event" id="ig-ev3"></div></div>
-                    <div class="ig-mv-cell" style="background:#0d0d0d;align-items:center;justify-content:center"><span style="font-size:8px;color:var(--red);font-weight:700">+ 1 More<br>Live Now</span></div>
+                    <div class="ig-mv-cell" style="opacity:.35"><span class="ig-mv-live-dot">LIVE</span><div class="ig-mv-score">🇫🇷 FRA 1–0 JPN 🇯🇵</div></div>
+                    <div class="ig-mv-cell" style="opacity:.35;background:#0d0d0d;align-items:center;justify-content:center"><span style="font-size:7px;color:var(--red);font-weight:700">+ More<br>Live Now</span></div>
                   </div>
                   <div class="ig-creative-bottom">
-                    <div class="ig-yt-logo">
-                      <div class="ig-yt-btn"></div>
-                      <span class="ig-yt-wm">YouTube TV</span>
-                    </div>
+                    <div class="ig-yt-logo"><div class="ig-yt-btn"></div><span class="ig-yt-wm">YouTube TV</span></div>
                     <button class="ig-cta">Watch Multiview Now →</button>
                   </div>
                 </div>
               </div>
-
               <div class="ig-actions-row">❤️ 💬 ↗️</div>
               <div class="ig-learn">Watch every moment live. <a href="#">Learn more</a></div>
+            </div>
+            <div class="ig-divider"></div>
+
+            <!-- Organic post #2 — espnfc -->
+            <div class="ig-post">
+              <div class="ig-post-head">
+                <div class="ig-avatar" style="background:linear-gradient(45deg,#cc0000,#880000);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff">ESPN</div>
+                <div><div class="ig-uname">espnfc</div></div>
+                <span class="ig-follow">Follow</span>
+                <span class="ig-more">···</span>
+              </div>
+              <div class="ig-photo-fallback" style="background:linear-gradient(160deg,#0a0a0a,#0a1400,#0a0a0a)">
+                <span style="font-size:32px">⚽</span>
+                <span style="font-size:11px;color:#555;font-weight:700;letter-spacing:.5px;text-transform:uppercase">Group Stage Recap</span>
+              </div>
+              <div class="ig-actions">❤️ 💬 ↗️ 🔖</div>
+              <div class="ig-likes">52,391 likes</div>
+              <div class="ig-caption"><strong>espnfc</strong> Every goal. Every moment. Every upset. Here's your full Group Stage Day 1 recap. 🎯 #WorldCup2026 #ESPNFC</div>
+              <div class="ig-time">4 hours ago</div>
+            </div>
+
+            <!-- Sticky bottom nav -->
+            <div class="ig-bottom-nav">
+              <span>🏠</span>
+              <span>🔍</span>
+              <span>➕</span>
+              <span>🎬</span>
+              <span>👤</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- TRIGGER ROW -->
+    </div><!-- /adpanel -->
+
+    <!-- TRIGGER ROW — just credits now -->
     <div class="trigger-area">
-      <div class="prox-banner" id="prox"><span style="font-size:16px">⚡</span><div><strong>Proximity trigger fired</strong><span id="prox-detail"> — 2 major events detected within 4 minutes. Ad served.</span></div></div>
-      <div class="hint" id="hint">Select events in at least 2 matches to trigger the proximity engine.</div>
-      <button class="tbtn" id="tbtn" onclick="runDemo()">⚡&nbsp; Simulate Concurrent Game Events</button>
       <div class="gscredit"><div class="gsdot"></div>Powered by Genius Sports real-time data</div>
     </div>
 
   </div><!-- /demo -->
 </div><!-- /page -->
 
+<!-- ── ZOOM MODAL ── -->
+<div id="zoom-modal" class="zoom-modal" onclick="handleModalClick(event)">
+  <button class="zoom-close-btn" onclick="closeZoom()">✕</button>
+  <div id="zoom-wrap" class="zoom-wrap"></div>
+</div>
+
 <script>
+// ── TEAM POOL ──
+const TEAMS = [
+  {name:'United States', flag:'🇺🇸', abbr:'USA'},
+  {name:'Mexico',        flag:'🇲🇽', abbr:'MEX'},
+  {name:'Canada',        flag:'🇨🇦', abbr:'CAN'},
+  {name:'Brazil',        flag:'🇧🇷', abbr:'BRA'},
+  {name:'Argentina',     flag:'🇦🇷', abbr:'ARG'},
+  {name:'France',        flag:'🇫🇷', abbr:'FRA'},
+  {name:'Germany',       flag:'🇩🇪', abbr:'GER'},
+  {name:'England',       flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', abbr:'ENG'},
+  {name:'Spain',         flag:'🇪🇸', abbr:'ESP'},
+  {name:'Portugal',      flag:'🇵🇹', abbr:'POR'},
+  {name:'Netherlands',   flag:'🇳🇱', abbr:'NED'},
+  {name:'Japan',         flag:'🇯🇵', abbr:'JPN'},
+  {name:'South Korea',   flag:'🇰🇷', abbr:'KOR'},
+  {name:'Morocco',       flag:'🇲🇦', abbr:'MAR'},
+  {name:'Nigeria',       flag:'🇳🇬', abbr:'NGA'},
+  {name:'Senegal',       flag:'🇸🇳', abbr:'SEN'},
+  {name:'Uruguay',       flag:'🇺🇾', abbr:'URU'},
+  {name:'Colombia',      flag:'🇨🇴', abbr:'COL'},
+  {name:'Ecuador',       flag:'🇪🇨', abbr:'ECU'},
+  {name:'Croatia',       flag:'🇭🇷', abbr:'CRO'},
+  {name:'Poland',        flag:'🇵🇱', abbr:'POL'},
+  {name:'Switzerland',   flag:'🇨🇭', abbr:'SUI'},
+  {name:'Denmark',       flag:'🇩🇰', abbr:'DEN'},
+  {name:'Australia',     flag:'🇦🇺', abbr:'AUS'},
+  {name:'Saudi Arabia',  flag:'🇸🇦', abbr:'KSA'},
+  {name:'Ghana',         flag:'🇬🇭', abbr:'GHA'},
+  {name:'Serbia',        flag:'🇷🇸', abbr:'SRB'},
+  {name:'Austria',       flag:'🇦🇹', abbr:'AUT'},
+  {name:'Iran',          flag:'🇮🇷', abbr:'IRN'},
+  {name:'Ivory Coast',   flag:'🇨🇮', abbr:'CIV'},
+];
+
+const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+
 // ── STATE ──
-const gameState = {
-  1: 'goal',     // ARG vs MEX — default none; shown selected for demo clarity? No, default none
-  2: 'goal',     // BRA vs GER
-  3: 'red',      // FRA vs JPN
+let gameData = {
+  1: {t1:'Argentina', f1:'🇦🇷', a1:'ARG', t2:'Mexico',  f2:'🇲🇽', a2:'MEX', s1:1, s2:0, min:67, group:'A'},
+  2: {t1:'Brazil',    f1:'🇧🇷', a1:'BRA', t2:'Germany', f2:'🇩🇪', a2:'GER', s1:0, s2:0, min:71, group:'B'},
 };
-
-// Reset to actual defaults matching the HTML chip state
-gameState[1] = null;
-gameState[2] = 'goal';
-gameState[3] = 'red';
-
-const GAMES = {
-  1: {teams:'Argentina vs Mexico', t1:'ARG',t2:'MEX',f1:'🇦🇷',f2:'🇲🇽'},
-  2: {teams:'Brazil vs Germany',   t1:'BRA',t2:'GER',f1:'🇧🇷',f2:'🇩🇪'},
-  3: {teams:'France vs Japan',     t1:'FRA',t2:'JPN',f1:'🇫🇷',f2:'🇯🇵'},
-};
+let eventState = {1:'goal', 2:'red'};
+let simState   = 'idle';
 
 const EVENTS = {
-  goal:    {ico:'⚽', label:'Goal',       cls:'goal', min:71, detail:(g)=>`${GAMES[g].t1} score — ${GAMES[g].teams}`},
-  red:     {ico:'🟥', label:'Red Card',   cls:'red',  min:72, detail:(g)=>`Defender — ${GAMES[g].teams}`},
-  yel:     {ico:'🟡', label:'Yellow Card',cls:'yel',  min:70, detail:(g)=>`Midfielder — ${GAMES[g].teams}`},
-  shot:    {ico:'🥅', label:'Shot on Goal',cls:'blue', min:73, detail:(g)=>`${GAMES[g].t1} — ${GAMES[g].teams}`},
-  injury:  {ico:'🤕', label:'Injury',     cls:'yel',  min:71, detail:(g)=>`Player down — ${GAMES[g].teams}`},
-  offside: {ico:'🚩', label:'Offside',    cls:'yel',  min:69, detail:(g)=>`${GAMES[g].t1} — ${GAMES[g].teams}`},
+  goal:    {ico:'⚽', label:'Goal',         cls:'goal'},
+  red:     {ico:'🟥', label:'Red Card',     cls:'red'},
+  yel:     {ico:'🟡', label:'Yellow Card',  cls:'yel'},
+  shot:    {ico:'🥅', label:'Shot on Goal', cls:'blue'},
+  injury:  {ico:'🤕', label:'Injury',       cls:'yel'},
+  offside: {ico:'🚩', label:'Offside',      cls:'yel'},
 };
 
-// Score updates per event type
-const SCORE_UPDATES = {goal:true};
+function evDetail(g, e) {
+  const d = gameData[g];
+  return ({
+    goal:    `${d.a1} score — ${d.t1} vs ${d.t2}`,
+    red:     `Defender — ${d.t1} vs ${d.t2}`,
+    yel:     `Midfielder — ${d.t1} vs ${d.t2}`,
+    shot:    `${d.a1} — ${d.t1} vs ${d.t2}`,
+    injury:  `Player down — ${d.t1} vs ${d.t2}`,
+    offside: `${d.a1} — ${d.t1} vs ${d.t2}`,
+  })[e];
+}
 
-let simState = 'idle';
+// ── RANDOMIZE ──
+function randomizeGames() {
+  if (simState === 'done') resetDemo();
+  const pool = [...TEAMS];
+  const picks = [];
+  for (let i = 0; i < 4; i++) {
+    const idx = Math.floor(Math.random() * pool.length);
+    picks.push(pool.splice(idx, 1)[0]);
+  }
+  const w  = [0,0,0,0,1,1,1,2,2,3];
+  const rg = () => w[Math.floor(Math.random() * w.length)];
+  const rm = () => Math.floor(Math.random() * 62) + 25;
+  const gi = Math.floor(Math.random() * GROUPS.length);
+  let gj; do { gj = Math.floor(Math.random() * GROUPS.length); } while (gj === gi);
+
+  gameData[1] = {t1:picks[0].name,f1:picks[0].flag,a1:picks[0].abbr,t2:picks[1].name,f2:picks[1].flag,a2:picks[1].abbr,s1:rg(),s2:rg(),min:rm(),group:GROUPS[gi]};
+  gameData[2] = {t1:picks[2].name,f1:picks[2].flag,a1:picks[2].abbr,t2:picks[3].name,f2:picks[3].flag,a2:picks[3].abbr,s1:rg(),s2:rg(),min:rm(),group:GROUPS[gj]};
+
+  eventState = {1:null, 2:null};
+  [1,2].forEach(g => document.getElementById('cr'+g).querySelectorAll('.chip').forEach(c => c.classList.remove('on')));
+  updateGameUI(1);
+  updateGameUI(2);
+
+  // Refresh pre-populated log
+  const list = document.getElementById('evlist');
+  Array.from(list.children).forEach(el => { if (el.classList.contains('pre')) el.remove(); });
+  const d1 = gameData[1], d2 = gameData[2];
+  [{min:d1.min-2,ico:'⚽',cls:'goal',type:'Goal',det:`${d1.a1} score — ${d1.t1} vs ${d1.t2}`},
+   {min:d2.min-5,ico:'🟡',cls:'yel', type:'Yellow Card',det:`Midfielder — ${d2.t1} vs ${d2.t2}`},
+   {min:d2.min-9,ico:'🚩',cls:'yel', type:'Offside',det:`${d2.a1} — ${d2.t1} vs ${d2.t2}`}
+  ].forEach(e => {
+    const el = document.createElement('div');
+    el.className = 'ev pre';
+    el.innerHTML = `<span class="emin">${e.min}'</span><span class="eico">${e.ico}</span><div class="ebody"><div class="etype ${e.cls}">${e.type}</div><div class="edet">${e.det}</div></div>`;
+    list.appendChild(el);
+  });
+}
+
+function updateGameUI(g) {
+  const d = gameData[g];
+  document.getElementById(`g${g}-t1`).textContent   = `${d.f1} ${d.t1}`;
+  document.getElementById(`g${g}-t2`).textContent   = `${d.t2} ${d.f2}`;
+  document.getElementById(`sc${g}`).textContent     = `${d.s1} – ${d.s2}`;
+  document.getElementById(`g${g}-meta`).textContent = `Group ${d.group} · ${d.min}'`;
+  const mvScore = `${d.f1} ${d.a1} ${d.s1}–${d.s2} ${d.a2} ${d.f2}`;
+  if (document.getElementById('mv'+g))    document.getElementById('mv'+g).textContent   = mvScore;
+  if (document.getElementById('igmv'+g)) document.getElementById('igmv'+g).textContent = mvScore;
+  if (g===1 && document.getElementById('tile1-lbl')) document.getElementById('tile1-lbl').innerHTML = `${d.a1} vs ${d.a2}<br>Group ${d.group}`;
+  if (g===2 && document.getElementById('tile2-lbl')) document.getElementById('tile2-lbl').innerHTML = `${d.a1} vs ${d.a2}<br>Group ${d.group}`;
+}
+
+// ── PANEL TOGGLE ──
+function togglePanel(id) {
+  const panel = document.getElementById('panel-' + id);
+  const btn   = document.getElementById('btn-' + id);
+  const isOpen = panel.classList.contains('open');
+  ['schedule','history'].forEach(p => {
+    document.getElementById('panel-'+p).classList.remove('open');
+    document.getElementById('btn-'+p).classList.remove('active');
+  });
+  if (!isOpen) {
+    panel.classList.add('open');
+    btn.classList.add('active');
+    setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
+  }
+}
 
 // ── CHIP SELECTION ──
 function pick(game, event, el) {
-  const chipRow = el.parentElement;
   const wasOn = el.classList.contains('on');
-  // Deselect all in this game
-  chipRow.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
-  if (!wasOn) {
-    el.classList.add('on');
-    gameState[game] = event;
-  } else {
-    gameState[game] = null;
-  }
+  el.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+  if (!wasOn) { el.classList.add('on'); eventState[game] = event; }
+  else { eventState[game] = null; }
 }
 
 // ── MODE TOGGLE ──
 function setMode(m) {
   document.getElementById('btn-ctv').classList.toggle('on', m==='ctv');
   document.getElementById('btn-ig').classList.toggle('on', m==='ig');
-  document.getElementById('ctv-view').style.display = m==='ctv'?'block':'none';
+  document.getElementById('ctv-view').style.display = m==='ctv' ? 'block' : 'none';
   document.getElementById('ig-view').classList.toggle('on', m==='ig');
 }
 
+// ── ZOOM ──
+function openZoom() {
+  const isCTV = document.getElementById('btn-ctv').classList.contains('on');
+  const src   = document.getElementById(isCTV ? 'ctv-widget' : 'ig-phone');
+  const modal = document.getElementById('zoom-modal');
+  const zWrap = document.getElementById('zoom-wrap');
+
+  const rect  = src.getBoundingClientRect();
+  const srcW  = rect.width;
+  const srcH  = rect.height;
+  if (srcW === 0 || srcH === 0) return;
+
+  // Clone for display only
+  const clone = src.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+
+  // Calculate scale to fit 88% of viewport
+  const vpW  = window.innerWidth  * 0.88;
+  const vpH  = window.innerHeight * 0.88;
+  const maxS = isCTV ? 1.75 : 2.1;
+  const scale = Math.min(vpW / srcW, vpH / srcH, maxS);
+
+  // Apply transform (reset margin so auto-margin doesn't offset before scale)
+  clone.style.margin          = '0';
+  clone.style.transformOrigin = 'top left';
+  clone.style.transform       = `scale(${scale})`;
+  clone.style.width           = srcW + 'px';
+  clone.style.display         = 'block';
+  clone.style.flexShrink      = '0';
+
+  // Size wrapper to visual footprint
+  zWrap.style.width        = Math.round(srcW * scale) + 'px';
+  zWrap.style.height       = Math.round(srcH * scale) + 'px';
+  zWrap.style.overflow     = 'hidden';
+  zWrap.style.borderRadius = isCTV ? '14px' : '44px';
+
+  zWrap.innerHTML = '';
+  zWrap.appendChild(clone);
+
+  modal.classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeZoom() {
+  document.getElementById('zoom-modal').classList.remove('on');
+  document.getElementById('zoom-wrap').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('zoom-modal')) closeZoom();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeZoom(); });
+
 // ── BUILD AD COPY ──
 function buildCopy(active) {
-  const lines = active.map(({g, e}) => {
-    const ev = EVENTS[e];
-    const gm = GAMES[g];
-    const labels = {
-      goal:`⚽ ${gm.t1} scored`,
-      red:`🟥 Red card — ${gm.teams}`,
-      yel:`🟡 Yellow card — ${gm.teams}`,
-      shot:`🥅 Shot on goal — ${gm.teams}`,
-      injury:`🤕 Injury — ${gm.teams}`,
-      offside:`🚩 Offside — ${gm.teams}`,
-    };
-    return labels[e];
+  const lines = active.map(({g,e}) => {
+    const d = gameData[g];
+    return ({
+      goal:    `⚽ ${d.a1} scored — ${d.t1} vs ${d.t2}`,
+      red:     `🟥 Red card — ${d.t1} vs ${d.t2}`,
+      yel:     `🟡 Yellow card — ${d.t1} vs ${d.t2}`,
+      shot:    `🥅 Shot on goal — ${d.t1} vs ${d.t2}`,
+      injury:  `🤕 Injury — ${d.t1} vs ${d.t2}`,
+      offside: `🚩 Offside — ${d.t1} vs ${d.t2}`,
+    })[e];
   });
-  // CTV
-  const ctv_hl = active.length >= 2
-    ? `YOU JUST MISSED<br>${active.length} MOMENTS.`
-    : 'YOU JUST MISSED<br>A KEY MOMENT.';
-  const ctv_sub = lines.join(' · ') + '<br>Watch all games at once with Multiview.';
-  // IG
-  const ig_hl = active.length >= 2
-    ? `You're watching<br><span>1 game.</span><br>${active.length} things happened.`
-    : `You're watching<br><span>1 game.</span><br>You missed this.`;
-  const ig_sub = lines.join(' · ');
-  return {ctv_hl, ctv_sub, ig_hl, ig_sub};
+  return {
+    ctv_hl:  `YOU JUST MISSED<br>2 MOMENTS.`,
+    ctv_sub: lines.join(' · ') + '<br>Watch both games at once with Multiview.',
+    ig_hl:   `You're watching<br><span>1 game.</span><br>2 things happened.`,
+    ig_sub:  lines.join(' · '),
+  };
 }
 
 // ── ADD EVENT TO LOG ──
 function addEv(game, eventId, delay) {
   setTimeout(() => {
-    const ev = EVENTS[eventId];
+    const ev   = EVENTS[eventId];
+    const min  = gameData[game].min;
     const list = document.getElementById('evlist');
-    const el = document.createElement('div');
+    const el   = document.createElement('div');
     el.className = 'ev';
-    el.innerHTML = `<span class="emin">${ev.min}'</span><span class="eico">${ev.ico}</span><div class="ebody"><div class="etype ${ev.cls}">${ev.label}</div><div class="edet">${ev.detail(game)}</div></div>`;
+    el.innerHTML = `<span class="emin">${min}'</span><span class="eico">${ev.ico}</span><div class="ebody"><div class="etype ${ev.cls}">${ev.label}</div><div class="edet">${evDetail(game,eventId)}</div></div>`;
     list.insertBefore(el, list.firstChild);
     setTimeout(() => el.classList.add('on'), 40);
   }, delay);
@@ -796,7 +1026,7 @@ function addEv(game, eventId, delay) {
 function light(nid, aid, delay) {
   setTimeout(() => {
     document.getElementById(nid).classList.add('lit');
-    if(aid) document.getElementById(aid).classList.add('lit');
+    if (aid) document.getElementById(aid).classList.add('lit');
   }, delay);
 }
 
@@ -804,9 +1034,9 @@ function light(nid, aid, delay) {
 function runDemo() {
   if (simState === 'done') { resetDemo(); return; }
 
-  const active = Object.entries(gameState)
+  const active = Object.entries(eventState)
     .filter(([,e]) => e !== null)
-    .map(([g,e]) => ({g: parseInt(g), e}));
+    .map(([g,e]) => ({g:parseInt(g), e}));
 
   if (active.length < 2) {
     document.getElementById('hint').classList.add('on');
@@ -816,67 +1046,55 @@ function runDemo() {
 
   simState = 'done';
   const btn = document.getElementById('tbtn');
-  btn.textContent = '...'; btn.style.opacity='0.6';
+  btn.textContent = '...'; btn.style.opacity = '0.6';
 
-  // Light flow nodes
-  light('fn1', null, 0);
-  light('fn2','fa1', 500);
-  light('fn3','fa2', 1000);
-  light('fn4','fa3', 1700);
+  light('fn1', null,  0);
+  light('fn2', 'fa1', 500);
+  light('fn3', 'fa2', 1000);
+  light('fn4', 'fa3', 1700);
 
-  // Add events to log
   active.forEach(({g,e}, i) => addEv(g, e, 350 + i * 650));
 
-  // Flash game cards & update scores
   active.forEach(({g,e}, i) => {
     setTimeout(() => {
       document.getElementById('gc'+g).classList.add('flash');
       if (e === 'goal') {
-        if(g===2) document.getElementById('sc2').textContent = '1 – 0';
-        if(g===3) document.getElementById('sc3').textContent = '3 – 1';
+        const d    = gameData[g];
+        const newS = d.s1 + 1;
+        document.getElementById('sc'+g).textContent = `${newS} – ${d.s2}`;
+        const mvScore = `${d.f1} ${d.a1} ${newS}–${d.s2} ${d.a2} ${d.f2}`;
+        if (document.getElementById('mv'+g))    document.getElementById('mv'+g).textContent   = mvScore;
+        if (document.getElementById('igmv'+g)) document.getElementById('igmv'+g).textContent = mvScore;
       }
-    }, 450 + i*650);
+    }, 450 + i * 650);
   });
 
-  // Proximity banner
-  const copy = buildCopy(active);
-  const detail = active.map(({g,e}) => {
-    return `${EVENTS[e].ico} ${EVENTS[e].label} — ${GAMES[g].teams}`;
-  }).join(' · ');
+  const copy   = buildCopy(active);
+  const detail = active.map(({g,e}) => `${EVENTS[e].ico} ${EVENTS[e].label} — ${gameData[g].t1} vs ${gameData[g].t2}`).join(' · ');
 
   setTimeout(() => {
     document.getElementById('prox-detail').textContent = ` — ${detail}. Ad served.`;
     document.getElementById('prox').classList.add('on');
   }, 1900);
 
-  // Update ad copy
   document.getElementById('ctv-headline').innerHTML = copy.ctv_hl;
-  document.getElementById('ctv-sub').innerHTML = copy.ctv_sub;
-  document.getElementById('ig-head').innerHTML = copy.ig_hl;
-  document.getElementById('ig-sub').innerHTML = copy.ig_sub;
+  document.getElementById('ctv-sub').innerHTML      = copy.ctv_sub;
+  document.getElementById('ig-head').innerHTML      = copy.ig_hl;
+  document.getElementById('ig-sub').innerHTML       = copy.ig_sub;
 
-  // Update multiview scores based on events
-  active.forEach(({g,e}) => {
-    if(e==='goal') {
-      if(g===2) { document.getElementById('mv2').textContent='🇧🇷 BRA 1–0 GER 🇩🇪'; document.getElementById('igmv2').textContent='🇧🇷 BRA 1–0 GER 🇩🇪'; }
-      if(g===3) { document.getElementById('mv3').textContent='🇫🇷 FRA 3–1 JPN 🇯🇵'; document.getElementById('igmv3').textContent='🇫🇷 FRA 3–1 JPN 🇯🇵'; }
-    }
-  });
-
-  // Show ads + event overlays
   setTimeout(() => {
     document.getElementById('ctv-default').style.display = 'none';
     document.getElementById('ctv-ad-hero').classList.add('show');
     document.getElementById('ig-ph').style.display = 'none';
     document.getElementById('ig-ad').classList.add('on');
-    btn.innerHTML = '↺&nbsp; Reset Demo'; btn.style.opacity='1';
+    btn.innerHTML    = '↺&nbsp; Reset Demo';
+    btn.style.opacity = '1';
 
-    // Emoji overlays on multiview cells
-    active.forEach(({g, e}) => {
-      if (g >= 1 && g <= 3) {
-        const ev = EVENTS[e];
+    active.forEach(({g,e}) => {
+      if (g >= 1 && g <= 2) {
+        const ev   = EVENTS[e];
         const html = `<span class="cme-emoji">${ev.ico}</span><span class="cme-label">${ev.label}</span>`;
-        ['ctv-ev', 'ig-ev'].forEach(prefix => {
+        ['ctv-ev','ig-ev'].forEach(prefix => {
           const el = document.getElementById(prefix + g);
           if (el) { el.innerHTML = html; el.classList.add('on'); el.parentElement.classList.add('has-event'); }
         });
@@ -885,37 +1103,104 @@ function runDemo() {
   }, 2400);
 }
 
+// ── AD CREATIVES ──
+const AD_CREATIVES = [
+  {
+    ctv_hl: `YOUR EYES CAN'T<br>BE EVERYWHERE.`,
+    ctv_sub: `But your screen can. Watch both concurrent Group Stage matches at once with YouTube TV Multiview.`,
+    ig_hl: `Your eyes can't<br><span>be everywhere.</span><br>Your screen can.`,
+    ig_sub: `Watch both live matches simultaneously — only on YouTube TV Multiview.`
+  },
+  {
+    ctv_hl: `BOTH GAMES<br>ARE LIVE NOW.`,
+    ctv_sub: `One screen can hold them both. YouTube TV Multiview — built for moments exactly like this.`,
+    ig_hl: `Both games are<br><span>live right now.</span><br>You're watching one.`,
+    ig_sub: `Don't choose. Watch both simultaneously with YouTube TV Multiview.`
+  },
+  {
+    ctv_hl: `THE GOAL YOU<br>MISSED WAS HERE.`,
+    ctv_sub: `It happened in the other match while you were watching this one. Never miss it again with Multiview.`,
+    ig_hl: `The goal you<br><span>missed</span><br>was in the other game.`,
+    ig_sub: `YouTube TV Multiview: never miss what's happening on the other pitch.`
+  },
+  {
+    ctv_hl: `SPLIT SCREEN.<br>FULL INTENSITY.`,
+    ctv_sub: `Two Group Stage clashes. One Multiview window. All the drama, all at once.`,
+    ig_hl: `Split screen.<br><span>Full intensity.</span><br>All live.`,
+    ig_sub: `Two World Cup matches on one screen. Only on YouTube TV.`
+  },
+  {
+    ctv_hl: `ONE TAB CAN'T HOLD<br>THE WHOLE WORLD CUP.`,
+    ctv_sub: `While you were watching one game, the other just changed everything. Get Multiview.`,
+    ig_hl: `One tab can't<br><span>hold the whole</span><br>World Cup.`,
+    ig_sub: `Watch every concurrent group stage match live on YouTube TV Multiview.`
+  },
+  {
+    ctv_hl: `THERE'S NO WAY<br>TO SEE EVERYTHING.`,
+    ctv_sub: `Actually, there is. YouTube TV Multiview — watch 2 live World Cup games simultaneously.`,
+    ig_hl: `There's no way<br><span>to see everything.</span><br>Actually, there is.`,
+    ig_sub: `YouTube TV Multiview — the only way to truly watch the World Cup.`
+  }
+];
+
+let creativeIdx = -1;
+
+function newCreative() {
+  creativeIdx = (creativeIdx + 1) % AD_CREATIVES.length;
+  const c = AD_CREATIVES[creativeIdx];
+
+  document.getElementById('ctv-headline').innerHTML = c.ctv_hl;
+  document.getElementById('ctv-sub').innerHTML      = c.ctv_sub;
+  document.getElementById('ig-head').innerHTML      = c.ig_hl;
+  document.getElementById('ig-sub').innerHTML       = c.ig_sub;
+
+  // Show ads even if sim hasn't been run
+  document.getElementById('ctv-default').style.display = 'none';
+  document.getElementById('ctv-ad-hero').classList.add('show');
+  document.getElementById('ig-ph').style.display       = 'none';
+  document.getElementById('ig-ad').classList.add('on');
+
+  const btn = document.getElementById('new-cta-btn');
+  btn.innerHTML = `↻ &nbsp;Creative ${creativeIdx + 1} <span style="color:var(--t3);font-weight:400">of ${AD_CREATIVES.length}</span>`;
+}
+
 // ── RESET ──
 function resetDemo() {
   simState = 'idle';
   ['fn1','fn2','fn3','fn4'].forEach(id => document.getElementById(id).classList.remove('lit'));
   ['fa1','fa2','fa3'].forEach(id => document.getElementById(id).classList.remove('lit'));
-  // Remove added events
+
   const list = document.getElementById('evlist');
-  Array.from(list.children).forEach(el => { if(!el.classList.contains('pre')) el.remove(); });
-  // Reset cards
-  [1,2,3].forEach(i => document.getElementById('gc'+i).classList.remove('flash'));
-  document.getElementById('sc2').textContent = '0 – 0';
-  document.getElementById('sc3').textContent = '2 – 1';
-  document.getElementById('mv2').textContent = '🇧🇷 BRA 0–0 GER 🇩🇪';
-  document.getElementById('mv3').textContent = '🇫🇷 FRA 2–1 JPN 🇯🇵';
-  document.getElementById('igmv2').textContent = '🇧🇷 BRA 0–0 GER 🇩🇪';
-  document.getElementById('igmv3').textContent = '🇫🇷 FRA 2–1 JPN 🇯🇵';
+  Array.from(list.children).forEach(el => { if (!el.classList.contains('pre')) el.remove(); });
+  [1,2].forEach(i => document.getElementById('gc'+i).classList.remove('flash'));
+
+  [1,2].forEach(g => {
+    const d = gameData[g];
+    document.getElementById('sc'+g).textContent = `${d.s1} – ${d.s2}`;
+    const mvScore = `${d.f1} ${d.a1} ${d.s1}–${d.s2} ${d.a2} ${d.f2}`;
+    if (document.getElementById('mv'+g))    document.getElementById('mv'+g).textContent   = mvScore;
+    if (document.getElementById('igmv'+g)) document.getElementById('igmv'+g).textContent = mvScore;
+  });
+
   document.getElementById('prox').classList.remove('on');
-  // Reset ads
   document.getElementById('ctv-default').style.display = '';
   document.getElementById('ctv-ad-hero').classList.remove('show');
   document.getElementById('ig-ph').style.display = '';
   document.getElementById('ig-ad').classList.remove('on');
-  // Clear event overlays
-  [1,2,3].forEach(i => {
+
+  [1,2].forEach(i => {
     ['ctv-ev','ig-ev'].forEach(prefix => {
       const el = document.getElementById(prefix + i);
       if (el) { el.innerHTML = ''; el.classList.remove('on'); el.parentElement.classList.remove('has-event'); }
     });
   });
+
   const btn = document.getElementById('tbtn');
-  btn.innerHTML = '⚡&nbsp; Simulate Concurrent Game Events'; btn.style.opacity='1';
+  btn.innerHTML    = '⚡&nbsp; Simulate Concurrent Game Events';
+  btn.style.opacity = '1';
+
+  creativeIdx = -1;
+  document.getElementById('new-cta-btn').innerHTML = '↻ &nbsp;Generate New Ad Creative';
 }
 </script>
 </body>
