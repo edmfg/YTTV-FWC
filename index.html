@@ -164,6 +164,11 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .zoom-toggle-btn{display:flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--bdr);color:var(--t3);font-size:11px;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;letter-spacing:.2px;}
 .zoom-toggle-btn:hover{border-color:#555;color:var(--t1)}
 
+/* FALL SAFE BUTTON */
+.fallsafe-btn{display:flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--bdr);color:var(--t3);font-size:11px;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;letter-spacing:.2px;white-space:nowrap;}
+.fallsafe-btn:hover{border-color:#F59E0B;color:#F59E0B}
+.fallsafe-btn.active{border-color:rgba(245,158,11,.45);color:#F59E0B;background:rgba(245,158,11,.06)}
+
 /* SIMULATE BUTTON (inline in adpanel) */
 .tbtn{display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;border:none;padding:14px 36px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.2px;transition:background .15s,transform .1s;}
 .tbtn:hover{background:#DD0000}.tbtn:active{transform:scale(.98)}
@@ -228,7 +233,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .ctv-live-badge{position:absolute;top:4px;left:4px;background:var(--red);color:#fff;font-size:7px;font-weight:800;padding:1px 4px;border-radius:2px;letter-spacing:.5px;}
 
 /* ── INSTAGRAM PHONE ── */
-#ig-view{display:none}
+#ctv-view{display:none}
 #ig-view.on{display:block}
 .phone-outer{width:276px;margin:0 auto;background:#1c1c1e;border-radius:44px;padding:12px;box-shadow:0 0 0 1px #333,0 20px 60px rgba(0,0,0,.6);position:relative;}
 .dyn-island{width:100px;height:30px;background:#000;border-radius:20px;margin:0 auto 10px;}
@@ -579,10 +584,13 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
       <!-- Controls row: toggle + zoom -->
       <div class="adpanel-controls">
         <div class="tpill">
-          <button class="tog on" id="btn-ctv" onclick="setMode('ctv')">📺&nbsp; CTV</button>
-          <button class="tog"    id="btn-ig"  onclick="setMode('ig')">📱&nbsp; Instagram</button>
+          <button class="tog on" id="btn-ig"  onclick="setMode('ig')">📱&nbsp; Instagram</button>
+          <button class="tog"    id="btn-ctv" onclick="setMode('ctv')">📺&nbsp; CTV</button>
         </div>
-        <button class="zoom-toggle-btn" onclick="openZoom()">⤢&nbsp; Expand</button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="fallsafe-btn" id="fallsafe-btn" onclick="runFallSafe()">🛡&nbsp; Fall Safe Option</button>
+          <button class="zoom-toggle-btn" onclick="openZoom()">⤢&nbsp; Expand</button>
+        </div>
       </div>
 
       <!-- Simulate button — right above the ad preview -->
@@ -655,7 +663,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
       </div>
 
       <!-- INSTAGRAM VIEW -->
-      <div id="ig-view">
+      <div id="ig-view" class="on">
         <div class="phone-outer" id="ig-phone">
           <div class="dyn-island"></div>
           <div class="status-bar">
@@ -715,7 +723,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
                 <div class="ig-creative-bg"></div>
                 <div class="ig-creative-content">
                   <div class="ig-copy-top">
-                    <div class="ig-copy-eyebrow">⚡ Proximity Trigger · Live</div>
+                    <div class="ig-copy-eyebrow" id="ig-eyebrow">⚡ Proximity Trigger · Live</div>
                     <div class="ig-copy-head" id="ig-head">You're watching<br><span>1 game.</span><br>2 are live.</div>
                     <div class="ig-copy-sub" id="ig-sub">Events just happened in the other game. Don't miss it.</div>
                   </div>
@@ -994,12 +1002,12 @@ function buildCopy(active) {
   const lines = active.map(({g,e}) => {
     const d = gameData[g];
     return ({
-      goal:    `⚽ ${d.a1} scored — ${d.t1} vs ${d.t2}`,
-      red:     `🟥 Red card — ${d.t1} vs ${d.t2}`,
-      yel:     `🟡 Yellow card — ${d.t1} vs ${d.t2}`,
-      shot:    `🥅 Shot on goal — ${d.t1} vs ${d.t2}`,
-      injury:  `🤕 Injury — ${d.t1} vs ${d.t2}`,
-      offside: `🚩 Offside — ${d.t1} vs ${d.t2}`,
+      goal:    `⚽ ${d.f1} ${d.a1} scored — ${d.f1} ${d.t1} vs ${d.t2} ${d.f2}`,
+      red:     `🟥 Red card — ${d.f1} ${d.t1} vs ${d.t2} ${d.f2}`,
+      yel:     `🟡 Yellow card — ${d.f1} ${d.t1} vs ${d.t2} ${d.f2}`,
+      shot:    `🥅 Shot on goal — ${d.f1} ${d.t1} vs ${d.t2} ${d.f2}`,
+      injury:  `🤕 Injury — ${d.f1} ${d.t1} vs ${d.t2} ${d.f2}`,
+      offside: `🚩 Offside — ${d.f1} ${d.t1} vs ${d.t2} ${d.f2}`,
     })[e];
   });
   return {
@@ -1166,6 +1174,85 @@ function newCreative() {
   btn.innerHTML = `↻ &nbsp;Creative ${creativeIdx + 1} <span style="color:var(--t3);font-weight:400">of ${AD_CREATIVES.length}</span>`;
 }
 
+// ── FALL SAFE CREATIVES ──
+const FALL_SAFE_CREATIVES = [
+  {
+    ctv_hl:  `WATCH BOTH GAMES<br>NOW.`,
+    ctv_sub: `Two World Cup group stage matches are live at this moment. YouTube TV Multiview — watch them both on one screen.`,
+    ig_hl:   `Watch both<br><span>games</span><br>right now.`,
+    ig_sub:  `Two live matches. One screen. YouTube TV Multiview.`,
+    eyebrow: `📺 Both Games Live · Now`,
+  },
+  {
+    ctv_hl:  `TWO GAMES.<br>ONE SCREEN.`,
+    ctv_sub: `Both Group Stage matches are happening simultaneously. Don't choose — watch both with YouTube TV Multiview.`,
+    ig_hl:   `Two games.<br><span>One screen.</span><br>All live.`,
+    ig_sub:  `Don't pick one. Watch both concurrent matches now on YouTube TV Multiview.`,
+    eyebrow: `📺 Concurrent Games · Live Now`,
+  },
+  {
+    ctv_hl:  `BOTH MATCHES<br>ARE LIVE NOW.`,
+    ctv_sub: `The World Cup is happening on two pitches at once. YouTube TV Multiview keeps you on both.`,
+    ig_hl:   `The World Cup is<br><span>on two pitches</span><br>right now.`,
+    ig_sub:  `Stay on both with YouTube TV Multiview. Never miss a moment.`,
+    eyebrow: `📺 Live Now · Two Pitches`,
+  },
+  {
+    ctv_hl:  `DON'T PICK<br>JUST ONE.`,
+    ctv_sub: `Two simultaneous World Cup matches. One Multiview window. All the action, all the time.`,
+    ig_hl:   `Don't pick<br><span>just one game.</span><br>Watch both.`,
+    ig_sub:  `YouTube TV Multiview — built for exactly this moment.`,
+    eyebrow: `📺 Always-On · Multiview`,
+  },
+  {
+    ctv_hl:  `THE FULL WORLD CUP<br>IS ON RIGHT NOW.`,
+    ctv_sub: `Multiple matches are live simultaneously. YouTube TV Multiview puts them all on one screen.`,
+    ig_hl:   `The full World Cup<br><span>is on</span><br>right now.`,
+    ig_sub:  `Multiview on YouTube TV. Watch every match, miss nothing.`,
+    eyebrow: `📺 Group Stage · Live`,
+  },
+];
+
+let fallSafeIdx = -1;
+
+function runFallSafe() {
+  fallSafeIdx = (fallSafeIdx + 1) % FALL_SAFE_CREATIVES.length;
+  const c = FALL_SAFE_CREATIVES[fallSafeIdx];
+
+  document.getElementById('ctv-headline').innerHTML = c.ctv_hl;
+  document.getElementById('ctv-sub').innerHTML      = c.ctv_sub;
+  document.getElementById('ig-head').innerHTML      = c.ig_hl;
+  document.getElementById('ig-sub').innerHTML       = c.ig_sub;
+  document.getElementById('ig-eyebrow').textContent = c.eyebrow;
+
+  // Set multiview cells to flag + matchup, no scores
+  [1,2].forEach(i => {
+    const d = gameData[i];
+    const label = `${d.f1} ${d.a1} vs ${d.a2} ${d.f2}`;
+    if (document.getElementById('mv'+i))    document.getElementById('mv'+i).textContent   = label;
+    if (document.getElementById('igmv'+i)) document.getElementById('igmv'+i).textContent = label;
+  });
+
+  // Clear any event overlays (not triggered by specific events)
+  [1,2].forEach(i => {
+    ['ctv-ev','ig-ev'].forEach(prefix => {
+      const el = document.getElementById(prefix + i);
+      if (el) { el.innerHTML = ''; el.classList.remove('on'); el.parentElement.classList.remove('has-event'); }
+    });
+  });
+
+  // Show ads
+  document.getElementById('ctv-default').style.display = 'none';
+  document.getElementById('ctv-ad-hero').classList.add('show');
+  document.getElementById('ig-ph').style.display       = 'none';
+  document.getElementById('ig-ad').classList.add('on');
+
+  // Update button state
+  const btn = document.getElementById('fallsafe-btn');
+  btn.classList.add('active');
+  btn.innerHTML = `🛡&nbsp; Fall Safe ${fallSafeIdx + 1} <span style="color:var(--t3);font-weight:400">of ${FALL_SAFE_CREATIVES.length}</span>`;
+}
+
 // ── RESET ──
 function resetDemo() {
   simState = 'idle';
@@ -1203,6 +1290,12 @@ function resetDemo() {
 
   creativeIdx = -1;
   document.getElementById('new-cta-btn').innerHTML = '↻ &nbsp;Generate New Ad Creative';
+
+  fallSafeIdx = -1;
+  document.getElementById('ig-eyebrow').textContent = '⚡ Proximity Trigger · Live';
+  const fsBtn = document.getElementById('fallsafe-btn');
+  fsBtn.classList.remove('active');
+  fsBtn.innerHTML = '🛡&nbsp; Fall Safe Option';
 }
 </script>
 </body>
