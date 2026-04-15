@@ -2395,6 +2395,7 @@ const PA_TEMPLATE = {
   copy:'You\'re watching one match. Another just scored. Multiview on YouTube TV lets you keep both live — goals, drama, everything — on a single screen.',
   cta:'Watch Multiview Now',
   platforms:['CTV','Instagram'],
+  signals:['goal_any','goal_late'],
   tone:'Urgent',
   priority:'Must-Have',
   status:'Draft',
@@ -2421,7 +2422,7 @@ function paNewBlank() {
   return {
     id:'pa_'+Math.random().toString(36).slice(2,10),
     title:'', event:'', example:'', visual:'', headline:'', copy:'', cta:'',
-    platforms:[], tone:'', priority:'', status:'Draft', window:'', notes:''
+    platforms:[], signals:[], tone:'', priority:'', status:'Draft', window:'', notes:''
   };
 }
 function paAddCard(){
@@ -2466,8 +2467,17 @@ function paTogglePlatform(id, p){
   const i = c.platforms.indexOf(p);
   if (i === -1) c.platforms.push(p); else c.platforms.splice(i, 1);
   paSave();
-  // Toggle class on the chip
   const chip = document.querySelector(`[data-card-id="${id}"] .pa-chip[data-group="platform"][data-val="${p}"]`);
+  if (chip) chip.classList.toggle('on');
+}
+function paToggleSignal(id, sigId){
+  const c = paCards.find(x => x.id === id);
+  if (!c) return;
+  c.signals = c.signals || [];
+  const i = c.signals.indexOf(sigId);
+  if (i === -1) c.signals.push(sigId); else c.signals.splice(i, 1);
+  paSave();
+  const chip = document.querySelector(`[data-card-id="${id}"] .pa-chip[data-group="signal"][data-val="${sigId}"]`);
   if (chip) chip.classList.toggle('on');
 }
 function paSetChoice(id, field, v){
@@ -2507,6 +2517,14 @@ function paChipRow(id, field, values, multi) {
     const active = multi ? (card.platforms||[]).includes(v) : card[field] === v;
     const handler = multi ? `paTogglePlatform('${id}','${v}')` : `paSetChoice('${id}','${field}','${v}')`;
     return `<button class="pa-chip ${active?'on':''}" data-group="${multi?'platform':field}" data-val="${v}" onclick="${handler}">${v}</button>`;
+  }).join('');
+}
+
+function paSignalChips(c) {
+  const selected = c.signals || [];
+  return SIGNALS.map(s => {
+    const active = selected.includes(s.id);
+    return `<button class="pa-chip ${active?'on':''}" data-group="signal" data-val="${s.id}" title="${s.evt}" onclick="paToggleSignal('${c.id}','${s.id}')">${s.ico}&nbsp;${s.name}</button>`;
   }).join('');
 }
 
@@ -2562,6 +2580,11 @@ function paCardHTML(c, idx) {
     <div class="pa-field">
       <div class="pa-label"><span class="pa-ico">📺</span>Platforms</div>
       <div class="pa-chip-row">${paChipRow(c.id,'platforms',PA_PLATFORMS,true)}</div>
+    </div>
+
+    <div class="pa-field">
+      <div class="pa-label"><span class="pa-ico">📡</span>Signals Used <span style="color:var(--t3);font-weight:500;letter-spacing:.3px;text-transform:none;margin-left:4px">— from Genius Sports feed</span></div>
+      <div class="pa-chip-row">${paSignalChips(c)}</div>
     </div>
 
     <div class="pa-row">
