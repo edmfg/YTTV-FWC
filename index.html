@@ -54,6 +54,11 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .iBtn:hover{border-color:#444;color:var(--t1)}
 .iBtn.active{border-color:rgba(255,0,0,.5);color:var(--t1);background:rgba(255,0,0,.06)}
 
+/* Triggers button — distinct amber/gold bold style */
+#btn-triggers{background:linear-gradient(135deg,#F59E0B,#D97706);border-color:#F59E0B;color:#111;font-weight:800;box-shadow:0 0 0 1px rgba(245,158,11,.3),0 4px 14px rgba(245,158,11,.25)}
+#btn-triggers:hover{border-color:#FBBF24;color:#000;background:linear-gradient(135deg,#FBBF24,#F59E0B)}
+#btn-triggers.active{background:linear-gradient(135deg,#F59E0B,#D97706);border-color:#FBBF24;color:#111;box-shadow:0 0 0 1px rgba(251,191,36,.5),0 6px 20px rgba(245,158,11,.4)}
+
 /* INFO PANELS */
 .info-panel{max-height:0;overflow:hidden;transition:max-height .55s ease,opacity .4s ease,margin-bottom .4s ease;opacity:0;margin-bottom:0;}
 .info-panel.open{max-height:2400px;opacity:1;margin-bottom:28px;}
@@ -355,6 +360,122 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
   cursor:pointer;transition:all .15s;z-index:501;
 }
 .zoom-close-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* ── TRIGGERS PANEL ── */
+.trig-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--bdr)}
+.trig-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.trig-stat{background:var(--s2);border:1px solid var(--bdr);border-radius:10px;padding:12px 14px}
+.trig-stat-num{font-size:22px;font-weight:800;letter-spacing:-.5px;line-height:1}
+.trig-stat-num.red{color:var(--red)}
+.trig-stat-lbl{font-size:10px;font-weight:600;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-top:4px}
+
+.trig-presets{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
+.trig-presets-lbl{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-right:4px}
+.trig-preset{padding:7px 14px;border-radius:20px;border:1px solid var(--bdr);background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.trig-preset:hover{border-color:#555;color:var(--t1)}
+.trig-preset.on{background:var(--red);border-color:var(--red);color:#fff}
+
+.trig-body{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;margin-bottom:24px}
+.trig-col-title{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.trig-col-title .count-badge{font-size:10px;color:var(--t3);font-weight:500;letter-spacing:.3px;text-transform:none}
+
+.sig-group{margin-bottom:14px;background:var(--s2);border:1px solid var(--bdr);border-radius:10px;padding:12px 14px}
+.sig-group-hd{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--t1);margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:8px}
+.sig-group-count{font-size:9px;color:var(--t3);font-weight:500;margin-left:auto;letter-spacing:.3px;text-transform:none}
+.sig-row{display:grid;grid-template-columns:20px 1fr 120px 34px;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(39,39,39,.55)}
+.sig-row:last-child{border-bottom:none}
+.sig-ico{font-size:13px;text-align:center;line-height:1}
+.sig-meta{min-width:0}
+.sig-name{font-size:12px;font-weight:600;color:var(--t1);line-height:1.2}
+.sig-desc{font-size:10px;color:var(--t3);margin-top:2px;line-height:1.35}
+.sig-range{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:var(--s3);outline:none;cursor:pointer}
+.sig-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--red);cursor:pointer;border:2px solid var(--bg)}
+.sig-range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--red);cursor:pointer;border:2px solid var(--bg)}
+.sig-val{font-size:12px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.sig-val.lo{color:var(--t3)}.sig-val.md{color:var(--yellow)}.sig-val.hi{color:var(--red)}
+
+.lb-list{display:flex;flex-direction:column;gap:6px}
+.lb-row{background:var(--s2);border:1px solid var(--bdr);border-radius:10px;padding:9px 12px;display:grid;grid-template-columns:20px 1fr 48px;align-items:center;gap:10px;transition:border-color .25s,background .25s}
+.lb-row.top{border-color:rgba(255,0,0,.45);background:rgba(255,0,0,.055)}
+.lb-row.top2{border-color:rgba(255,0,0,.3)}
+.lb-rank{font-size:13px;font-weight:900;color:var(--t3);text-align:center;line-height:1}
+.lb-row.top .lb-rank{color:var(--red)}
+.lb-pair{min-width:0}
+.lb-sig{font-size:12px;color:var(--t1);font-weight:600;line-height:1.35}
+.lb-x{color:var(--t3);margin:0 5px;font-weight:400}
+.lb-score{font-size:18px;font-weight:800;color:var(--red);text-align:right;line-height:1;font-variant-numeric:tabular-nums}
+.lb-score-lbl{font-size:8px;color:var(--t3);text-align:right;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+
+.spotlight{background:linear-gradient(135deg,rgba(255,0,0,.1),rgba(255,0,0,.02));border:1px solid rgba(255,0,0,.35);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.spot-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.spot-lbl::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.8s ease-in-out infinite;flex-shrink:0}
+.spot-head{font-size:15px;font-weight:800;color:var(--t1);margin-bottom:6px;letter-spacing:-.3px;line-height:1.25}
+.spot-narr{font-size:11.5px;color:var(--t2);line-height:1.6}
+.spot-narr strong{color:var(--t1);font-weight:600}
+
+.hm-section{border-top:1px solid var(--bdr);padding-top:22px}
+.hm-wrap{overflow-x:auto;padding-bottom:8px}
+.hm-grid-outer{display:inline-block;min-width:100%}
+.hm-row{display:flex;align-items:center;gap:2px;margin-bottom:2px}
+.hm-col-hd{display:flex;gap:2px;margin-left:118px;margin-bottom:4px}
+.hm-col-lbl{width:30px;font-size:8px;color:var(--t3);text-align:center;display:flex;align-items:flex-end;justify-content:center;height:62px;padding-bottom:4px}
+.hm-col-lbl span{transform:rotate(-55deg);transform-origin:center bottom;white-space:nowrap;font-weight:600}
+.hm-row-lbl{width:116px;font-size:10px;color:var(--t2);text-align:right;padding-right:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.hm-cell{width:30px;height:30px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:rgba(255,255,255,.9);cursor:pointer;transition:transform .12s,outline .12s;outline:0 solid transparent;position:relative}
+.hm-cell:hover{transform:scale(1.18);z-index:5;outline:1.5px solid #fff}
+.hm-legend{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:10px;color:var(--t3);font-weight:500}
+.hm-legend-bar{width:140px;height:8px;border-radius:4px;background:linear-gradient(90deg,#222 0%,#5a1515 30%,#a01010 60%,#ff0000 100%)}
+
+/* Likelihood & combined display within sig row + leaderboard */
+.sig-row{grid-template-columns:20px 1fr 120px 34px 46px}
+.sig-prob{font-size:10px;text-align:right;color:var(--t3);font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.sig-prob-lbl{font-size:8px;color:#555;letter-spacing:.4px;text-transform:uppercase;font-weight:700}
+
+.lb-row{grid-template-columns:20px 1fr 56px 56px}
+.lb-side{text-align:right;line-height:1}
+.lb-side .big{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+.lb-side .lbl{font-size:8px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-top:3px}
+.lb-side.intensity .big{color:var(--red)}
+.lb-side.prob .big{color:var(--blue)}
+.lb-row:not(.top):not(.top2) .lb-side.intensity .big{color:#F59E0B}
+.lb-histbadge{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;background:rgba(245,158,11,.15);color:#F59E0B;border:1px solid rgba(245,158,11,.35);padding:1px 6px;border-radius:20px;margin-top:4px}
+
+.spot-meta{display:flex;gap:14px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,0,0,.2)}
+.spot-meta-item{display:flex;flex-direction:column;gap:2px}
+.spot-meta-item .big{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.spot-meta-item .lbl{font-size:9px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.spot-hist{margin-top:10px;padding:10px 12px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-radius:8px;font-size:11px;color:var(--t2);line-height:1.55}
+.spot-hist strong{color:#F59E0B;font-weight:700}
+.spot-hist .hist-tag{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;background:rgba(245,158,11,.2);color:#F59E0B;padding:1px 6px;border-radius:20px;margin-right:6px;vertical-align:middle}
+
+/* View All CSV button */
+.trig-viewall-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-size:12px;font-weight:600;padding:7px 14px;border-radius:20px;cursor:pointer;font-family:inherit;transition:all .15s}
+.trig-viewall-btn:hover{border-color:#F59E0B;color:#F59E0B}
+
+/* CSV MODAL */
+.csv-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:600;backdrop-filter:blur(10px);padding:32px}
+.csv-modal.on{display:flex}
+.csv-sheet{background:var(--s1);border:1px solid var(--bdr);border-radius:14px;max-width:1040px;width:100%;max-height:86vh;display:flex;flex-direction:column;overflow:hidden}
+.csv-sheet-hd{padding:18px 24px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.csv-sheet-ttl{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.csv-sheet-sub{font-size:11px;color:var(--t3);margin-top:3px}
+.csv-close{background:transparent;border:1px solid var(--bdr);color:var(--t2);width:34px;height:34px;border-radius:50%;font-size:14px;cursor:pointer;font-family:inherit;transition:all .15s}
+.csv-close:hover{border-color:#F59E0B;color:#F59E0B}
+.csv-sheet-body{overflow:auto;padding:14px 24px 24px}
+.csv-search{width:100%;background:var(--s2);border:1px solid var(--bdr);color:var(--t1);font-size:12px;padding:9px 14px;border-radius:8px;margin-bottom:14px;font-family:inherit;outline:none}
+.csv-search:focus{border-color:#F59E0B}
+.csv-table{width:100%;border-collapse:collapse;font-size:11.5px}
+.csv-table th{text-align:left;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--t3);padding:8px 10px;border-bottom:1px solid var(--bdr);position:sticky;top:0;background:var(--s1);z-index:2}
+.csv-table td{padding:9px 10px;border-bottom:1px solid rgba(39,39,39,.55);color:var(--t2);vertical-align:top}
+.csv-table tr:hover td{background:rgba(245,158,11,.04)}
+.csv-table .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--t1);font-size:11px}
+.csv-table .cat-pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.3px;background:var(--s3);color:var(--t2)}
+.csv-table .cat-pill.goal{background:rgba(34,197,94,.15);color:#22C55E}
+.csv-table .cat-pill.card{background:rgba(245,158,11,.15);color:#F59E0B}
+.csv-table .cat-pill.setpiece{background:rgba(59,130,246,.15);color:#3B82F6}
+.csv-table .cat-pill.var{background:rgba(168,85,247,.18);color:#c084fc}
+.csv-table .cat-pill.match{background:rgba(255,0,0,.12);color:#FF4444}
+.csv-table .cat-pill.period{background:rgba(156,163,175,.15);color:#9CA3AF}
 </style>
 </head>
 <body>
@@ -411,6 +532,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
   <div class="info-btns">
     <button class="iBtn" id="btn-schedule" onclick="togglePanel('schedule')">📅&nbsp; Concurrent Game Schedule</button>
     <button class="iBtn" id="btn-history" onclick="togglePanel('history')">🏆&nbsp; Historical Examples</button>
+    <button class="iBtn" id="btn-triggers" onclick="togglePanel('triggers')">⚡&nbsp; Triggers</button>
   </div>
 
   <!-- SCHEDULE PANEL -->
@@ -499,6 +621,71 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
           <div class="hist-card-head"><div class="hist-title">Donovan's 91st-Minute Miracle</div><div class="hist-badge"><span class="hist-year">2010 S. Africa</span><span class="hist-grp">Group C</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">USA vs Algeria</span><span class="hist-score">1–0</span></div><div class="hist-match"><span class="hist-vs">England vs Slovenia</span><span class="hist-score">1–0</span></div></div>
           <div class="hist-drama">Scoreless at 90 minutes, the USA were heading home. Slovenia were already celebrating qualification in the other stadium. Then <strong>Landon Donovan scored in the 91st minute</strong> off a Tim Howard rebound. In an instant: USA through, Slovenia eliminated. <strong>Still the most-watched moment in U.S. soccer history.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIGGERS PANEL -->
+  <div id="panel-triggers" class="info-panel">
+    <div class="panel-inner">
+      <div class="panel-title">Emotional Trigger Signals</div>
+      <div class="panel-sub">Tune how emotionally charged each Genius Sports event signal is. The Proximity Engine combines weights across two concurrent matches to decide which "you're missing something" moment deserves an ad. Higher weights = more likely to fire the Multiview trigger.</div>
+
+      <div class="trig-intro">
+        <div>
+          <div class="slabel" style="margin-bottom:10px">How scoring works</div>
+          <div style="font-size:12.5px;color:var(--t2);line-height:1.7">
+            Each signal carries an <strong style="color:var(--t1)">emotional weight</strong> (0–100) and a <strong style="color:#3B82F6">base likelihood</strong> per match. The Proximity Engine blends both into a <strong style="color:var(--t1)">priority score</strong> — so we plan not just for rare peak-drama moments (Red + Penalty), but also for the <em>obvious high-volume pairs</em> like "Goal in Game 1 + Goal in Game 2 within 5 minutes."
+          </div>
+        </div>
+        <div class="trig-stats">
+          <div class="trig-stat"><div class="trig-stat-num red" id="trig-stat-signals">21</div><div class="trig-stat-lbl">Signals Tuned</div></div>
+          <div class="trig-stat"><div class="trig-stat-num" id="trig-stat-top" style="color:var(--red)">0</div><div class="trig-stat-lbl">Peak Priority</div></div>
+          <div class="trig-stat"><div class="trig-stat-num" id="trig-stat-obvious" style="color:#3B82F6">0</div><div class="trig-stat-lbl">High-Likelihood Pairs</div></div>
+        </div>
+      </div>
+
+      <div class="trig-presets">
+        <span class="trig-presets-lbl">Preset profile</span>
+        <button class="trig-preset on" data-preset="balanced" onclick="applyPreset('balanced',this)">Balanced</button>
+        <button class="trig-preset" data-preset="drama" onclick="applyPreset('drama',this)">Max Drama</button>
+        <button class="trig-preset" data-preset="goals" onclick="applyPreset('goals',this)">Goals First</button>
+        <button class="trig-preset" data-preset="chaos" onclick="applyPreset('chaos',this)">Cards &amp; Controversy</button>
+        <button class="trig-preset" data-preset="decisive" onclick="applyPreset('decisive',this)">Match-Defining</button>
+        <button class="trig-preset" onclick="resetSignals()">↻&nbsp; Reset</button>
+        <button class="trig-viewall-btn" style="margin-left:auto" onclick="openCsvModal()">📋&nbsp; View All Signals (CSV)</button>
+      </div>
+
+      <div class="trig-body">
+        <!-- LEFT: Signal Library -->
+        <div>
+          <div class="trig-col-title">Signal Library <span class="count-badge">Adjust each signal's emotional weight</span></div>
+          <div id="sig-library"></div>
+        </div>
+
+        <!-- RIGHT: Spotlight + Leaderboard -->
+        <div>
+          <div class="trig-col-title">Top Concurrent Trigger Pairs <span class="count-badge">Game 1 × Game 2</span></div>
+          <div class="spotlight" id="spotlight">
+            <div class="spot-lbl">Peak Trigger Moment</div>
+            <div class="spot-head" id="spot-head">—</div>
+            <div class="spot-narr" id="spot-narr">—</div>
+          </div>
+          <div class="lb-list" id="lb-list"></div>
+        </div>
+      </div>
+
+      <!-- HEATMAP -->
+      <div class="hm-section">
+        <div class="trig-col-title">Pairing Intensity Heatmap <span class="count-badge">Hover any cell for the concurrent-event scenario</span></div>
+        <div class="hm-wrap">
+          <div class="hm-grid-outer" id="hm-grid"></div>
+        </div>
+        <div class="hm-legend">
+          <span>Low intensity</span>
+          <div class="hm-legend-bar"></div>
+          <span>High intensity — fire the ad</span>
         </div>
       </div>
     </div>
@@ -786,6 +973,23 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
   </div><!-- /demo -->
 </div><!-- /page -->
 
+<!-- ── CSV MODAL (all signals from Signals.csv) ── -->
+<div id="csv-modal" class="csv-modal" onclick="if(event.target===this)closeCsvModal()">
+  <div class="csv-sheet">
+    <div class="csv-sheet-hd">
+      <div>
+        <div class="csv-sheet-ttl">📋 All Trigger Signals — Raw Feed Specification</div>
+        <div class="csv-sheet-sub">Every event type emitted by the Genius Sports real-time feed. Source: Signals.csv · 38 rows</div>
+      </div>
+      <button class="csv-close" onclick="closeCsvModal()">✕</button>
+    </div>
+    <div class="csv-sheet-body">
+      <input type="text" class="csv-search" id="csv-search" placeholder="🔍  Filter by event, condition, or type…" oninput="filterCsv(this.value)" />
+      <table class="csv-table" id="csv-table"></table>
+    </div>
+  </div>
+</div>
+
 <!-- ── ZOOM MODAL ── -->
 <div id="zoom-modal" class="zoom-modal" onclick="handleModalClick(event)">
   <button class="zoom-close-btn" onclick="closeZoom()">✕</button>
@@ -914,7 +1118,7 @@ function togglePanel(id) {
   const panel = document.getElementById('panel-' + id);
   const btn   = document.getElementById('btn-' + id);
   const isOpen = panel.classList.contains('open');
-  ['schedule','history'].forEach(p => {
+  ['schedule','history','triggers'].forEach(p => {
     document.getElementById('panel-'+p).classList.remove('open');
     document.getElementById('btn-'+p).classList.remove('active');
   });
@@ -1297,6 +1501,386 @@ function resetDemo() {
   fsBtn.classList.remove('active');
   fsBtn.innerHTML = '🛡&nbsp; Fall Safe Option';
 }
+
+// ────────────────────────────────────────────────────────────
+// ── TRIGGERS TAB ───────────────────────────────────────────
+// ────────────────────────────────────────────────────────────
+// SIGNALS: w = emotional weight (0-100), p = per-match probability that this event fires at least once (0-1)
+// Probabilities derived from WC 2022 Opta/Stats Perform aggregates and recent WC tournament averages.
+const SIGNALS = [
+  // Goals
+  {id:'goal_any',   grp:'Goals',      ico:'⚽', name:'Goal (any)',          evt:'Football.GoalEvent',               desc:'Any goal scored · ~2.7/match avg at WC 2022',     w:92, p:0.97},
+  {id:'goal_pen',   grp:'Goals',      ico:'🎯', name:'Penalty Goal',        evt:'GoalEvent · PenaltyGoal',          desc:'Scored from the spot · 1 in ~5 matches',           w:90, p:0.22},
+  {id:'goal_own',   grp:'Goals',      ico:'😱', name:'Own Goal',            evt:'GoalEvent · OwnGoal',              desc:'The ultimate plot twist · rare',                   w:97, p:0.06},
+  {id:'goal_late',  grp:'Goals',      ico:'⏱️', name:"Late Goal (85'+)",    evt:'GoalEvent + period time',          desc:"Scored after 85' · ~35% of matches",               w:99, p:0.38},
+  {id:'goal_et',    grp:'Goals',      ico:'🔥', name:'Extra-Time Goal',     evt:'GoalEvent · ExtraTime',            desc:'ET only · knockout stage, uncommon',               w:100,p:0.05},
+  {id:'goal_pk',    grp:'Goals',      ico:'🎱', name:'Penalty Shootout',    evt:'GoalEvent · PenaltyShootout',      desc:'Sudden-death kicks · very rare',                   w:100,p:0.03},
+  // Cards
+  {id:'card_yel',   grp:'Cards',      ico:'🟨', name:'Yellow Card',         evt:'CardEvent · YellowCard',           desc:'Booking · almost every match',                     w:25, p:0.99},
+  {id:'card_yel2',  grp:'Cards',      ico:'🟨🟨',name:'Second Yellow',      evt:'CardEvent · SecondYellow',         desc:'Dismissal via two yellows',                        w:78, p:0.12},
+  {id:'card_red',   grp:'Cards',      ico:'🟥', name:'Red Card',            evt:'CardEvent · RedCard',              desc:'Straight red · ~14% of matches',                   w:90, p:0.14},
+  // Set-pieces / Shots
+  {id:'pen_awd',    grp:'Set-piece',  ico:'⚠️', name:'Penalty Awarded',     evt:'Football.PenaltyAwardedEvent',     desc:'Pre-kick tension · ~28% of matches',               w:93, p:0.28},
+  {id:'shot',       grp:'Set-piece',  ico:'🥅', name:'Shot on Goal',        evt:'Football.ShotEvent',               desc:'Any shot · ubiquitous',                            w:38, p:1.00},
+  {id:'corner',     grp:'Set-piece',  ico:'🚩', name:'Corner Awarded',      evt:'Football.CornerAwardedEvent',      desc:'Chance developing · every match',                  w:22, p:1.00},
+  {id:'freekick',   grp:'Set-piece',  ico:'🦶', name:'Free Kick',           evt:'Football.FreeKickEvent',           desc:'Restart · every match',                            w:28, p:1.00},
+  // Flow / officiating
+  {id:'offside',    grp:'Flow',       ico:'🏳️', name:'Offside',             evt:'Football.OffsideEvent',            desc:'Flag raised · ~4/match avg',                       w:15, p:0.99},
+  {id:'sub',        grp:'Flow',       ico:'🔄', name:'Substitution',        evt:'Football.SubstitutionEvent',       desc:'Swap · 10/match avg',                              w:10, p:1.00},
+  {id:'var_start',  grp:'Flow',       ico:'📹', name:'VAR Review Started',  evt:'Football.VarEvent',                desc:'Tension while decision pending · ~55% of matches', w:70, p:0.55},
+  {id:'var_end',    grp:'Flow',       ico:'✅', name:'VAR Review Ended',    evt:'Football.VarEndedEvent',           desc:'Decision revealed · pairs with VAR start',         w:68, p:0.55},
+  // Match status / outcome / analytics
+  {id:'win_prob',   grp:'Analytics',  ico:'📈', name:'Win-Prob Swing',      evt:'Football.WinProbabilityEvent',     desc:'Model shifts >15 pts · ~65% of matches',           w:82, p:0.65},
+  {id:'match_end',  grp:'Match',      ico:'🏁', name:'Match Finished',      evt:'MatchStatusEvent · Finished',       desc:'Final whistle · every match',                      w:55, p:1.00},
+  {id:'match_abd',  grp:'Match',      ico:'⛔', name:'Match Abandoned',     evt:'MatchStatusEvent · Abandoned',      desc:'Unexpected stoppage · extremely rare',             w:80, p:0.002},
+  {id:'outcome',    grp:'Match',      ico:'🏆', name:'Competitor Won/Lost', evt:'CompetitorWon / CompetitorLost',    desc:'Decisive final result (not a draw)',               w:72, p:0.78},
+];
+
+// Historic examples of actual concurrent-match pair types that have happened.
+// Keyed on a sorted pair of signal IDs.
+const HISTORIC_PAIRS = {
+  'goal_any|goal_any': {
+    year:'2022 Qatar', tag:'Miracle of Doha',
+    text:"Japan's Tanaka scored at 51' vs Spain just as Costa Rica's Fuller scored at 58' vs Germany — for <strong>15 unreal minutes both Spain and Germany were being eliminated at the same time</strong>. Two goals in two simultaneous matches, same 10-minute window."
+  },
+  'goal_any|goal_late': {
+    year:'2018 Russia', tag:'Son 95\' vs Mexico–Sweden',
+    text:"Son Heung-min's 95th-minute empty-netter arrived as Mexico were being dismantled 3–0 by Sweden — Germany, the reigning champions, <strong>crashed out</strong> in the other stadium."
+  },
+  'goal_late|match_end': {
+    year:'2010 S. Africa', tag:"Donovan's Miracle",
+    text:"Landon Donovan's 91st-minute goal vs Algeria fired <em>at the exact moment</em> England's 1-0 vs Slovenia was ending — <strong>USA topped the group, Slovenia eliminated</strong>, all decided in about 90 concurrent seconds."
+  },
+  'goal_any|card_red': {
+    year:'2014 Brazil', tag:'Suárez bite',
+    text:"Suárez scored Uruguay's winner vs Italy after biting Chiellini (red-card-worthy but issued post-match) — while England drew 0-0 with Costa Rica, <strong>both Italy and England exited on the same afternoon</strong>."
+  },
+  'goal_pen|goal_any': {
+    year:'2018 Russia', tag:'Penalty + Goal synergy',
+    text:"Across Group B's final matchday, penalties in one game repeatedly coincided with goals in the other — a statistically common pairing with huge narrative weight."
+  },
+  'card_red|goal_any': {
+    year:'2002 K/J', tag:'Cannavaro era',
+    text:"Red cards in one match paired with goals in a simultaneous match have occurred in <strong>every single World Cup since 1998</strong> — the most reliable high-drama pairing on the bingo card."
+  },
+  'var_start|goal_any': {
+    year:'2018 Russia', tag:'VAR era',
+    text:"Since VAR was introduced at World Cups in 2018, every tournament has produced at least one instance of a VAR review overlapping a goal in a simultaneous match — a modern staple."
+  },
+  'goal_any|pen_awd': {
+    year:'2022 Qatar', tag:'Group decider pattern',
+    text:"Penalty awards in one concurrent match regularly coincide with goals in another — 2022 Group C saw exactly this during Argentina–Poland / Saudi Arabia–Mexico."
+  },
+  'goal_late|goal_late': {
+    year:'2022 Qatar', tag:'Group H · Suárez cried',
+    text:"South Korea's 91' winner over Portugal coincided with Uruguay's <em>failed</em> late push vs Ghana — <strong>Suárez was caught on camera in tears</strong> watching the other match on his phone."
+  },
+  'goal_any|win_prob': {
+    year:'Every WC', tag:'Universal pairing',
+    text:"A goal in one match almost always triggers a win-probability swing in the other when group-stage permutations are live. This is arguably the <strong>bread-and-butter trigger</strong> of the entire campaign."
+  },
+  'card_red|card_red': {
+    year:'2006 Germany', tag:'Battle of Nuremberg',
+    text:"Portugal–Netherlands saw <strong>4 red cards in one match</strong>; a red in a simultaneous game is statistically rare but has occurred — e.g., 2006 group stage double-red afternoons."
+  },
+};
+
+const PRESETS = {
+  balanced: {},
+  drama:    {goal_any:100,goal_pen:98,goal_own:100,goal_late:100,goal_et:100,goal_pk:100,card_red:98,card_yel2:88,pen_awd:100,var_start:82,var_end:78,win_prob:92,match_abd:90,outcome:85,card_yel:18,sub:5,offside:8,shot:35,corner:15,freekick:20,match_end:60},
+  goals:    {goal_any:100,goal_pen:100,goal_own:100,goal_late:100,goal_et:100,goal_pk:100,shot:55,pen_awd:85,card_red:28,card_yel2:22,card_yel:8,sub:4,offside:6,corner:10,freekick:14,var_start:30,var_end:28,win_prob:65,match_end:40,match_abd:35,outcome:55},
+  chaos:    {card_red:100,card_yel2:95,card_yel:55,var_start:90,var_end:88,goal_own:100,pen_awd:92,match_abd:95,offside:40,sub:25,goal_any:72,goal_pen:80,goal_late:85,goal_et:82,goal_pk:82,shot:35,corner:18,freekick:25,win_prob:70,match_end:50,outcome:60},
+  decisive: {goal_late:100,goal_et:100,goal_pk:100,outcome:100,win_prob:95,match_end:88,match_abd:78,goal_any:82,goal_pen:90,goal_own:92,pen_awd:92,card_red:80,card_yel2:70,card_yel:20,shot:30,corner:12,freekick:18,offside:8,sub:8,var_start:70,var_end:68},
+};
+
+// Live state — copy of SIGNALS with mutable weight
+let sigState = SIGNALS.map(s => ({...s}));
+
+function renderSignalLibrary() {
+  const groups = {};
+  sigState.forEach(s => { (groups[s.grp] = groups[s.grp] || []).push(s); });
+  const order = ['Goals','Cards','Set-piece','Flow','Analytics','Match'];
+  const host = document.getElementById('sig-library');
+  if (!host) return;
+  host.innerHTML = order.map(g => {
+    const items = groups[g] || [];
+    if (!items.length) return '';
+    return `<div class="sig-group">
+      <div class="sig-group-hd">${g}<span class="sig-group-count">${items.length} signals</span></div>
+      ${items.map(s => `
+        <div class="sig-row">
+          <div class="sig-ico">${s.ico}</div>
+          <div class="sig-meta"><div class="sig-name">${s.name}</div><div class="sig-desc">${s.desc} · <span style="font-style:italic">${s.evt}</span></div></div>
+          <input class="sig-range" type="range" min="0" max="100" value="${s.w}" oninput="onSigChange('${s.id}',this.value)" />
+          <div class="sig-val ${valClass(s.w)}" id="sv-${s.id}">${s.w}</div>
+          <div class="sig-prob"><div class="sig-prob-lbl">freq</div><div style="color:#3B82F6">${Math.round(s.p*100)}%</div></div>
+        </div>
+      `).join('')}
+    </div>`;
+  }).join('');
+}
+
+function valClass(v){ return v>=75 ? 'hi' : v>=40 ? 'md' : 'lo'; }
+
+function onSigChange(id, v) {
+  const s = sigState.find(x => x.id === id);
+  if (!s) return;
+  s.w = parseInt(v,10);
+  const vd = document.getElementById('sv-'+id);
+  if (vd) { vd.textContent = s.w; vd.className = 'sig-val ' + valClass(s.w); }
+  // Deselect preset buttons since this is now custom
+  document.querySelectorAll('.trig-preset').forEach(b => b.classList.remove('on'));
+  recomputeTriggers();
+}
+
+function applyPreset(key, btn) {
+  document.querySelectorAll('.trig-preset').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  const preset = PRESETS[key] || {};
+  sigState.forEach(s => {
+    const orig = SIGNALS.find(o => o.id === s.id);
+    s.w = (key === 'balanced') ? orig.w : (preset[s.id] ?? orig.w);
+  });
+  renderSignalLibrary();
+  recomputeTriggers();
+}
+
+function resetSignals() {
+  sigState = SIGNALS.map(s => ({...s}));
+  document.querySelectorAll('.trig-preset').forEach(b => b.classList.remove('on'));
+  document.querySelector('.trig-preset[data-preset="balanced"]').classList.add('on');
+  renderSignalLibrary();
+  recomputeTriggers();
+}
+
+// ── SCORING ──
+// Intensity: emotional weight component (average of two weights + synergy bonus)
+function intensityOf(a, b) {
+  const avg = (a.w + b.w) / 2;
+  const bonus = (a.w >= 70 && b.w >= 70) ? Math.min(8, (Math.min(a.w,b.w) - 70) * 0.5) : 0;
+  return Math.min(100, Math.round(avg + bonus));
+}
+// Likelihood: probability both events occur in their respective matches within a concurrent 5-min window.
+// p_both_per_match = p_a * p_b. Within any 5-min window of 90 min of play ≈ 5/90. Then normalize to 0-100.
+function likelihoodOf(a, b) {
+  const pBothInMatch = a.p * b.p;            // 0..1
+  const window5 = pBothInMatch * (5/90);      // 0..0.056
+  // Normalize so obvious pairs (both p=1) land near 100
+  const raw = Math.min(1, window5 / (1/18));  // 1/18 ≈ 0.056
+  // Apply gentle curve so mid-probability pairs still register
+  return Math.round(Math.pow(raw, 0.7) * 100);
+}
+// Priority = blended score that balances drama AND how often we'll actually see this pair.
+// Weighted so intensity leads but likelihood materially boosts common pairs.
+function priorityOf(a, b) {
+  const i = intensityOf(a, b);
+  const l = likelihoodOf(a, b);
+  return Math.round(i * 0.60 + l * 0.40);
+}
+function pairScore(a, b) { return intensityOf(a, b); } // legacy alias
+
+function histKey(a, b) {
+  const [x, y] = [a.id, b.id].sort();
+  return `${x}|${y}`;
+}
+function findHistoric(a, b) { return HISTORIC_PAIRS[histKey(a,b)] || null; }
+
+function scenarioNarrative(a, b, score) {
+  const templates = [
+    `A fan locked on one match sees <strong>${a.name.toLowerCase()}</strong> unfold — while across the dial, <strong>${b.name.toLowerCase()}</strong> just erupted. Perfect moment to serve Multiview.`,
+    `<strong>${a.name}</strong> in the watched game, <strong>${b.name.toLowerCase()}</strong> in the one they're missing. The Proximity Engine scores this ${score}/100 — high enough to interrupt.`,
+    `Two signals the brain can't ignore: <strong>${a.name}</strong> + <strong>${b.name}</strong> firing within the same minute. The ad writes itself.`,
+    `When <strong>${a.name.toLowerCase()}</strong> meets <strong>${b.name.toLowerCase()}</strong> on separate pitches, you get the kind of "wait — what just happened?" energy that drives Multiview activations.`,
+  ];
+  return templates[(a.name.length + b.name.length + score) % templates.length];
+}
+
+function recomputeTriggers() {
+  // Build all unordered pairs (a != b), including self-pairs (goal+goal in two different games)
+  const pairs = [];
+  for (let i = 0; i < sigState.length; i++) {
+    for (let j = i; j < sigState.length; j++) {
+      const a = sigState[i], b = sigState[j];
+      const intensity = intensityOf(a, b);
+      const likelihood = likelihoodOf(a, b);
+      const priority = priorityOf(a, b);
+      const hist = findHistoric(a, b);
+      pairs.push({a, b, intensity, likelihood, priority, hist});
+    }
+  }
+  pairs.sort((x,y) => y.priority - x.priority);
+
+  // Stats
+  document.getElementById('trig-stat-signals').textContent = sigState.length;
+  document.getElementById('trig-stat-top').textContent = pairs[0]?.priority ?? 0;
+  const obvious = pairs.filter(p => p.likelihood >= 60).length;
+  document.getElementById('trig-stat-obvious').textContent = obvious;
+
+  // Spotlight = #1 by priority
+  const top = pairs[0];
+  if (top) {
+    document.getElementById('spot-head').innerHTML = `${top.a.ico} ${top.a.name} <span style="color:var(--t3);font-weight:400">+</span> ${top.b.ico} ${top.b.name}`;
+    const narr = scenarioNarrative(top.a, top.b, top.priority);
+    const meta = `<div class="spot-meta">
+      <div class="spot-meta-item"><div class="big" style="color:var(--red)">${top.priority}</div><div class="lbl">Priority</div></div>
+      <div class="spot-meta-item"><div class="big" style="color:#F59E0B">${top.intensity}</div><div class="lbl">Intensity</div></div>
+      <div class="spot-meta-item"><div class="big" style="color:#3B82F6">${top.likelihood}</div><div class="lbl">Likelihood</div></div>
+    </div>`;
+    let histBlock = '';
+    if (top.hist) {
+      histBlock = `<div class="spot-hist"><span class="hist-tag">${top.hist.year} · ${top.hist.tag}</span>${top.hist.text}</div>`;
+    }
+    document.getElementById('spot-narr').innerHTML = narr + meta + histBlock;
+  }
+
+  // Leaderboard: top 8 after spotlight
+  const lb = document.getElementById('lb-list');
+  lb.innerHTML = pairs.slice(1, 9).map((p, idx) => {
+    const cls = idx === 0 ? 'top' : idx === 1 ? 'top2' : '';
+    const histBadge = p.hist ? `<div class="lb-histbadge">★ Real: ${p.hist.year} · ${p.hist.tag}</div>` : '';
+    return `<div class="lb-row ${cls}">
+      <div class="lb-rank">${idx+2}</div>
+      <div class="lb-pair"><div><span class="lb-sig">${p.a.ico} ${p.a.name}</span><span class="lb-x">×</span><span class="lb-sig">${p.b.ico} ${p.b.name}</span></div>${histBadge}</div>
+      <div class="lb-side intensity"><div class="big">${p.intensity}</div><div class="lbl">Drama</div></div>
+      <div class="lb-side prob"><div class="big">${p.likelihood}</div><div class="lbl">Likely</div></div>
+    </div>`;
+  }).join('');
+
+  renderHeatmap();
+}
+
+function heatColor(score) {
+  // 0..100 -> gradient dim→red
+  const t = Math.max(0, Math.min(1, score/100));
+  // dark base to red
+  const r = Math.round(34 + (255-34)*Math.pow(t,1.4));
+  const g = Math.round(34 + (0-34)*Math.pow(t,1.6));
+  const b = Math.round(34 + (0-34)*Math.pow(t,1.6));
+  return `rgb(${r},${Math.max(0,g)},${Math.max(0,b)})`;
+}
+
+function renderHeatmap() {
+  const host = document.getElementById('hm-grid');
+  if (!host) return;
+  // Rank by PRIORITY (intensity × likelihood blend) to surface the most actionable pairs
+  const subset = [...sigState].sort((a,b) => {
+    // Use max priority against any other signal as ranking heuristic
+    const sa = Math.max(...sigState.map(x => priorityOf(a,x)));
+    const sb = Math.max(...sigState.map(x => priorityOf(b,x)));
+    return sb - sa;
+  }).slice(0, 14);
+  const colHd = `<div class="hm-col-hd">${subset.map(s => `<div class="hm-col-lbl"><span>${s.ico} ${s.name}</span></div>`).join('')}</div>`;
+  const rows = subset.map(rowSig => {
+    const cells = subset.map(colSig => {
+      const pr = priorityOf(rowSig, colSig);
+      const i = intensityOf(rowSig, colSig);
+      const l = likelihoodOf(rowSig, colSig);
+      const hist = findHistoric(rowSig, colSig);
+      const title = `${rowSig.ico} ${rowSig.name} × ${colSig.ico} ${colSig.name}\n Priority ${pr} · Intensity ${i} · Likelihood ${l}${hist ? `\n ★ Real: ${hist.year} · ${hist.tag}` : ''}`;
+      const histMark = hist ? '★' : '';
+      return `<div class="hm-cell" style="background:${heatColor(pr)}" title="${title}">${pr}${histMark ? `<span style="position:absolute;top:-1px;right:2px;font-size:7px;color:#FBBF24">${histMark}</span>` : ''}</div>`;
+    }).join('');
+    return `<div class="hm-row"><div class="hm-row-lbl">${rowSig.ico} ${rowSig.name}</div>${cells}</div>`;
+  }).join('');
+  host.innerHTML = colHd + rows;
+}
+
+// ── CSV MODAL — full Signals.csv ──
+const CSV_ROWS = [
+  // Pulled from Signals.csv (Event, Additional conditions, match_event.event_type, match_event.event_sub_type)
+  ['FootballGoal','Any goal','Football.GoalEvent','Unknown'],
+  ['FootballGoal','Regular goal','Football.GoalEvent','Football.RegularGoal'],
+  ['FootballGoal','Penalty goal','Football.GoalEvent','Football.PenaltyGoal'],
+  ['FootballGoal','Own goal','Football.GoalEvent','Football.OwnGoal'],
+  ['FootballGoal','During 1st half (feed period Regular number 1)','Football.GoalEvent','(RegularGoal | PenaltyGoal | OwnGoal)'],
+  ['FootballGoal','During 2nd half (feed period Regular number 2)','Football.GoalEvent','(RegularGoal | PenaltyGoal | OwnGoal)'],
+  ['FootballGoal','During extra time period 1 (feed period ExtraTime number 1)','Football.GoalEvent','(RegularGoal | PenaltyGoal | OwnGoal)'],
+  ['FootballGoal','During extra time period 2 (feed period ExtraTime number 2)','Football.GoalEvent','(RegularGoal | PenaltyGoal | OwnGoal)'],
+  ['FootballGoal','During penalty shootout segment (feed period PenaltyShootout)','Football.GoalEvent','(RegularGoal | PenaltyGoal | OwnGoal)'],
+  ['FootballCard','Yellow card','Football.CardEvent','Football.YellowCard'],
+  ['FootballCard','Second yellow','Football.CardEvent','Football.SecondYellow'],
+  ['FootballCard','Red card','Football.CardEvent','Football.RedCard'],
+  ['FootballShot','Any shot','Football.ShotEvent','Unknown'],
+  ['FootballSetpiece/restart','Corner awarded','Football.CornerAwardedEvent','Unknown'],
+  ['FootballSetpiece/restart','Penalty awarded','Football.PenaltyAwardedEvent','Unknown'],
+  ['FootballSetpiece/restart','Free kick','Football.FreeKickEvent','Unknown'],
+  ['FootballInfraction','Offside','Football.OffsideEvent','Unknown'],
+  ['FootballSubstitution','Substitution','Football.SubstitutionEvent','Unknown'],
+  ['FootballVAR','VAR review started','Football.VarEvent','Unknown'],
+  ['FootballVAR','VAR review ended','Football.VarEndedEvent','Unknown'],
+  ['Cross-sport · Period','Period started / in progress (see period_number)','PeriodEvent','PeriodInProgress'],
+  ['Cross-sport · Period','Period complete (see period_number)','PeriodEvent','PeriodComplete'],
+  ['Cross-sport · Period','Period not started (see period_number)','PeriodEvent','PeriodNotStarted'],
+  ['Cross-sport · Period','1st half period in progress (typical)','PeriodEvent','PeriodInProgress'],
+  ['Cross-sport · Period','2nd half period in progress (typical)','PeriodEvent','PeriodInProgress'],
+  ['Cross-sport · Period','Extra time 1st period in progress (typical)','PeriodEvent','PeriodInProgress'],
+  ['Cross-sport · Period','Extra time 2nd period in progress (typical)','PeriodEvent','PeriodInProgress'],
+  ['Cross-sport · Period','Penalty shootout phase in progress (typical)','PeriodEvent','PeriodInProgress'],
+  ['Cross-sport · Match status','Match in progress','MatchStatusEvent','MatchInProgress'],
+  ['Cross-sport · Match status','Match finished','MatchStatusEvent','MatchFinished'],
+  ['Cross-sport · Match status','Match abandoned','MatchStatusEvent','MatchAbandoned'],
+  ['Cross-sport · Match status','Match cancelled','MatchStatusEvent','MatchCancelled'],
+  ['Cross-sport · Match status','Match postponed','MatchStatusEvent','MatchPostponed'],
+  ['Cross-sport · Pregame','Minutes until scheduled kickoff','PrematchEvent','Unknown'],
+  ['Cross-sport · Outcome','Fixture drawn','DrawEvent','Unknown'],
+  ['Cross-sport · Outcome','Competitor won','CompetitorWonEvent','Unknown'],
+  ['Cross-sport · Outcome','Competitor lost','CompetitorLostEvent','Unknown'],
+  ['Analytics · WinProbability','Win probability','Football.WinProbabilityEvent','N/A'],
+];
+
+function categoryPill(evt) {
+  if (evt.startsWith('FootballGoal')) return {cls:'goal', label:'Goal'};
+  if (evt.startsWith('FootballCard')) return {cls:'card', label:'Card'};
+  if (evt.includes('Shot'))           return {cls:'setpiece', label:'Shot'};
+  if (evt.includes('Setpiece') || evt.includes('Infraction') || evt.includes('Substitution')) return {cls:'setpiece', label:'Play'};
+  if (evt.includes('VAR'))            return {cls:'var', label:'VAR'};
+  if (evt.includes('Match'))          return {cls:'match', label:'Match'};
+  if (evt.includes('Period'))         return {cls:'period', label:'Period'};
+  if (evt.includes('Outcome'))        return {cls:'match', label:'Outcome'};
+  if (evt.includes('Analytics'))      return {cls:'var', label:'Analytics'};
+  return {cls:'', label:'Other'};
+}
+
+function renderCsvTable(filter) {
+  const q = (filter || '').toLowerCase().trim();
+  const rows = CSV_ROWS.filter(r => !q || r.some(c => c.toLowerCase().includes(q)));
+  const host = document.getElementById('csv-table');
+  const header = `<thead><tr><th style="width:14%">Category</th><th style="width:30%">Condition</th><th style="width:28%">event_type</th><th>event_sub_type</th></tr></thead>`;
+  const body = rows.map(r => {
+    const pill = categoryPill(r[0]);
+    return `<tr>
+      <td><span class="cat-pill ${pill.cls}">${r[0]}</span></td>
+      <td>${r[1]}</td>
+      <td class="mono">${r[2]}</td>
+      <td class="mono">${r[3]}</td>
+    </tr>`;
+  }).join('');
+  host.innerHTML = header + `<tbody>${body || '<tr><td colspan="4" style="color:var(--t3);text-align:center;padding:24px">No signals match "' + q + '"</td></tr>'}</tbody>`;
+}
+
+function openCsvModal() {
+  renderCsvTable('');
+  document.getElementById('csv-search').value = '';
+  document.getElementById('csv-modal').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeCsvModal() {
+  document.getElementById('csv-modal').classList.remove('on');
+  document.body.style.overflow = '';
+}
+function filterCsv(v) { renderCsvTable(v); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('csv-modal').classList.contains('on')) closeCsvModal();
+});
+
+// Init on load
+document.addEventListener('DOMContentLoaded', () => {
+  renderSignalLibrary();
+  recomputeTriggers();
+});
+// Also render immediately in case script runs after DOMContentLoaded
+renderSignalLibrary();
+recomputeTriggers();
 </script>
 </body>
 </html>

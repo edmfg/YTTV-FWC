@@ -1,0 +1,39 @@
+﻿Event,Additional conditions,match_event.event_type,match_event.event_sub_type
+FootballGoal,Any goal,Football.GoalEvent,Unknown
+FootballGoal,Regular goal,Football.GoalEvent,Football.RegularGoal
+FootballGoal,Penalty goal,Football.GoalEvent,Football.PenaltyGoal
+FootballGoal,Own goal,Football.GoalEvent,Football.OwnGoal
+FootballGoal,During 1st half (feed period Regular number 1),Football.GoalEvent,(RegularGoal | PenaltyGoal | OwnGoal)
+FootballGoal,During 2nd half (feed period Regular number 2),Football.GoalEvent,(RegularGoal | PenaltyGoal | OwnGoal)
+FootballGoal,During extra time period 1 (feed period ExtraTime number 1),Football.GoalEvent,(RegularGoal | PenaltyGoal | OwnGoal)
+FootballGoal,During extra time period 2 (feed period ExtraTime number 2),Football.GoalEvent,(RegularGoal | PenaltyGoal | OwnGoal)
+FootballGoal,During penalty shootout segment (feed period PenaltyShootout),Football.GoalEvent,(RegularGoal | PenaltyGoal | OwnGoal)
+FootballCard,Yellow card,Football.CardEvent,Football.YellowCard
+FootballCard,Second yellow,Football.CardEvent,Football.SecondYellow
+FootballCard,Red card,Football.CardEvent,Football.RedCard
+FootballShot,Any shot,Football.ShotEvent,Unknown
+FootballSetpiece/restart,Corner awarded,Football.CornerAwardedEvent,Unknown
+FootballSetpiece/restart,Penalty awarded,Football.PenaltyAwardedEvent,Unknown
+FootballSetpiece/restart,Free kick,Football.FreeKickEvent,Unknown
+FootballInfraction,Offside,Football.OffsideEvent,Unknown
+FootballSubstitution,Substitution,Football.SubstitutionEvent,Unknown
+FootballVAR,VAR review started,Football.VarEvent,Unknown
+FootballVAR,VAR review ended,Football.VarEndedEvent,Unknown
+Cross-sportPeriod,Period started / in progress (see period_number),PeriodEvent,PeriodInProgress
+Cross-sportPeriod,Period complete (see period_number),PeriodEvent,PeriodComplete
+Cross-sportPeriod,Period not started (see period_number),PeriodEvent,PeriodNotStarted
+Cross-sportPeriod,1st half  period in progress (typical),PeriodEvent,PeriodInProgress
+Cross-sportPeriod,2nd half  period in progress (typical),PeriodEvent,PeriodInProgress
+Cross-sportPeriod,Extra time 1st period  in progress (typical),PeriodEvent,PeriodInProgress
+Cross-sportPeriod,Extra time 2nd period  in progress (typical),PeriodEvent,PeriodInProgress
+Cross-sportPeriod,Penalty shootout phase  in progress (typical),PeriodEvent,PeriodInProgress
+Cross-sportMatchstatus,Match in progress,MatchStatusEvent,MatchInProgress
+Cross-sportMatchstatus,Match finished,MatchStatusEvent,MatchFinished
+Cross-sportMatchstatus,Match abandoned,MatchStatusEvent,MatchAbandoned
+Cross-sportMatchstatus,Match cancelled,MatchStatusEvent,MatchCancelled
+Cross-sportMatchstatus,Match postponed,MatchStatusEvent,MatchPostponed
+Cross-sportPregame,Minutes until scheduled kickoff,PrematchEvent,Unknown
+Cross-sportOutcome,Fixture drawn,DrawEvent,Unknown
+Cross-sportOutcome,Competitor won,CompetitorWonEvent,Unknown
+Cross-sportOutcome,Competitor lost,CompetitorLostEvent,Unknown
+WinProbability,Win probability,Football.WinProbabilityEvent,N/A
