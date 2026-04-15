@@ -105,6 +105,19 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .hist-score{font-size:11px;font-weight:700;color:var(--t1);background:var(--s3);padding:1px 6px;border-radius:3px;white-space:nowrap}
 .hist-drama{font-size:11px;color:var(--t2);line-height:1.65;border-top:1px solid var(--bdr);padding-top:10px;margin-top:6px}
 .hist-drama strong{color:var(--t1)}
+.hist-card{cursor:pointer;position:relative;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s}
+.hist-card:hover{transform:translateY(-2px);border-color:rgba(255,100,100,.35) !important}
+.hist-card::after{content:'＋';position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#c0c0c7;transition:transform .3s,background .3s,color .3s}
+.hist-card.open::after{content:'×';transform:rotate(0);background:linear-gradient(135deg,rgba(255,80,80,.35),rgba(220,20,20,.35));color:#fff;border-color:rgba(255,120,120,.5)}
+.hist-expand{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.2,.8,.2,1),opacity .35s,margin-top .3s;margin-top:0}
+.hist-card.open .hist-expand{max-height:600px;opacity:1;margin-top:12px}
+.hist-exp-inner{padding-top:12px;border-top:1px solid rgba(255,255,255,.09)}
+.hist-exp-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#F59E0B;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.hist-exp-lbl::before{content:'';width:5px;height:5px;border-radius:50%;background:#F59E0B}
+.hist-situation{font-size:12px;color:var(--t1);line-height:1.6;margin-bottom:14px;font-weight:500}
+.hist-heads{display:flex;flex-direction:column;gap:6px}
+.hist-head{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:9px 12px;font-size:11.5px;color:#fff;font-weight:600;line-height:1.4;display:flex;align-items:flex-start;gap:8px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hist-head-num{font-size:9px;font-weight:800;letter-spacing:.5px;color:var(--red);background:rgba(255,60,60,.15);border:1px solid rgba(255,90,90,.35);padding:2px 6px;border-radius:20px;flex-shrink:0;margin-top:1px}
 
 /* DEMO GRID */
 .demo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -794,32 +807,32 @@ body > *{position:relative;z-index:1}
       <div class="panel-title">When Concurrent Games Changed Everything</div>
       <div class="panel-sub">Six moments from the last five World Cups where fans watching one game suddenly realized the other simultaneous game had just rewritten history in real time.</div>
       <div class="hist-grid">
-        <div class="hist-card">
+        <div class="hist-card" data-moment="doha" onclick="toggleMoment(this)">
           <div class="hist-card-head"><div class="hist-title">"The Miracle of Doha"</div><div class="hist-badge"><span class="hist-year">2022 Qatar</span><span class="hist-grp">Group E</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Japan vs Spain</span><span class="hist-score">2–1</span></div><div class="hist-match"><span class="hist-vs">Germany vs Costa Rica</span><span class="hist-score">4–2</span></div></div>
           <div class="hist-drama">Japan trailed Spain 0–1 at half. <strong>Doan (48') and Tanaka (51')</strong> flipped it. Simultaneously, Costa Rica took a 2–1 lead over Germany — for 15 unreal minutes, <strong>both Spain and Germany were being eliminated at the same time.</strong> Germany recovered to win 4–2 but it didn't matter. Japan topped the group and Germany exited for the second straight Cup.</div>
         </div>
-        <div class="hist-card">
+        <div class="hist-card" data-moment="suarez2022" onclick="toggleMoment(this)">
           <div class="hist-card-head"><div class="hist-title">Suárez Watches Uruguay Eliminated</div><div class="hist-badge"><span class="hist-year">2022 Qatar</span><span class="hist-grp">Group H</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Uruguay vs Ghana</span><span class="hist-score">2–0</span></div><div class="hist-match"><span class="hist-vs">South Korea vs Portugal</span><span class="hist-score">2–1</span></div></div>
           <div class="hist-drama">Uruguay won their game comfortably — and still went home. <strong>Hwang Hee-chan's 91st-minute goal</strong> for South Korea created a perfect four-way deadlock resolved only by total goals scored. South Korea advanced; Uruguay did not. Cameras caught <strong>Luis Suárez in tears on the bench</strong>, watching the other game's final minutes on his phone.</div>
         </div>
-        <div class="hist-card">
+        <div class="hist-card" data-moment="yellow2018" onclick="toggleMoment(this)">
           <div class="hist-card-head"><div class="hist-title">Advanced on Yellow Cards Alone</div><div class="hist-badge"><span class="hist-year">2018 Russia</span><span class="hist-grp">Group H</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Japan vs Poland</span><span class="hist-score">0–1</span></div><div class="hist-match"><span class="hist-vs">Senegal vs Colombia</span><span class="hist-score">0–1</span></div></div>
           <div class="hist-drama">Japan were <strong>intentionally losing</strong> — and did it on purpose. Knowing Colombia was beating Senegal in the other stadium, Japan spent the final 10 minutes passing sideways to protect their fair play advantage (4 yellow cards vs Senegal's 6). <strong>For the first time in World Cup history</strong>, a team advanced — and a team was eliminated — purely on accumulated yellow cards.</div>
         </div>
-        <div class="hist-card">
+        <div class="hist-card" data-moment="germany2018" onclick="toggleMoment(this)">
           <div class="hist-card-head"><div class="hist-title">Defending Champions Collapse</div><div class="hist-badge"><span class="hist-year">2018 Russia</span><span class="hist-grp">Group F</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Germany vs South Korea</span><span class="hist-score">0–2</span></div><div class="hist-match"><span class="hist-vs">Sweden vs Mexico</span><span class="hist-score">3–0</span></div></div>
           <div class="hist-drama">Mexican fans watching Sweden dismantle their team <strong>erupted in celebration</strong> when Son Heung-min sprinted the length of the field to slot into an empty net at 95' as Neuer gambled upfield. <strong>Germany, the reigning World Cup champions, failed to escape the group stage for the first time since 1938.</strong></div>
         </div>
-        <div class="hist-card">
+        <div class="hist-card" data-moment="italy2014" onclick="toggleMoment(this)">
           <div class="hist-card-head"><div class="hist-title">Italy & England Exit Together</div><div class="hist-badge"><span class="hist-year">2014 Brazil</span><span class="hist-grp">Group D</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Italy vs Uruguay</span><span class="hist-score">0–1</span></div><div class="hist-match"><span class="hist-vs">Costa Rica vs England</span><span class="hist-score">0–0</span></div></div>
           <div class="hist-drama"><strong>Suárez bit Chiellini</strong>, scored the winner, and sent Italy home. Simultaneously, England's draw with Costa Rica completed a <strong>historic double elimination of two of football's most storied nations on the same afternoon.</strong> Costa Rica — 500/1 pre-tournament — topped the group.</div>
         </div>
-        <div class="hist-card">
+        <div class="hist-card" data-moment="donovan2010" onclick="toggleMoment(this)">
           <div class="hist-card-head"><div class="hist-title">Donovan's 91st-Minute Miracle</div><div class="hist-badge"><span class="hist-year">2010 S. Africa</span><span class="hist-grp">Group C</span></div></div>
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">USA vs Algeria</span><span class="hist-score">1–0</span></div><div class="hist-match"><span class="hist-vs">England vs Slovenia</span><span class="hist-score">1–0</span></div></div>
           <div class="hist-drama">Scoreless at 90 minutes, the USA were heading home. Slovenia were already celebrating qualification in the other stadium. Then <strong>Landon Donovan scored in the 91st minute</strong> off a Tim Howard rebound. In an instant: USA through, Slovenia eliminated. <strong>Still the most-watched moment in U.S. soccer history.</strong></div>
@@ -2074,6 +2087,80 @@ function filterCsv(v) { renderCsvTable(v); }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.getElementById('csv-modal').classList.contains('on')) closeCsvModal();
 });
+
+// ── MOMENT CARD EXPANSIONS ──
+const MOMENTS = {
+  doha: {
+    situation: "Japan flipped Spain 0–1 to 2–1 while Costa Rica simultaneously led Germany 2–1 — for 15 surreal minutes <strong>both Spain and Germany were being eliminated at the same time</strong>, on two different pitches.",
+    heads: [
+      "Spain is losing. Germany is losing. You're watching one.",
+      "Two European giants are falling right now. Multiview or miss it.",
+      "The Miracle of Doha needs two screens. You only have one.",
+    ]
+  },
+  suarez2022: {
+    situation: "Uruguay cruised 2–0 vs Ghana and still went home. Hwang's 91st-minute winner for South Korea flipped Group H in the other stadium — Suárez was caught on camera <strong>crying on the bench, watching the other match on his phone</strong>.",
+    heads: [
+      "Winning your game isn't enough. Watch the one that matters.",
+      "Don't be Luis. Watch both games on Multiview.",
+      "91st minute. Wrong stadium. Multiview would've caught it.",
+    ]
+  },
+  yellow2018: {
+    situation: "With Colombia beating Senegal in the other stadium, Japan <strong>deliberately passed sideways</strong> for the final 10 minutes — accepting a 0–1 loss to advance on fair-play yellow-card differential. Two matches, one choreographed result.",
+    heads: [
+      "Two matches. One decision. Watch them both unfold.",
+      "When yellow cards decide the World Cup, you need both games.",
+      "These tactics don't make sense — until you see the other pitch.",
+    ]
+  },
+  germany2018: {
+    situation: "Son Heung-min's 95th-minute empty-netter sealed Germany's first group-stage exit since 1938 — at the same moment Mexican fans were watching Sweden dismantle their team 3–0. <strong>Two shockwaves, one afternoon.</strong>",
+    heads: [
+      "Germany is crashing out. Mexico too. Watch both happen live.",
+      "The defending champions are gone. Were you watching the right game?",
+      "One screen couldn't hold what 1938 couldn't stop.",
+    ]
+  },
+  italy2014: {
+    situation: "Suárez bit Chiellini, scored the winner, and sent Italy home. Simultaneously, England's <strong>0–0 draw with Costa Rica completed a same-afternoon double elimination</strong> of two of football's most storied nations.",
+    heads: [
+      "Two football giants went home on the same afternoon.",
+      "A bite on one pitch. An exit on another. Multiview saw both.",
+      "Italy. England. Gone. Don't pick which collapse to watch.",
+    ]
+  },
+  donovan2010: {
+    situation: "The USA were heading home on a 0–0 until Donovan's 91st-minute winner — <strong>the exact moment England's 1–0 over Slovenia was ending</strong>. One goal, two groups settled, still the most-watched moment in U.S. soccer history.",
+    heads: [
+      "One goal. Two groups settled at once. Multiview caught it all.",
+      "Landon's 91st minute needed a second screen.",
+      "The most important goal in U.S. soccer lived across two matches.",
+    ]
+  },
+};
+
+function toggleMoment(card) {
+  const key = card.getAttribute('data-moment');
+  const data = MOMENTS[key];
+  if (!data) return;
+  const isOpen = card.classList.contains('open');
+  // Collapse any siblings first for cleaner reading
+  card.parentElement.querySelectorAll('.hist-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
+  if (isOpen) { card.classList.remove('open'); return; }
+  // Inject expansion markup once
+  if (!card.querySelector('.hist-expand')) {
+    const heads = data.heads.map((h,i) => `<div class="hist-head"><span class="hist-head-num">${String(i+1).padStart(2,'0')}</span><span>${h}</span></div>`).join('');
+    const html = `<div class="hist-expand"><div class="hist-exp-inner">
+      <div class="hist-exp-lbl">The Situation</div>
+      <div class="hist-situation">${data.situation}</div>
+      <div class="hist-exp-lbl" style="color:var(--red)">Multiview Ad Headlines</div>
+      <div class="hist-heads">${heads}</div>
+    </div></div>`;
+    card.insertAdjacentHTML('beforeend', html);
+  }
+  card.classList.add('open');
+}
 
 // Init on load
 document.addEventListener('DOMContentLoaded', () => {
