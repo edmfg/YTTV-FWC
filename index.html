@@ -837,6 +837,36 @@ body > *{position:relative;z-index:1}
           <div class="hist-matches"><div class="hist-match"><span class="hist-vs">USA vs Algeria</span><span class="hist-score">1–0</span></div><div class="hist-match"><span class="hist-vs">England vs Slovenia</span><span class="hist-score">1–0</span></div></div>
           <div class="hist-drama">Scoreless at 90 minutes, the USA were heading home. Slovenia were already celebrating qualification in the other stadium. Then <strong>Landon Donovan scored in the 91st minute</strong> off a Tim Howard rebound. In an instant: USA through, Slovenia eliminated. <strong>Still the most-watched moment in U.S. soccer history.</strong></div>
         </div>
+        <div class="hist-card" data-moment="rojo2018" onclick="toggleMoment(this)">
+          <div class="hist-card-head"><div class="hist-title">Rojo Saves Messi's Tournament</div><div class="hist-badge"><span class="hist-year">2018 Russia</span><span class="hist-grp">Group D</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Nigeria vs Argentina</span><span class="hist-score">1–2</span></div><div class="hist-match"><span class="hist-vs">Iceland vs Croatia</span><span class="hist-score">1–2</span></div></div>
+          <div class="hist-drama">Argentina were drawing 1–1 and <strong>heading home</strong> — until Marcos Rojo volleyed in at 86'. At nearly the same minute, Perišić's late strike sent Iceland packing too. <strong>Two 85'+ goals on two pitches rescued Messi's World Cup.</strong></div>
+        </div>
+        <div class="hist-card" data-moment="neymar2014" onclick="toggleMoment(this)">
+          <div class="hist-card-head"><div class="hist-title">Six Goals, Ten Minutes, Two Pitches</div><div class="hist-badge"><span class="hist-year">2014 Brazil</span><span class="hist-grp">Group A</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Brazil vs Cameroon</span><span class="hist-score">4–1</span></div><div class="hist-match"><span class="hist-vs">Croatia vs Mexico</span><span class="hist-score">1–3</span></div></div>
+          <div class="hist-drama">Neymar bagged a brace and Brazil were cruising — meanwhile Mexico scored at <strong>72', 75' and 82'</strong> on the other pitch. Six goals across two concurrent matches in barely ten minutes. Both hosts' and neighbors' nations exploded at different stadiums.</div>
+        </div>
+        <div class="hist-card" data-moment="argentina2002" onclick="toggleMoment(this)">
+          <div class="hist-card-head"><div class="hist-title">Group of Death Sends Favorites Home</div><div class="hist-badge"><span class="hist-year">2002 KOR/JPN</span><span class="hist-grp">Group F</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Sweden vs Argentina</span><span class="hist-score">1–1</span></div><div class="hist-match"><span class="hist-vs">England vs Nigeria</span><span class="hist-score">0–0</span></div></div>
+          <div class="hist-drama">Pre-tournament favorites Argentina needed to beat Sweden AND for England to slip. <strong>Crespo's 88th-minute equalizer came as England were grinding out a goalless draw</strong> on the other pitch — the result that sent Batistuta, Verón and Crespo home.</div>
+        </div>
+        <div class="hist-card" data-moment="sirakov1994" onclick="toggleMoment(this)">
+          <div class="hist-card-head"><div class="hist-title">Sirakov's 91st-Minute Dagger</div><div class="hist-badge"><span class="hist-year">1994 USA</span><span class="hist-grp">Group D</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Argentina vs Bulgaria</span><span class="hist-score">0–2</span></div><div class="hist-match"><span class="hist-vs">Nigeria vs Greece</span><span class="hist-score">2–0</span></div></div>
+          <div class="hist-drama">Argentina were topping the group going into stoppage time. Then <strong>Nasko Sirakov's 91st-minute header</strong> — with Bulgaria playing the last 25 minutes a man down — flipped everything. Simultaneously, Amokachi's late goal for Nigeria cemented the upheaval. <strong>Argentina plummeted from 1st to 3rd in seconds.</strong></div>
+        </div>
+        <div class="hist-card" data-moment="portugalned2006" onclick="toggleMoment(this)">
+          <div class="hist-card-head"><div class="hist-title">Battle of Nuremberg · 4 Reds, 16 Yellows</div><div class="hist-badge"><span class="hist-year">2006 Germany</span><span class="hist-grp">Round of 16</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Portugal vs Netherlands</span><span class="hist-score">1–0</span></div><div class="hist-match"><span class="hist-vs">Ghana vs Brazil</span><span class="hist-score">0–3</span></div></div>
+          <div class="hist-drama">Four red cards. Sixteen yellows. A <strong>World Cup record</strong> for a single match. Meanwhile, on the other R16 pitch, Brazil were dismantling Ghana with Ronaldo's record-breaking 15th WC goal. <strong>Two completely different flavors of drama</strong>, same window.</div>
+        </div>
+        <div class="hist-card" data-moment="handofgod1986" onclick="toggleMoment(this)">
+          <div class="hist-card-head"><div class="hist-title">Hand of God + Goal of the Century</div><div class="hist-badge"><span class="hist-year">1986 Mexico</span><span class="hist-grp">Quarter-finals</span></div></div>
+          <div class="hist-matches"><div class="hist-match"><span class="hist-vs">Argentina vs England</span><span class="hist-score">2–1</span></div><div class="hist-match"><span class="hist-vs">France vs Brazil</span><span class="hist-score">1–1 (4–3 pen)</span></div></div>
+          <div class="hist-drama">Maradona punched in the <strong>Hand of God</strong> at 51' and scored the <strong>Goal of the Century</strong> at 55' — four minutes apart. On the same QF day, France and Brazil went to penalties after 1–1. <strong>Two knockout shocks in one window.</strong></div>
+        </div>
       </div>
     </div>
   </div>
@@ -2136,6 +2166,54 @@ const MOMENTS = {
       "One goal. Two groups settled at once. Multiview caught it all.",
       "Landon's 91st minute needed a second screen.",
       "The most important goal in U.S. soccer lived across two matches.",
+    ]
+  },
+  rojo2018: {
+    situation: "Argentina were drawing 1–1 and heading home — Marcos Rojo's 86th-minute volley saved them, at almost the exact moment Perišić was sealing Croatia's late winner over Iceland. <strong>Two 85'+ goals on two pitches rewrote Group D</strong> — and the classic 'late-goal + late-goal' pairing Multiview was built for.",
+    heads: [
+      "Argentina was out. Two late goals fixed it — one on another pitch.",
+      "Messi's World Cup was saved by a goal you weren't watching.",
+      "Two 86' goals. Two stadiums. Multiview keeps you on both.",
+    ]
+  },
+  neymar2014: {
+    situation: "Brazil cruised past Cameroon while Mexico lit up Croatia at <strong>72', 75' and 82'</strong>. Six goals across two simultaneous matches inside ten minutes — the most predictable, highest-likelihood pair the Multiview trigger exists to catch: goal + goal clusters.",
+    heads: [
+      "Six goals on two pitches in ten minutes. You picked one.",
+      "Mexico scored three times while you watched Neymar. Both, please.",
+      "When goals come in clusters — on plural pitches — Multiview.",
+    ]
+  },
+  argentina2002: {
+    situation: "The favorites needed a win AND an England slip. Crespo's 88th-minute equalizer arrived as England were grinding a 0–0 draw on the other pitch — the simultaneous <strong>goalless match that eliminated Batistuta, Verón and Crespo</strong> despite Argentina fighting back.",
+    heads: [
+      "Sometimes the match that matters doesn't have any goals.",
+      "Argentina tied. England tied. Only one went home.",
+      "The favorites exited on a 0–0 happening elsewhere.",
+    ]
+  },
+  sirakov1994: {
+    situation: "Argentina were topping the group into stoppage time — then <strong>Nasko Sirakov headed Bulgaria's 91st-minute dagger</strong>. On the other pitch, Amokachi sealed Nigeria's win over Greece at the same moment. Argentina collapsed <strong>from 1st to 3rd in seconds</strong>. A quintessential late-goal + late-goal pair.",
+    heads: [
+      "One header just reshaped the group. It wasn't on your screen.",
+      "Argentina went from 1st to 3rd in a minute. Only Multiview saw it.",
+      "The goal that rewrote the group was on the other pitch.",
+    ]
+  },
+  portugalned2006: {
+    situation: "Four red cards and sixteen yellows — a <strong>World Cup record</strong> — while on the other R16 pitch Brazil were dismantling Ghana, with Ronaldo breaking the all-time WC goalscoring record. <strong>Two entirely different flavors of drama</strong>, same knockout window. The red-card + goal pair has occurred in every WC since 1998.",
+    heads: [
+      "Record red cards on one pitch. Record-breaking goals on the other.",
+      "The Battle of Nuremberg was live while Ronaldo made history elsewhere.",
+      "Chaos in one stadium, records in another. Multiview or miss half.",
+    ]
+  },
+  handofgod1986: {
+    situation: "Maradona's <strong>Hand of God</strong> (51') and <strong>Goal of the Century</strong> (55') came four minutes apart — while the same QF day delivered France-Brazil going to penalties after 1–1. Freak events rarely coincide exactly, but the tournament-window pairing of <strong>penalty shootout + legendary goal</strong> is real and historically documented.",
+    heads: [
+      "The Hand of God on one pitch. Penalties on the other. Same afternoon.",
+      "Maradona's greatest 4 minutes happened while France-Brazil went to pens.",
+      "History made on two pitches in one window. Multiview is the only seat.",
     ]
   },
 };
