@@ -712,7 +712,10 @@ body > *{position:relative;z-index:1}
 .pw-btn{width:100%;background:linear-gradient(135deg,#ff4d4d,#e10000);color:#fff;border:1px solid rgba(255,120,120,.35);border-radius:10px;font-size:13px;font-weight:700;padding:12px;cursor:pointer;font-family:inherit;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 22px rgba(255,0,0,.3);transition:transform .1s}
 .pw-btn:active{transform:scale(.98)}
 .pw-err{font-size:11px;color:#ff6666;margin-top:10px;min-height:15px;font-weight:600}
-.pw-foot{font-size:10px;color:#555;margin-top:20px;letter-spacing:.3px}
+.pw-contact{font-size:11px;color:#9a9aa3;margin-top:16px;line-height:1.5}
+.pw-contact a{color:#4CC2F0;text-decoration:none;font-weight:600}
+.pw-contact a:hover{text-decoration:underline}
+.pw-foot{font-size:10px;color:#555;margin-top:14px;letter-spacing:.3px}
 </style>
 </head>
 <body>
@@ -726,6 +729,7 @@ body > *{position:relative;z-index:1}
     <input type="password" class="pw-input" id="pw-input" placeholder="Password" autofocus onkeydown="if(event.key==='Enter')checkPw()" />
     <button class="pw-btn" onclick="checkPw()">Enter</button>
     <div class="pw-err" id="pw-err"></div>
+    <div class="pw-contact">Need the password? Email <a href="mailto:jineen.carcamo@mediafuturesgroup.com">jineen.carcamo@mediafuturesgroup.com</a></div>
     <div class="pw-foot">Created by Media Futures Group</div>
   </div>
 </div>
