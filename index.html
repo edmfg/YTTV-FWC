@@ -725,7 +725,20 @@ body > *{position:relative;z-index:1}
 .pa-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .pa-card{background:var(--glass-bg);border:1px solid var(--glass-bdr);border-radius:18px;padding:18px 20px;-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 10px 32px rgba(0,0,0,.25);position:relative;transition:border-color .2s,transform .2s}
 .pa-card:hover{border-color:rgba(52,211,153,.35)}
-.pa-card-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--glass-bdr)}
+.pa-card-summary{cursor:pointer;user-select:none}
+.pa-card-hd{display:flex;align-items:center;gap:10px}
+.pa-card.open .pa-card-hd{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--glass-bdr)}
+.pa-card-teaser{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.pa-card.open .pa-card-teaser{display:none}
+.pa-teaser-head{font-size:14.5px;color:var(--t1);font-weight:500;line-height:1.45;letter-spacing:-.2px}
+.pa-teaser-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--t3);line-height:1.4}
+.pa-teaser-meta span{white-space:nowrap}
+
+.pa-chevron{transition:transform .25s cubic-bezier(.2,.8,.2,1);font-size:14px}
+.pa-card.open .pa-chevron{transform:rotate(180deg)}
+
+.pa-card-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .45s cubic-bezier(.2,.8,.2,1),opacity .3s,margin-top .25s;margin-top:0}
+.pa-card.open .pa-card-body{max-height:5000px;opacity:1;margin-top:0}
 .pa-card-num{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,rgba(52,211,153,.3),rgba(16,185,129,.15));border:1px solid rgba(52,211,153,.4);color:#6EE7B7;font-size:14.3px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pa-title-input{flex:1;background:transparent;border:none;color:#fff;font-size:19.5px;font-weight:800;letter-spacing:-.2px;font-family:inherit;outline:none;padding:2px 4px;border-radius:4px;min-width:0}
 .pa-title-input:focus{background:rgba(255,255,255,.05)}
@@ -1040,11 +1053,12 @@ body > *{position:relative;z-index:1}
   <div id="panel-assets" class="info-panel">
     <div class="panel-inner">
       <div class="panel-title">Perfect Assets — Creative Briefs</div>
-      <div class="panel-sub">Build a brief card for every high-priority concurrent-event pairing, then hand the deck to design and copy.</div>
+      <div class="panel-sub">Build a brief card for every high-priority concurrent-event pairing, then hand the deck to design and copy. Click a card to expand. Fastest realistic serve window is <strong style="color:var(--t1)">hours, not seconds</strong> — ad-ops and Meta approvals gate the turnaround.</div>
 
       <div class="pa-toolbar">
         <button class="pa-btn primary" onclick="paAddCard()">＋&nbsp; Add Brief Card</button>
-        <button class="pa-btn ghost" onclick="paAddFromTemplate()">✦&nbsp; Load Brief Pack (5)</button>
+        <button class="pa-btn ghost" onclick="paExpandAll()">⇕&nbsp; Expand All</button>
+        <button class="pa-btn ghost" onclick="paCollapseAll()">⇤&nbsp; Collapse All</button>
         <button class="pa-btn ghost" onclick="paExport()">⤓&nbsp; Export JSON</button>
         <button class="pa-btn ghost" onclick="paClearAll()">🗑&nbsp; Clear All</button>
         <span class="pa-count" id="pa-count">0 cards</span>
@@ -2518,7 +2532,7 @@ const PA_STARTER_PACK = [
     tone:'Urgent',
     priority:'Must-Have',
     status:'Ready',
-    window:'Fire within 60s of the second goal',
+    window:'Serve 2–6 hours after the second goal (ad-ops + Meta approval gate the fastest realistic response)',
     notes:''
   },
   {
@@ -2534,7 +2548,7 @@ const PA_STARTER_PACK = [
     tone:'Playful',
     priority:'Must-Have',
     status:'Ready',
-    window:'Serve 30–10 minutes before dual kickoff',
+    window:'Serve 6–24 hours before dual kickoff',
     notes:'Pre-game trigger: fired by schedule, not by live events. Use the Minutes-Until-Kickoff feed signal (PrematchEvent) gated on "two matches within 5 min of each other."'
   },
   {
@@ -2550,7 +2564,7 @@ const PA_STARTER_PACK = [
     tone:'Urgent',
     priority:'Must-Have',
     status:'Ready',
-    window:'Fire at 85\' if both matches are level and concurrent',
+    window:'Serve 2–6 hours after both concurrent matches close tied in their final minutes',
     notes:'Alt headline: "Don\'t blink. Don\'t pick. Just watch both."'
   },
   {
@@ -2566,7 +2580,7 @@ const PA_STARTER_PACK = [
     tone:'Reverent',
     priority:'Nice-to-Have',
     status:'Ready',
-    window:'Within 30 minutes of final whistle',
+    window:'Serve 2–12 hours after final whistle',
     notes:'Social-first moment — meant to re-engage for the next round rather than rescue an in-flight viewer.'
   },
   {
@@ -2588,12 +2602,37 @@ const PA_STARTER_PACK = [
 ];
 
 let paCards = [];
+let paOpenCards = new Set(); // in-memory; cards start collapsed each session
+
+function paStampStarters() {
+  return PA_STARTER_PACK.map(tpl => ({
+    ...tpl,
+    id:'pa_'+Math.random().toString(36).slice(2,10),
+    platforms:[...(tpl.platforms||[])],
+    signals:[...(tpl.signals||[])]
+  }));
+}
 function paLoad(){
   try { paCards = JSON.parse(localStorage.getItem('pa_cards_v1') || '[]'); } catch(e){ paCards = []; }
+  // Auto-seed the starter pack on first ever visit. If the user later clears
+  // all cards, the seed flag stays set — they won't reappear uninvited.
+  const seeded = localStorage.getItem('pa_seeded_v1');
+  if (!paCards.length && !seeded) {
+    paCards = paStampStarters();
+    try { localStorage.setItem('pa_seeded_v1', '1'); localStorage.setItem('pa_cards_v1', JSON.stringify(paCards)); } catch(e){}
+  }
 }
 function paSave(){
   try { localStorage.setItem('pa_cards_v1', JSON.stringify(paCards)); } catch(e){}
 }
+function paToggleCard(id){
+  if (paOpenCards.has(id)) paOpenCards.delete(id);
+  else paOpenCards.add(id);
+  const el = document.querySelector(`[data-card-id="${id}"]`);
+  if (el) el.classList.toggle('open');
+}
+function paExpandAll(){ paCards.forEach(c => paOpenCards.add(c.id)); paRender(); }
+function paCollapseAll(){ paOpenCards.clear(); paRender(); }
 function paToast(msg){
   let t = document.getElementById('pa-toast');
   if (!t) { t = document.createElement('div'); t.id = 'pa-toast'; t.className = 'pa-toast'; document.body.appendChild(t); }
@@ -2610,7 +2649,9 @@ function paNewBlank() {
   };
 }
 function paAddCard(){
-  paCards.unshift(paNewBlank());
+  const n = paNewBlank();
+  paCards.unshift(n);
+  paOpenCards.add(n.id); // new cards start expanded so the user can fill them in immediately
   paSave(); paRender();
 }
 function paAddFromTemplate(){
@@ -2720,82 +2761,100 @@ function paSignalChips(c) {
 
 function paCardHTML(c, idx) {
   const statusCls = (c.status || 'Draft').toLowerCase();
-  return `<div class="pa-card" data-card-id="${c.id}">
-    <div class="pa-card-hd">
-      <div class="pa-card-num">${String(idx+1).padStart(2,'0')}</div>
-      <input class="pa-title-input" placeholder="Untitled brief — name the concurrent event…" value="${escapeHtml(c.title)}" oninput="paUpdateField('${c.id}','title',this.value)" />
-      <span class="pa-status ${statusCls}">${c.status || 'Draft'}</span>
-      <div class="pa-card-actions">
-        <button class="pa-icon-btn" title="Duplicate" onclick="paDuplicateCard('${c.id}')">⎘</button>
-        <button class="pa-icon-btn del" title="Delete" onclick="paDeleteCard('${c.id}')">✕</button>
+  const isOpen = paOpenCards.has(c.id);
+  const headlineTeaser = c.headline ? `"${escapeHtml(c.headline)}"` : '<span style="color:var(--t3);font-style:italic">No headline yet — click to write one</span>';
+  const metaBits = [];
+  if (c.tone)     metaBits.push(`<span>🎭 ${escapeHtml(c.tone)}</span>`);
+  if (c.priority) metaBits.push(`<span>📌 ${escapeHtml(c.priority)}</span>`);
+  if ((c.platforms||[]).length) metaBits.push(`<span>📺 ${c.platforms.map(escapeHtml).join(' · ')}</span>`);
+  if ((c.signals||[]).length)   metaBits.push(`<span>📡 ${c.signals.length} signal${c.signals.length===1?'':'s'}</span>`);
+  if (c.window)   metaBits.push(`<span>⏱ ${escapeHtml(c.window)}</span>`);
+
+  return `<div class="pa-card ${isOpen?'open':''}" data-card-id="${c.id}">
+    <div class="pa-card-summary" onclick="paToggleCard('${c.id}')">
+      <div class="pa-card-hd">
+        <div class="pa-card-num">${String(idx+1).padStart(2,'0')}</div>
+        <input class="pa-title-input" placeholder="Untitled brief…" value="${escapeHtml(c.title)}" oninput="paUpdateField('${c.id}','title',this.value)" onclick="event.stopPropagation()" />
+        <span class="pa-status ${statusCls}">${c.status || 'Draft'}</span>
+        <div class="pa-card-actions">
+          <button class="pa-icon-btn" title="Duplicate" onclick="event.stopPropagation();paDuplicateCard('${c.id}')">⎘</button>
+          <button class="pa-icon-btn del" title="Delete" onclick="event.stopPropagation();paDeleteCard('${c.id}')">✕</button>
+          <button class="pa-icon-btn pa-chevron" title="${isOpen?'Collapse':'Expand'}" onclick="event.stopPropagation();paToggleCard('${c.id}')">▾</button>
+        </div>
+      </div>
+      <div class="pa-card-teaser">
+        <div class="pa-teaser-head">${headlineTeaser}</div>
+        ${metaBits.length ? `<div class="pa-teaser-meta">${metaBits.join('')}</div>` : ''}
       </div>
     </div>
 
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">⚡</span>Concurrent Event</div>
-      <textarea class="pa-textarea" placeholder="What exactly needs to happen across two simultaneous matches to fire this ad? (e.g. 'Goal in Match A + Red card in Match B within 3 minutes')" oninput="paUpdateField('${c.id}','event',this.value)">${escapeHtml(c.event)}</textarea>
-    </div>
-
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">🏆</span>Historical Example</div>
-      <textarea class="pa-textarea" placeholder="A real WC moment this mirrors (year, teams, minute). Helps the creative team picture it." oninput="paUpdateField('${c.id}','example',this.value)">${escapeHtml(c.example)}</textarea>
-    </div>
-
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">🎨</span>Visualization</div>
-      <textarea class="pa-textarea lg" placeholder="Describe the visual: split-screen? Live celebration footage? Multiview UI in frame? Which team brand colors? Motion or static?" oninput="paUpdateField('${c.id}','visual',this.value)">${escapeHtml(c.visual)}</textarea>
-    </div>
-
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">📣</span>Headline</div>
-      <input class="pa-input" placeholder="The hook — short, punchy, platform-agnostic." value="${escapeHtml(c.headline)}" oninput="paUpdateField('${c.id}','headline',this.value)" />
-    </div>
-
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">✍️</span>Post Copy</div>
-      <textarea class="pa-textarea lg" placeholder="The body copy for Instagram / social. Tone, rhythm, and the Multiview mention." oninput="paUpdateField('${c.id}','copy',this.value)">${escapeHtml(c.copy)}</textarea>
-    </div>
-
-    <div class="pa-row">
+    <div class="pa-card-body">
       <div class="pa-field">
-        <div class="pa-label"><span class="pa-ico">🎯</span>CTA</div>
-        <input class="pa-input" placeholder="e.g. Watch Multiview Now" value="${escapeHtml(c.cta)}" oninput="paUpdateField('${c.id}','cta',this.value)" />
+        <div class="pa-label"><span class="pa-ico">⚡</span>Concurrent Event</div>
+        <textarea class="pa-textarea" placeholder="What exactly needs to happen across two simultaneous matches to fire this ad? (e.g. 'Goal in Match A + Red card in Match B within 3 minutes')" oninput="paUpdateField('${c.id}','event',this.value)">${escapeHtml(c.event)}</textarea>
       </div>
+
       <div class="pa-field">
-        <div class="pa-label"><span class="pa-ico">⏱</span>Timing Window</div>
-        <input class="pa-input" placeholder="When to fire (e.g. within 60s of trigger)" value="${escapeHtml(c.window)}" oninput="paUpdateField('${c.id}','window',this.value)" />
+        <div class="pa-label"><span class="pa-ico">🏆</span>Historical Example</div>
+        <textarea class="pa-textarea" placeholder="A real WC moment this mirrors (year, teams, minute). Helps the creative team picture it." oninput="paUpdateField('${c.id}','example',this.value)">${escapeHtml(c.example)}</textarea>
       </div>
-    </div>
 
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">📺</span>Platforms</div>
-      <div class="pa-chip-row">${paChipRow(c.id,'platforms',PA_PLATFORMS,true)}</div>
-    </div>
-
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">📡</span>Signals Used <span style="color:var(--t3);font-weight:500;letter-spacing:.3px;text-transform:none;margin-left:4px">— from Genius Sports feed</span></div>
-      <div class="pa-chip-row">${paSignalChips(c)}</div>
-    </div>
-
-    <div class="pa-row">
       <div class="pa-field">
-        <div class="pa-label"><span class="pa-ico">🎭</span>Tone</div>
-        <div class="pa-chip-row">${paChipRow(c.id,'tone',PA_TONES,false)}</div>
+        <div class="pa-label"><span class="pa-ico">🎨</span>Visualization</div>
+        <textarea class="pa-textarea lg" placeholder="Describe the visual: split-screen? Live celebration footage? Multiview UI in frame? Which team brand colors? Motion or static?" oninput="paUpdateField('${c.id}','visual',this.value)">${escapeHtml(c.visual)}</textarea>
       </div>
+
       <div class="pa-field">
-        <div class="pa-label"><span class="pa-ico">📌</span>Priority</div>
-        <div class="pa-chip-row">${paChipRow(c.id,'priority',PA_PRIORITY,false)}</div>
+        <div class="pa-label"><span class="pa-ico">📣</span>Headline</div>
+        <input class="pa-input" placeholder="The hook — short, punchy, platform-agnostic." value="${escapeHtml(c.headline)}" oninput="paUpdateField('${c.id}','headline',this.value)" />
       </div>
-    </div>
 
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">🚦</span>Status</div>
-      <div class="pa-chip-row">${paChipRow(c.id,'status',PA_STATUS,false)}</div>
-    </div>
+      <div class="pa-field">
+        <div class="pa-label"><span class="pa-ico">✍️</span>Post Copy</div>
+        <textarea class="pa-textarea lg" placeholder="The body copy for Instagram / social. Tone, rhythm, and the Multiview mention." oninput="paUpdateField('${c.id}','copy',this.value)">${escapeHtml(c.copy)}</textarea>
+      </div>
 
-    <div class="pa-field">
-      <div class="pa-label"><span class="pa-ico">📝</span>Creative Notes</div>
-      <textarea class="pa-textarea" placeholder="Anything extra for the creative team: references, must-haves, must-avoids, legal notes…" oninput="paUpdateField('${c.id}','notes',this.value)">${escapeHtml(c.notes)}</textarea>
+      <div class="pa-row">
+        <div class="pa-field">
+          <div class="pa-label"><span class="pa-ico">🎯</span>CTA</div>
+          <input class="pa-input" placeholder="e.g. Watch Multiview Now" value="${escapeHtml(c.cta)}" oninput="paUpdateField('${c.id}','cta',this.value)" />
+        </div>
+        <div class="pa-field">
+          <div class="pa-label"><span class="pa-ico">⏱</span>Timing Window <span style="color:var(--t3);font-weight:500;letter-spacing:.3px;text-transform:none;margin-left:4px">— practical fastest is hours, not seconds</span></div>
+          <input class="pa-input" placeholder="e.g. Serve 2–6 hours after the trigger event" value="${escapeHtml(c.window)}" oninput="paUpdateField('${c.id}','window',this.value)" />
+        </div>
+      </div>
+
+      <div class="pa-field">
+        <div class="pa-label"><span class="pa-ico">📺</span>Platforms</div>
+        <div class="pa-chip-row">${paChipRow(c.id,'platforms',PA_PLATFORMS,true)}</div>
+      </div>
+
+      <div class="pa-field">
+        <div class="pa-label"><span class="pa-ico">📡</span>Signals Used <span style="color:var(--t3);font-weight:500;letter-spacing:.3px;text-transform:none;margin-left:4px">— from Genius Sports feed</span></div>
+        <div class="pa-chip-row">${paSignalChips(c)}</div>
+      </div>
+
+      <div class="pa-row">
+        <div class="pa-field">
+          <div class="pa-label"><span class="pa-ico">🎭</span>Tone</div>
+          <div class="pa-chip-row">${paChipRow(c.id,'tone',PA_TONES,false)}</div>
+        </div>
+        <div class="pa-field">
+          <div class="pa-label"><span class="pa-ico">📌</span>Priority</div>
+          <div class="pa-chip-row">${paChipRow(c.id,'priority',PA_PRIORITY,false)}</div>
+        </div>
+      </div>
+
+      <div class="pa-field">
+        <div class="pa-label"><span class="pa-ico">🚦</span>Status</div>
+        <div class="pa-chip-row">${paChipRow(c.id,'status',PA_STATUS,false)}</div>
+      </div>
+
+      <div class="pa-field">
+        <div class="pa-label"><span class="pa-ico">📝</span>Creative Notes</div>
+        <textarea class="pa-textarea" placeholder="Anything extra for the creative team: references, must-haves, must-avoids, legal notes…" oninput="paUpdateField('${c.id}','notes',this.value)">${escapeHtml(c.notes)}</textarea>
+      </div>
     </div>
   </div>`;
 }
