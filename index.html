@@ -1044,7 +1044,7 @@ body > *{position:relative;z-index:1}
 
       <div class="pa-toolbar">
         <button class="pa-btn primary" onclick="paAddCard()">＋&nbsp; Add Brief Card</button>
-        <button class="pa-btn ghost" onclick="paAddFromTemplate()">✦&nbsp; Start From Template</button>
+        <button class="pa-btn ghost" onclick="paAddFromTemplate()">✦&nbsp; Load Brief Pack (5)</button>
         <button class="pa-btn ghost" onclick="paExport()">⤓&nbsp; Export JSON</button>
         <button class="pa-btn ghost" onclick="paClearAll()">🗑&nbsp; Clear All</button>
         <span class="pa-count" id="pa-count">0 cards</span>
@@ -2504,22 +2504,88 @@ const PA_TONES     = ['Dramatic', 'Urgent', 'Witty', 'Reverent', 'Playful'];
 const PA_PRIORITY  = ['Must-Have', 'Nice-to-Have'];
 const PA_STATUS    = ['Draft', 'Review', 'Ready'];
 
-const PA_TEMPLATE = {
-  title:'Goal + Goal (Same 5-Min Window)',
-  event:'A goal fires in Match A while another goal fires in Match B within a 5-minute window.',
-  example:'2022 Doha: Tanaka 51\' (JPN vs ESP) + Fuller 58\' (CRC vs GER) — two goals on two pitches, same 10-minute window.',
-  visual:'Split-screen multiview with both scorers\' celebrations cross-dissolving; a countdown "-02:47" overlay shows the time between goals; YouTube TV Multiview UI animates in bottom third.',
-  headline:'Two goals. Two pitches. One screen.',
-  copy:'You\'re watching one match. Another just scored. Multiview on YouTube TV lets you keep both live — goals, drama, everything — on a single screen.',
-  cta:'Watch Multiview Now',
-  platforms:['CTV','Instagram'],
-  signals:['goal_any','goal_late'],
-  tone:'Urgent',
-  priority:'Must-Have',
-  status:'Draft',
-  window:'Serve within 60 seconds of the second event',
-  notes:'Pair-type likelihood: very high. Goals occur in ~97% of matches. Both pitches scoring within 5 min happens on ~20% of concurrent doubleheaders. This is the campaign\'s bread-and-butter trigger.'
-};
+const PA_STARTER_PACK = [
+  {
+    title:'In-Game · Concurrent Goals (With Score)',
+    event:'A goal fires in Match A within minutes of a goal in Match B — scoreboards on both pitches change inside the same window.',
+    example:'2022 Doha: Tanaka 51\' (JPN vs ESP) + Fuller 58\' (CRC vs GER). 2014: Neymar brace for Brazil concurrent with Mexico\'s 72/75/82 cluster vs Croatia.',
+    visual:'URG–USA 2–1 / CAN–BRA 0–1 — scoreboard graphic, broadcast-style lower third, red "LIVE" pulse.',
+    headline:'You waited 4 years. And you just missed it.',
+    copy:'While you were watching one, the other one happened. Multiview on YouTube TV. Never pick wrong again.',
+    cta:'Watch Multiview',
+    platforms:['CTV','Instagram'],
+    signals:['goal_any','goal_late'],
+    tone:'Urgent',
+    priority:'Must-Have',
+    status:'Ready',
+    window:'Fire within 60s of the second goal',
+    notes:''
+  },
+  {
+    title:'Pre-Game · Concurrent Marquee Matchups',
+    event:'Two marquee matches kicking off at the same time (group-stage finale doubleheaders and later rounds where paired games share a window).',
+    example:'WC 2026 group-stage finales: 3 simultaneous kickoffs per day across 4 days. Earlier precedent: 1998 Group H Argentina/Croatia + Japan/Jamaica both at 16:00.',
+    visual:'4-up grid — team crests in quadrants with kickoff times stamped, "WHY CHOOSE?" centered.',
+    headline:'Don\'t miss any of the action. Watch all the games at once on YTTV. ✓',
+    copy:'[Team 1] vs [Team 2]. [Team 3] vs [Team 4]. Same time. Same screen. Multiview on YouTube TV.',
+    cta:'Learn More',
+    platforms:['CTV','Instagram','TikTok'],
+    signals:[],
+    tone:'Playful',
+    priority:'Must-Have',
+    status:'Ready',
+    window:'Serve 30–10 minutes before dual kickoff',
+    notes:'Pre-game trigger: fired by schedule, not by live events. Use the Minutes-Until-Kickoff feed signal (PrematchEvent) gated on "two matches within 5 min of each other."'
+  },
+  {
+    title:'In-Game · Tied Late',
+    event:'Two simultaneous matches both tied with less than 5 minutes remaining — win-probability stays near 50/50 in both.',
+    example:'Any final-day group scenario where both pitches head into stoppage level. 2022 Group H: Uruguay–Ghana and Korea–Portugal both on knife-edge in the final 10 minutes.',
+    visual:'Split-screen, both clocks ticking 88:00+, two goalkeepers mid-dive — frozen-frame energy.',
+    headline:'Two games. Two minutes left. Both tied. Pick one. (We dare you.)',
+    copy:'When every second matters in two games at once, Multiview on YouTube TV is the only answer.',
+    cta:'Watch Both',
+    platforms:['CTV','Instagram'],
+    signals:['win_prob','goal_late','match_end'],
+    tone:'Urgent',
+    priority:'Must-Have',
+    status:'Ready',
+    window:'Fire at 85\' if both matches are level and concurrent',
+    notes:'Alt headline: "Don\'t blink. Don\'t pick. Just watch both."'
+  },
+  {
+    title:'Post-Game · Big Upset',
+    event:'Tournament-level upset confirmed — a top-seeded team is eliminated while other matches are still live or just ending.',
+    example:'2022 Germany out of the group after Japan–Spain + Costa Rica–Germany. 2018 Germany losing to Korea while Sweden beat Mexico. 2002 Argentina exiting on the final group matchday.',
+    visual:'"EPIC FAIL" stamp over a scoreboard graphic showing the upset score; player slumped on pitch in background, slightly blurred.',
+    headline:'🇧🇷 is out. You missed it. Stay in the loop next round with YTTV. ✓',
+    copy:'The biggest moments don\'t wait for you to switch channels. Multiview on YouTube TV — every game, every upset, every time.',
+    cta:'Stay In The Loop',
+    platforms:['Instagram','TikTok','X'],
+    signals:['outcome','match_end','win_prob'],
+    tone:'Reverent',
+    priority:'Nice-to-Have',
+    status:'Ready',
+    window:'Within 30 minutes of final whistle',
+    notes:'Social-first moment — meant to re-engage for the next round rather than rescue an in-flight viewer.'
+  },
+  {
+    title:'Failsafe · Always-On',
+    event:'Evergreen — no trigger required. Runs as the campaign\'s always-on baseline across the tournament.',
+    example:'N/A — always-on creative, served continuously for users who haven\'t received a triggered ad yet.',
+    visual:'Hero shot of Multiview UI on a big screen, four marquee matches tiled, living-room ambient — aspirational but not sterile.',
+    headline:'Never Miss a Moment with YTTV. ✓',
+    copy:'104 matches. 39 days. One subscription. YouTube TV brings you the entire FIFA World Cup 26 — with Multiview so you never have to choose.',
+    cta:'Subscribe',
+    platforms:['CTV','Instagram','TikTok','YouTube','X'],
+    signals:[],
+    tone:'Reverent',
+    priority:'Must-Have',
+    status:'Ready',
+    window:'Evergreen / always-on',
+    notes:'Alt punchier headline: "Every game. Every goal. One screen."'
+  },
+];
 
 let paCards = [];
 function paLoad(){
@@ -2548,10 +2614,16 @@ function paAddCard(){
   paSave(); paRender();
 }
 function paAddFromTemplate(){
-  const c = {...PA_TEMPLATE, id:'pa_'+Math.random().toString(36).slice(2,10), platforms:[...PA_TEMPLATE.platforms]};
-  paCards.unshift(c);
+  // Adds the full Brief Pack (5 starter cards) at the top, preserving existing cards.
+  const stamped = PA_STARTER_PACK.map(tpl => ({
+    ...tpl,
+    id:'pa_'+Math.random().toString(36).slice(2,10),
+    platforms:[...(tpl.platforms||[])],
+    signals:[...(tpl.signals||[])]
+  }));
+  paCards = [...stamped, ...paCards];
   paSave(); paRender();
-  paToast('Template card added');
+  paToast('Loaded ' + stamped.length + '-card Brief Pack');
 }
 function paDeleteCard(id){
   if (!confirm('Delete this brief card?')) return;
@@ -2738,7 +2810,7 @@ function paRender(){
     host.innerHTML = `<div class="pa-empty">
       <div class="pa-empty-ico">✦</div>
       <div class="pa-empty-ttl">No brief cards yet</div>
-      <div class="pa-empty-sub">Click "Add Brief Card" to start, or "Start From Template" for a filled-out example.</div>
+      <div class="pa-empty-sub">Click "Add Brief Card" to start, or "Load Brief Pack" for five pre-filled starter briefs.</div>
     </div>`;
     return;
   }
