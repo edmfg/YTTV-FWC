@@ -58,7 +58,17 @@ body{background:var(--bg);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .iBtn:hover{border-color:#444;color:var(--t1)}
 .iBtn.active{border-color:rgba(255,0,0,.5);color:var(--t1);background:rgba(255,0,0,.06)}
 
-/* Triggers button — distinct amber/gold bold style */
+/* Schedule button — bold sky blue */
+#btn-schedule{background:linear-gradient(135deg,#38BDF8,#0284C7);border-color:#38BDF8;color:#031826;font-weight:800;box-shadow:0 0 0 1px rgba(56,189,248,.3),0 4px 14px rgba(14,165,233,.28)}
+#btn-schedule:hover{border-color:#7DD3FC;color:#000;background:linear-gradient(135deg,#7DD3FC,#0EA5E9)}
+#btn-schedule.active{background:linear-gradient(135deg,#38BDF8,#0284C7);border-color:#7DD3FC;color:#031826;box-shadow:0 0 0 1px rgba(125,211,252,.5),0 6px 20px rgba(14,165,233,.4)}
+
+/* History button — bold violet */
+#btn-history{background:linear-gradient(135deg,#C084FC,#7C3AED);border-color:#C084FC;color:#1A0B2E;font-weight:800;box-shadow:0 0 0 1px rgba(192,132,252,.3),0 4px 14px rgba(124,58,237,.28)}
+#btn-history:hover{border-color:#D8B4FE;color:#000;background:linear-gradient(135deg,#D8B4FE,#8B5CF6)}
+#btn-history.active{background:linear-gradient(135deg,#C084FC,#7C3AED);border-color:#D8B4FE;color:#1A0B2E;box-shadow:0 0 0 1px rgba(216,180,254,.5),0 6px 20px rgba(124,58,237,.4)}
+
+/* Genius Triggers button — distinct amber/gold bold style */
 #btn-triggers{background:linear-gradient(135deg,#F59E0B,#D97706);border-color:#F59E0B;color:#111;font-weight:800;box-shadow:0 0 0 1px rgba(245,158,11,.3),0 4px 14px rgba(245,158,11,.25)}
 #btn-triggers:hover{border-color:#FBBF24;color:#000;background:linear-gradient(135deg,#FBBF24,#F59E0B)}
 #btn-triggers.active{background:linear-gradient(135deg,#F59E0B,#D97706);border-color:#FBBF24;color:#111;box-shadow:0 0 0 1px rgba(251,191,36,.5),0 6px 20px rgba(245,158,11,.4)}
@@ -873,7 +883,7 @@ body > *{position:relative;z-index:1}
   <div class="info-btns">
     <button class="iBtn" id="btn-schedule" onclick="togglePanel('schedule')">📅&nbsp; Concurrent Game Schedule</button>
     <button class="iBtn" id="btn-history" onclick="togglePanel('history')">🏆&nbsp; Historical Examples</button>
-    <button class="iBtn" id="btn-triggers" onclick="togglePanel('triggers')">⚡&nbsp; Triggers</button>
+    <button class="iBtn" id="btn-triggers" onclick="togglePanel('triggers')">🧠&nbsp; Genius Triggers</button>
     <button class="iBtn" id="btn-assets" onclick="togglePanel('assets')">✦&nbsp; Perfect Assets</button>
   </div>
 
