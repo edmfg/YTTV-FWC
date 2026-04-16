@@ -977,21 +977,7 @@ body > *{position:relative;z-index:1}
   <div id="panel-triggers" class="info-panel">
     <div class="panel-inner">
       <div class="panel-title">Emotional Trigger Signals</div>
-      <div class="panel-sub">Tune how emotionally charged each Genius Sports event signal is. The Proximity Engine combines weights across two concurrent matches to decide which "you're missing something" moment deserves an ad. Higher weights = more likely to fire the Multiview trigger.</div>
-
-      <div class="trig-intro">
-        <div>
-          <div class="slabel" style="margin-bottom:10px">How scoring works</div>
-          <div style="font-size:12.5px;color:var(--t2);line-height:1.7">
-            Each signal carries an <strong style="color:var(--t1)">emotional weight</strong> (0–100) and a <strong style="color:#3B82F6">base likelihood</strong> per match. The Proximity Engine blends both into a <strong style="color:var(--t1)">priority score</strong> — so we plan not just for rare peak-drama moments (Red + Penalty), but also for the <em>obvious high-volume pairs</em> like "Goal in Game 1 + Goal in Game 2 within 5 minutes."
-          </div>
-        </div>
-        <div class="trig-stats">
-          <div class="trig-stat"><div class="trig-stat-num red" id="trig-stat-signals">21</div><div class="trig-stat-lbl">Signals Tuned</div></div>
-          <div class="trig-stat"><div class="trig-stat-num" id="trig-stat-top" style="color:var(--red)">0</div><div class="trig-stat-lbl">Peak Priority</div></div>
-          <div class="trig-stat"><div class="trig-stat-num" id="trig-stat-obvious" style="color:#3B82F6">0</div><div class="trig-stat-lbl">High-Likelihood Pairs</div></div>
-        </div>
-      </div>
+      <div class="panel-sub">Each signal has an <strong style="color:var(--t1)">emotional weight</strong> (0–100) and a <strong style="color:#3B82F6">base likelihood</strong> per match. The Proximity Engine blends both into a <strong style="color:var(--t1)">priority score</strong> — catching rare peak-drama moments (Red + Penalty) <em>and</em> high-volume pairs (Goal + Goal in the same 5 minutes).</div>
 
       <div class="trig-presets">
         <span class="trig-presets-lbl">Preset profile</span>
@@ -1042,7 +1028,7 @@ body > *{position:relative;z-index:1}
   <div id="panel-assets" class="info-panel">
     <div class="panel-inner">
       <div class="panel-title">Perfect Assets — Creative Briefs</div>
-      <div class="panel-sub">Working space to brief creative teams on the perfect asset for each concurrent-event trigger. Build a template card for every high-priority pairing, then hand the deck off to design and copy. All cards auto-save locally to your browser.</div>
+      <div class="panel-sub">Build a brief card for every high-priority concurrent-event pairing, then hand the deck to design and copy.</div>
 
       <div class="pa-toolbar">
         <button class="pa-btn primary" onclick="paAddCard()">＋&nbsp; Add Brief Card</button>
@@ -2093,11 +2079,7 @@ function recomputeTriggers() {
   }
   pairs.sort((x,y) => y.priority - x.priority);
 
-  // Stats
-  document.getElementById('trig-stat-signals').textContent = sigState.length;
-  document.getElementById('trig-stat-top').textContent = pairs[0]?.priority ?? 0;
-  const obvious = pairs.filter(p => p.likelihood >= 60).length;
-  document.getElementById('trig-stat-obvious').textContent = obvious;
+  // (Stats block removed from UI; intentionally no-op here.)
 
   // Spotlight = #1 by priority
   const top = pairs[0];
