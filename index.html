@@ -1496,6 +1496,10 @@ function togglePanel(id) {
     btn.classList.add('active');
     setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
   }
+  // Triggers and Perfect Assets are working surfaces — hide the simulator/mock-ups beneath them.
+  const hideDemo = !isOpen && (id === 'triggers' || id === 'assets');
+  const demo = document.querySelector('.demo');
+  if (demo) demo.style.display = hideDemo ? 'none' : '';
 }
 
 // ── CHIP SELECTION ──
