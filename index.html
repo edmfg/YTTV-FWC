@@ -807,18 +807,19 @@ body > *{position:relative;z-index:1}
 .dl-owner.yt     {color:#FB7185;background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.4)}
 
 /* Horizontal timeline visualization */
-.dl-timeline{position:relative;margin:24px 0 36px;padding:0 24px}
-.dl-track{position:relative;height:56px}
-.dl-line{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.3) 10%,rgba(255,255,255,.3) 90%,rgba(251,113,133,.8));transform:translateY(-50%)}
+.dl-timeline{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;margin:24px 0 32px}
+.dl-start,.dl-end{font-size:13px;font-weight:800;letter-spacing:.5px;line-height:1.2;white-space:nowrap}
+.dl-start{color:var(--t1);text-align:right}
+.dl-end{color:#FB7185;font-size:17px}
+.dl-center{display:flex;flex-direction:column;gap:12px;min-width:0}
+.dl-track{position:relative;height:44px;padding:0 12px}
+.dl-line{position:absolute;left:12px;right:12px;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.2),rgba(255,255,255,.35) 15%,rgba(255,255,255,.35) 85%,rgba(251,113,133,.8));transform:translateY(-50%)}
 .dl-point{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#1a1a1a;border:2px solid rgba(255,255,255,.5);z-index:2}
 .dl-point.milestone{background:#E11D48;border-color:#FDA4AF;box-shadow:0 0 0 4px rgba(225,29,72,.2),0 0 14px rgba(225,29,72,.5)}
 .dl-point.launch{background:linear-gradient(135deg,#FB7185,#E11D48);width:22px;height:22px;border-color:#FECDD3;box-shadow:0 0 0 5px rgba(225,29,72,.22),0 0 20px rgba(225,29,72,.6)}
-.dl-start,.dl-end{position:absolute;top:50%;transform:translateY(-50%);font-size:13px;font-weight:800;letter-spacing:.5px;color:var(--t1);white-space:nowrap}
-.dl-start{left:-6px;transform:translate(-100%,-50%);padding-right:14px}
-.dl-end{right:-6px;transform:translate(100%,-50%);padding-left:14px;color:#FB7185}
 
-.dl-weeks-strip{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:14px}
-.dl-weeks-strip .dl-wk{background:linear-gradient(135deg,rgba(180,140,70,.35),rgba(140,100,40,.25));border:1px solid rgba(200,160,80,.3);border-radius:999px;padding:7px 6px;text-align:center;font-size:11px;font-weight:800;letter-spacing:1.5px;color:#F5D79A;text-transform:uppercase}
+.dl-weeks-strip{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.dl-weeks-strip .dl-wk{background:linear-gradient(135deg,rgba(180,140,70,.35),rgba(140,100,40,.25));border:1px solid rgba(200,160,80,.3);border-radius:999px;padding:7px 6px;text-align:center;font-size:11px;font-weight:800;letter-spacing:1.5px;color:#F5D79A;text-transform:uppercase;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Week milestone cards */
 .dl-weeks{display:flex;flex-direction:column;gap:12px;margin-top:12px}
@@ -1145,30 +1146,32 @@ body > *{position:relative;z-index:1}
 
       <!-- Timeline visualization -->
       <div class="dl-timeline">
-        <div class="dl-track">
-          <div class="dl-line"></div>
-          <span class="dl-start">Internal<br>Kickoff</span>
-          <span class="dl-end">LAUNCH</span>
-          <!-- 6 points across weeks 2-7 plus the launch dot -->
-          <div class="dl-point" style="left:calc(10% + 14px)" title="Creative Briefing / R1 Mapping"></div>
-          <div class="dl-point milestone" style="left:calc(23% + 14px)" title="R1 Creative Concept Live Review · 4/30"></div>
-          <div class="dl-point" style="left:calc(40% + 14px)" title="Internal creative revisions"></div>
-          <div class="dl-point milestone" style="left:calc(55% + 14px)" title="R2 Creative Concept Live Review · 5/13"></div>
-          <div class="dl-point" style="left:calc(62% + 14px)" title="R2 Final Mapping Session · 5/19"></div>
-          <div class="dl-point milestone" style="left:calc(73% + 14px)" title="YouTube approves Final Assets · 5/28"></div>
-          <div class="dl-point" style="left:calc(86% + 14px)" title="MFG Q/A + Trafficking"></div>
-          <div class="dl-point launch" style="left:calc(100% - 6px)" title="LAUNCH"></div>
+        <span class="dl-start">Internal<br>Kickoff</span>
+        <div class="dl-center">
+          <div class="dl-track">
+            <div class="dl-line"></div>
+            <!-- Dots anchored to week-column centers: week N center = (N-0.5)/8 -->
+            <div class="dl-point"           style="left:18.75%" title="Creative Briefing / R1 Mapping (Week 2)"></div>
+            <div class="dl-point milestone" style="left:31.25%" title="R1 Creative Concept Live Review · 4/30 (Week 3)"></div>
+            <div class="dl-point"           style="left:43.75%" title="Internal creative revisions (Week 4)"></div>
+            <div class="dl-point milestone" style="left:54%"    title="R2 Creative Concept Live Review · 5/13 (Week 5)"></div>
+            <div class="dl-point"           style="left:62%"    title="R2 Final Mapping Session · 5/19 (Week 5)"></div>
+            <div class="dl-point milestone" style="left:68.75%" title="YouTube approves Final Assets · 5/28 (Week 6)"></div>
+            <div class="dl-point"           style="left:81.25%" title="Q/A + Trafficking (Week 7)"></div>
+            <div class="dl-point launch"    style="left:93.75%" title="LAUNCH (Week 8)"></div>
+          </div>
+          <div class="dl-weeks-strip">
+            <div class="dl-wk">Week 1</div>
+            <div class="dl-wk">Week 2</div>
+            <div class="dl-wk">Week 3</div>
+            <div class="dl-wk">Week 4</div>
+            <div class="dl-wk">Week 5</div>
+            <div class="dl-wk">Week 6</div>
+            <div class="dl-wk">Week 7</div>
+            <div class="dl-wk">Week 8</div>
+          </div>
         </div>
-        <div class="dl-weeks-strip">
-          <div class="dl-wk">Week 1</div>
-          <div class="dl-wk">Week 2</div>
-          <div class="dl-wk">Week 3</div>
-          <div class="dl-wk">Week 4</div>
-          <div class="dl-wk">Week 5</div>
-          <div class="dl-wk">Week 6</div>
-          <div class="dl-wk">Week 7</div>
-          <div class="dl-wk">Week 8</div>
-        </div>
+        <span class="dl-end">LAUNCH</span>
       </div>
 
       <!-- Owner legend -->
